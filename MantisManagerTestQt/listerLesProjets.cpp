@@ -16,7 +16,7 @@ namespace MantisManagerTest
 			MantisManager mantisManager;
 
 			QVector<QString>listeProjets;
-			//mantisManager.recupererProjets(listeProjets);
+			mantisManager.recupererProjets(listeProjets);
 
 			Assert::AreEqual(3, listeProjets.size());
 

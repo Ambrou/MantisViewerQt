@@ -1,7 +1,8 @@
 #include "MantisViewerConsoleQt.h"
+#include <QVector>
 #include <iostream>
 #include <string>
-
+#include "..\MantisManager\mantismanager.h"
 
 MantisViewerConsoleQt::MantisViewerConsoleQt(QObject *parent)
 	: QThread(parent)
@@ -20,6 +21,12 @@ void MantisViewerConsoleQt::run()
 			std::cout << "stop reader thread" << std::endl;
 			emit quitter();
 			break;
+		}
+		else
+		{
+			MantisManager mant;
+			QVector<QString>listeProjets;
+			mant.recupererProjets(listeProjets);
 		}
 	}
 }

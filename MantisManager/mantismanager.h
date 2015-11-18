@@ -9,6 +9,8 @@ public:
 	MantisManager();
 	~MantisManager();
 
+	void recupererProjets(QVector<QString>&listeProjets) const;
+
 private:
 
 };

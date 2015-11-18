@@ -9,8 +9,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MantisViewerConsoleQt", "Ma
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MantisViewerConsoleQtTest", "MantisViewerConsoleQtTest\MantisViewerConsoleQtTest.vcxproj", "{6AE973CB-B76A-474F-9996-09D1DB7A1028}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MantisManagerTestQt", "MantisManagerTestQt\MantisManagerTestQt.vcxproj", "{25C0BFAF-2C5D-4194-B9C9-465294868035}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -29,10 +27,6 @@ Global
 		{6AE973CB-B76A-474F-9996-09D1DB7A1028}.Debug|Win32.Build.0 = Debug|Win32
 		{6AE973CB-B76A-474F-9996-09D1DB7A1028}.Release|Win32.ActiveCfg = Release|Win32
 		{6AE973CB-B76A-474F-9996-09D1DB7A1028}.Release|Win32.Build.0 = Release|Win32
-		{25C0BFAF-2C5D-4194-B9C9-465294868035}.Debug|Win32.ActiveCfg = Debug|Win32
-		{25C0BFAF-2C5D-4194-B9C9-465294868035}.Debug|Win32.Build.0 = Debug|Win32
-		{25C0BFAF-2C5D-4194-B9C9-465294868035}.Release|Win32.ActiveCfg = Release|Win32
-		{25C0BFAF-2C5D-4194-B9C9-465294868035}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

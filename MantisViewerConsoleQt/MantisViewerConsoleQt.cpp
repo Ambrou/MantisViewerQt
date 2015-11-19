@@ -22,11 +22,27 @@ void MantisViewerConsoleQt::run()
 			emit quitter();
 			break;
 		}
-		else
+		else if (input == "liste_projet")
 		{
 			MantisManager mant;
 			QVector<QString>listeProjets;
 			mant.recupererProjets(listeProjets);
+			QString nomProjet;
+			foreach(nomProjet, listeProjets)
+			{
+				std::cout << nomProjet.toStdString() << std::endl;
+			}
+		}
+		else if (input == "liste_ticket")
+		{
+			MantisManager mant;
+			QVector<QString>listeTicket;
+			mant.recupererTicketsDuProjet(listeTicket, "TRIXELL-TETRIS");
+			QString nomTicket;
+			foreach(nomTicket, listeTicket)
+			{
+				std::cout << nomTicket.toStdString() << std::endl;
+			}
 		}
 	}
 }

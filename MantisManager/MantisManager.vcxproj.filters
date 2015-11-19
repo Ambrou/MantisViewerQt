@@ -50,6 +50,12 @@
     <ClCompile Include="GeneratedFiles\Release\moc_mantisconnect.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="MantisConnecteur.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseConnecteur.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -59,6 +65,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="mantismanager_global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MantisConnecteur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseConnecteur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

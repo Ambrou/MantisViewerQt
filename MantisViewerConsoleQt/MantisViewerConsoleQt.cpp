@@ -2,10 +2,10 @@
 #include <QVector>
 #include <iostream>
 #include <string>
-#include "..\MantisManager\mantismanager.h"
+#include "..\MantisManager\BaseConnecteur.h"
 
-MantisViewerConsoleQt::MantisViewerConsoleQt(QObject *parent)
-	: QThread(parent)
+MantisViewerConsoleQt::MantisViewerConsoleQt(QObject *parent, BaseConnecteur &baseConnecteur)
+	: QThread(parent), m_BaseConnecteur(baseConnecteur)
 {
 
 }
@@ -24,9 +24,8 @@ void MantisViewerConsoleQt::run()
 		}
 		else if (input == "liste_projet")
 		{
-			MantisManager mant;
 			QVector<QString>listeProjets;
-			mant.recupererProjets(listeProjets);
+			m_BaseConnecteur.recupererProjets(listeProjets);
 			QString nomProjet;
 			foreach(nomProjet, listeProjets)
 			{
@@ -35,9 +34,9 @@ void MantisViewerConsoleQt::run()
 		}
 		else if (input == "liste_ticket")
 		{
-			MantisManager mant;
+
 			QVector<QString>listeTicket;
-			mant.recupererTicketsDuProjet(listeTicket, "TRIXELL-TETRIS");
+			m_BaseConnecteur.recupererTicketsDuProjet(listeTicket, "TRIXELL-TETRIS");
 			QString nomTicket;
 			foreach(nomTicket, listeTicket)
 			{

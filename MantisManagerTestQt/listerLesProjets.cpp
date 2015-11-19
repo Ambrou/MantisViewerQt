@@ -1,5 +1,5 @@
 #include "CppUnitTest.h"
-#include "MantisManager.h"
+#include "MantisConnecteur.h"
 #include <QVector>
 #include <QString>
 #include <QCoreApplication>
@@ -16,11 +16,12 @@ namespace MantisManagerTest
 		{
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			MantisManager mantisManager;
-
 			QVector<QString>listeProjets;
-			mantisManager.recupererProjets(listeProjets);
+			/*MantisConnecteur mantisManager;
 
+			
+			mantisManager.recupererProjets(listeProjets);
+*/
 			Assert::AreEqual(3, listeProjets.size());
 		}
 	};

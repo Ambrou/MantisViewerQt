@@ -158,6 +158,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_v100|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_v100|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="LecteurClavier.cpp" />
+    <ClCompile Include="LecteurCommande.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MantisViewerConsoleQt.cpp" />
   </ItemGroup>
@@ -180,6 +182,10 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore"</Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release_v100|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore"</Command>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LecteurClavier.h" />
+    <ClInclude Include="LecteurCommande.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

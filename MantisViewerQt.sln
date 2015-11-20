@@ -1,16 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MantisManager", "MantisManager\MantisManager.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MantisViewerConsoleQt", "MantisViewerConsoleQt\MantisViewerConsoleQt.vcxproj", "{05DE7572-FB0F-444C-988F-EAEA6E0B9689}"
 	ProjectSection(ProjectDependencies) = postProject
 		{B12702AD-ABFB-343A-A199-8E24837244A3} = {B12702AD-ABFB-343A-A199-8E24837244A3}
-	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MantisViewerConsoleQtTest", "MantisViewerConsoleQtTest\MantisViewerConsoleQtTest.vcxproj", "{6AE973CB-B76A-474F-9996-09D1DB7A1028}"
-	ProjectSection(ProjectDependencies) = postProject
-		{05DE7572-FB0F-444C-988F-EAEA6E0B9689} = {05DE7572-FB0F-444C-988F-EAEA6E0B9689}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MantisManagerTestQt", "MantisManagerTestQt\MantisManagerTestQt.vcxproj", "{25C0BFAF-2C5D-4194-B9C9-465294868035}"
@@ -42,12 +39,6 @@ Global
 		{05DE7572-FB0F-444C-988F-EAEA6E0B9689}.Release_v100|Win32.Build.0 = Release_v100|Win32
 		{05DE7572-FB0F-444C-988F-EAEA6E0B9689}.Release|Win32.ActiveCfg = Release|Win32
 		{05DE7572-FB0F-444C-988F-EAEA6E0B9689}.Release|Win32.Build.0 = Release|Win32
-		{6AE973CB-B76A-474F-9996-09D1DB7A1028}.Debug_v100|Win32.ActiveCfg = Debug_v100|Win32
-		{6AE973CB-B76A-474F-9996-09D1DB7A1028}.Debug|Win32.ActiveCfg = Debug|Win32
-		{6AE973CB-B76A-474F-9996-09D1DB7A1028}.Debug|Win32.Build.0 = Debug|Win32
-		{6AE973CB-B76A-474F-9996-09D1DB7A1028}.Release_v100|Win32.ActiveCfg = Release_v100|Win32
-		{6AE973CB-B76A-474F-9996-09D1DB7A1028}.Release|Win32.ActiveCfg = Release|Win32
-		{6AE973CB-B76A-474F-9996-09D1DB7A1028}.Release|Win32.Build.0 = Release|Win32
 		{25C0BFAF-2C5D-4194-B9C9-465294868035}.Debug_v100|Win32.ActiveCfg = Debug_v100|Win32
 		{25C0BFAF-2C5D-4194-B9C9-465294868035}.Debug|Win32.ActiveCfg = Debug|Win32
 		{25C0BFAF-2C5D-4194-B9C9-465294868035}.Debug|Win32.Build.0 = Debug|Win32

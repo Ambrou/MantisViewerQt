@@ -33,6 +33,12 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Generated Files\Debug_v100">
+      <UniqueIdentifier>{15215eb4-1779-4a9b-aef3-86f6a4b01283}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files\Release_v100">
+      <UniqueIdentifier>{e085b6a6-ec75-407b-83b9-38cd6bdba568}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -44,17 +50,17 @@
     <ClCompile Include="mantisconnect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_mantisconnect.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_mantisconnect.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="MantisConnecteur.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BaseConnecteur.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug_v100\moc_mantisconnect.cpp">
+      <Filter>Generated Files\Debug_v100</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release_v100\moc_mantisconnect.cpp">
+      <Filter>Generated Files\Release_v100</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

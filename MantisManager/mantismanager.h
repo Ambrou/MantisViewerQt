@@ -12,11 +12,8 @@ public:
 	~MantisManager();
 
 	BaseConnecteur& connecteur() const;
-	//void recupererProjets(QVector<QString>&listeProjets) const;
-	//void recupererTicketsDuProjet(QVector<QString>&listeTicket, const QString nomDuProjet) const;
 
 private:
-	//BaseConnecteur* m_pBaseConnecteur;
 	BaseConnecteur* mp_Connecteur;
 };
 

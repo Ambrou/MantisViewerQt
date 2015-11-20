@@ -29,6 +29,16 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Generated Files\Debug_v100">
+      <UniqueIdentifier>{2c5259b5-af60-4e31-9321-6b7269e750fe}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Release_v100">
+      <UniqueIdentifier>{cb4f7f8f-bd4d-4603-b5b4-074c7027457a}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,6 +52,12 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_MantisViewerConsoleQt.cpp">
       <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug_v100\moc_MantisViewerConsoleQt.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release_v100\moc_MantisViewerConsoleQt.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

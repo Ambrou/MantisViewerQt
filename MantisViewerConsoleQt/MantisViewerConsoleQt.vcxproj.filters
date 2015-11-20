@@ -53,12 +53,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_MantisViewerConsoleQt.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug_v100\moc_MantisViewerConsoleQt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release_v100\moc_MantisViewerConsoleQt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LecteurCommande.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

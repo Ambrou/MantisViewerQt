@@ -6,7 +6,8 @@
 MantisViewerConsoleQt::MantisViewerConsoleQt(QObject *parent, BaseConnecteur &baseConnecteur, LecteurCommande& lecteurCommande)
 	: QThread(parent), m_BaseConnecteur(baseConnecteur), m_LecteurCommande(lecteurCommande)
 {
-
+	m_Login = "";
+	m_MotDePasse = "";
 }
 
 void MantisViewerConsoleQt::run()
@@ -15,14 +16,8 @@ void MantisViewerConsoleQt::run()
 	do
 	{
 		commandeSaisie = m_LecteurCommande.lireCommande();
-		//traiterCommande(line);
 		//std::cout << "read " << input << std::endl;
-		//if (input == "quit")
-		//{
-		//	std::cout << "stop reader thread" << std::endl;
-		//	emit quitter();
-		//	break;
-		//}
+		
 		//else if (input == "liste_projet")
 		//{
 		//	QVector<QString>listeProjets;
@@ -55,5 +50,30 @@ void MantisViewerConsoleQt::run()
 		//		std::cout << nomTicket.toStdString() << std::endl;
 		//	}
 		//}*/
-	} while (true);
+	} while (traiterCommandeEtAttendreLaSuivante(commandeSaisie) == true);
+}
+
+bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& nomCommande)
+{
+	bool attendreCommandeSuivante = true;
+	if (nomCommande == "quitter")
+	{
+		emit quitter();
+		attendreCommandeSuivante = false;
+	}
+	else if (nomCommande == "connecter")
+	{
+		m_Login = m_LecteurCommande.lireCommande();
+		m_MotDePasse = m_LecteurCommande.lireCommande();
+	}
+	return attendreCommandeSuivante;
+}
+
+QString MantisViewerConsoleQt::login() const
+{
+	return m_Login;
+}
+QString MantisViewerConsoleQt::motDePasse() const
+{
+	return m_MotDePasse;
 }

@@ -13,6 +13,9 @@ public:
 
 protected:
 	virtual void run();
+	bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande);
+	QString login() const;
+	QString motDePasse() const;
 
 signals:
 	void quitter();
@@ -20,6 +23,9 @@ signals:
 private:
 	BaseConnecteur& m_BaseConnecteur;
 	LecteurCommande& m_LecteurCommande;
+
+	QString m_Login;
+	QString m_MotDePasse;
 
 };
 

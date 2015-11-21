@@ -66,6 +66,16 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 		m_Login = m_LecteurCommande.lireCommande();
 		m_MotDePasse = m_LecteurCommande.lireCommande();
 	}
+	else if (nomCommande == "lister projets")
+	{
+		QVector<QString>listeProjets;
+		QString nomProjet("");
+		m_BaseConnecteur.recupererProjets(listeProjets, login(), motDePasse());
+		foreach(nomProjet, listeProjets)
+		{
+			m_LecteurCommande.ecrire(nomProjet);
+		}
+	}
 	return attendreCommandeSuivante;
 }
 

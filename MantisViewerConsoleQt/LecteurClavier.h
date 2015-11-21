@@ -8,5 +8,6 @@ public:
 	~LecteurClavier();
 
 	QString lireCommande() const;
+	void ecrire(const QString& texte) const;
 };
 

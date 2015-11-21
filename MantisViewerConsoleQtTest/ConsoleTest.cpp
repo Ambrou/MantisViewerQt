@@ -64,8 +64,70 @@ namespace MantisViewerConsoleQtTest
 			Assert::AreEqual(true, attendreCommandeSuivante);
 			Assert::AreEqual(QString("login").toStdString(), console.login().toStdString());
 			Assert::AreEqual(QString("******").toStdString(), console.motDePasse().toStdString());
-
-
 		}
+
+		static void recupererProjets_delegate(QVector<QString>&listeProjets, const QString& user, const QString& password)
+		{
+			listeProjets.append(QString("TeTriS"));
+		}
+
+		static void ecrire_delegate(const QString& texte)
+		{
+			
+		}
+
+		TEST_METHOD(listerLesProjets)
+		{
+			class MaConsole : public MantisViewerConsoleQt
+			{
+			public:
+				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, LecteurCommande& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
+			};
+
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			Mock<LecteurCommande> mockLecteur;
+			Mock<BaseConnecteur> mockBase;
+		
+			When(Method(mockBase, recupererProjets)).Do(recupererProjets_delegate);
+			When(Method(mockLecteur, ecrire)).Do(ecrire_delegate);
+
+			MaConsole console(&app, mockBase.get(), mockLecteur.get());
+
+			bool attendreCommandeSuivante = console.traiterCommandeEtAttendreLaSuivante("lister projets");
+
+			Assert::AreEqual(true, attendreCommandeSuivante);
+			Verify(Method(mockBase, recupererProjets).Using(_, _, _)).Once();
+			Verify(Method(mockLecteur, ecrire).Using(Any<QString>()));
+		}
+
+		//struct SomeInterface {
+		//	virtual int func(int) = 0;
+		//	virtual int func2(int, std::string) = 0;
+		//	virtual int func3(int&) = 0;
+		//};
+
+		//TEST_METHOD(apt)
+		//{
+		//	int a = 1;
+		//	int b = 2;
+		//	Mock<SomeInterface> mock;
+		//	When(Method(mock, func3).Using(1)).Do([&a](int& val) {
+		//		a = val + 1;
+		//		val++;
+		//		return 1;
+		//	});
+		//	//When(Method(mock, func3).Using(1)).AlwaysReturn(1);
+		//	SomeInterface &i = mock.get();
+		//	/*{
+		//	    int a = 1;
+		//	    i.func3(a);
+		//	    a = 2;
+		//	}*/
+		//	
+		//	int toto = i.func3(b);
+		//	Verify(Method(mock, func3).Using(Eq(1)));
+		//}
 	};
 }

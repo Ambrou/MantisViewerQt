@@ -14,10 +14,10 @@ MantisConnecteur::~MantisConnecteur()
 	
 }
 
-void MantisConnecteur::recupererProjets(QVector<QString>&listeProjets) const
+void MantisConnecteur::recupererProjets(QVector<QString>&listeProjets, const QString& user, const QString& password) const
 {
 	MantisConnect mantisConnect;
-	TNS__ProjectDataArray projetDataArray = mantisConnect.mc_projects_get_user_accessible("apetitgenet", "MAg28vkwde");
+	TNS__ProjectDataArray projetDataArray = mantisConnect.mc_projects_get_user_accessible(user, password);
 	QList<TNS__ProjectData> list = projetDataArray.items();
 
 	TNS__ProjectData project;

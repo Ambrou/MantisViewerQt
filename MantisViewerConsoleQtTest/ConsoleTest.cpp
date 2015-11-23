@@ -78,6 +78,8 @@ namespace MantisViewerConsoleQtTest
 
 		TEST_METHOD(listerLesProjets)
 		{
+			
+			///// CA ne marche pas
 			class MaConsole : public MantisViewerConsoleQt
 			{
 			public:
@@ -91,7 +93,7 @@ namespace MantisViewerConsoleQtTest
 			Mock<BaseConnecteur> mockBase;
 		
 			When(Method(mockBase, recupererProjets)).Do(recupererProjets_delegate);
-			When(Method(mockLecteur, ecrire)).Do(ecrire_delegate);
+			When(Method(mockLecteur, ecrire)).Return();
 
 			MaConsole console(&app, mockBase.get(), mockLecteur.get());
 
@@ -99,7 +101,16 @@ namespace MantisViewerConsoleQtTest
 
 			Assert::AreEqual(true, attendreCommandeSuivante);
 			Verify(Method(mockBase, recupererProjets).Using(_, _, _)).Once();
-			Verify(Method(mockLecteur, ecrire).Using(Any<QString>()));
+			Verify(Method(mockLecteur, ecrire).Using("TeTriS"));
+
+			////
+			///// CA MARCHE
+			//Mock<LecteurCommande> mockLecteur; 
+			LecteurCommande& lc = mockLecteur.get(); 
+			
+			When(Method(mockLecteur, ecrire)).Return();
+			lc.ecrire("TeTriS");
+			Verify(Method(mockLecteur, ecrire).Using("TeTriS"));
 		}
 
 		//struct SomeInterface {

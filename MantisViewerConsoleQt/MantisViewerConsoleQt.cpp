@@ -30,7 +30,9 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 	}
 	else if (nomCommande == "connecter")
 	{
+		m_LecteurCommande.ecrire("Login :");
 		m_Login = m_LecteurCommande.lireCommande();
+		m_LecteurCommande.ecrire("Mot de passe :");
 		m_MotDePasse = m_LecteurCommande.lireCommande();
 	}
 	else if (nomCommande == "lister projets")

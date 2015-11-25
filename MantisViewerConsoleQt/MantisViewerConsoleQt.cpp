@@ -16,40 +16,7 @@ void MantisViewerConsoleQt::run()
 	do
 	{
 		commandeSaisie = m_LecteurCommande.lireCommande();
-		//std::cout << "read " << input << std::endl;
-		
-		//else if (input == "liste_projet")
-		//{
-		//	QVector<QString>listeProjets;
-		//	m_BaseConnecteur.recupererProjets(listeProjets);
-		//	QString nomProjet;
-		//	foreach(nomProjet, listeProjets)
-		//	{
-		//		std::cout << nomProjet.toStdString() << std::endl;
-		//	}
-		//}
-		//else if (input == "liste_ticket")
-		//{
 
-		//	QVector<QString>listeTicket;
-		//	m_BaseConnecteur.recupererTicketsDuProjet(listeTicket, "TRIXELL-TETRIS");
-		//	QString nomTicket;
-		//	foreach(nomTicket, listeTicket)
-		//	{
-		//		std::cout << nomTicket.toStdString() << std::endl;
-		//	}
-		//}
-		///*else if (input == "connecter")
-		//{
-
-		//	QVector<QString>listeTicket;
-		//	m_BaseConnecteur.recupererTicketsDuProjet(listeTicket, "TRIXELL-TETRIS");
-		//	QString nomTicket;
-		//	foreach(nomTicket, listeTicket)
-		//	{
-		//		std::cout << nomTicket.toStdString() << std::endl;
-		//	}
-		//}*/
 	} while (traiterCommandeEtAttendreLaSuivante(commandeSaisie) == true);
 }
 
@@ -73,8 +40,17 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 		m_BaseConnecteur.recupererProjets(listeProjets, login(), motDePasse());
 		foreach(nomProjet, listeProjets)
 		{
-			//m_LecteurCommande.ecrire(nomProjet);
-			m_LecteurCommande.ecrire("TeTriS");
+			m_LecteurCommande.ecrire(nomProjet);
+		}
+	}
+	else if (nomCommande == "lister tickets")
+	{
+		QVector<QString>listeTickets;
+		QString nomProjet(m_LecteurCommande.lireCommande());
+		m_BaseConnecteur.recupererTicketsDuProjet(listeTickets, nomProjet, login(), motDePasse());
+		foreach(QString nomTicket, listeTickets)
+		{
+			m_LecteurCommande.ecrire(nomTicket);
 		}
 	}
 	return attendreCommandeSuivante;

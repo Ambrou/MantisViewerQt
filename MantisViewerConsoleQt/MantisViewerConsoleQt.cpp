@@ -1,10 +1,10 @@
 #include "MantisViewerConsoleQt.h"
 #include <QVector>
 #include "..\MantisManager\BaseConnecteur.h"
-#include "LecteurCommande.h"
+#include "IOManager.h"
 
-MantisViewerConsoleQt::MantisViewerConsoleQt(QObject *parent, BaseConnecteur &baseConnecteur, LecteurCommande& lecteurCommande)
-	: QThread(parent), m_BaseConnecteur(baseConnecteur), m_LecteurCommande(lecteurCommande)
+MantisViewerConsoleQt::MantisViewerConsoleQt(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& _IOManager)
+	: QThread(parent), m_BaseConnecteur(baseConnecteur), m_IoManager(_IOManager)
 {
 	m_Login = "";
 	m_MotDePasse = "";
@@ -15,7 +15,7 @@ void MantisViewerConsoleQt::run()
 	QString commandeSaisie("");
 	do
 	{
-		commandeSaisie = m_LecteurCommande.lireCommande();
+		commandeSaisie = m_IoManager.lireCommande();
 
 	} while (traiterCommandeEtAttendreLaSuivante(commandeSaisie) == true);
 }
@@ -30,10 +30,10 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 	}
 	else if (nomCommande == "connecter")
 	{
-		m_LecteurCommande.ecrire("Login :");
-		m_Login = m_LecteurCommande.lireCommande();
-		m_LecteurCommande.ecrire("Mot de passe :");
-		m_MotDePasse = m_LecteurCommande.lireCommande();
+		m_IoManager.ecrire("Login :");
+		m_Login = m_IoManager.lireCommande();
+		m_IoManager.ecrire("Mot de passe :");
+		m_MotDePasse = m_IoManager.lireCommande();
 	}
 	else if (nomCommande == "lister projets")
 	{
@@ -42,17 +42,17 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 		m_BaseConnecteur.recupererProjets(listeProjets, login(), motDePasse());
 		foreach(nomProjet, listeProjets)
 		{
-			m_LecteurCommande.ecrire(nomProjet);
+			m_IoManager.ecrire(nomProjet);
 		}
 	}
 	else if (nomCommande == "lister tickets")
 	{
 		QVector<QString>listeTickets;
-		QString nomProjet(m_LecteurCommande.lireCommande());
+		QString nomProjet(m_IoManager.lireCommande());
 		m_BaseConnecteur.recupererTicketsDuProjet(listeTickets, nomProjet, login(), motDePasse());
 		foreach(QString nomTicket, listeTickets)
 		{
-			m_LecteurCommande.ecrire(nomTicket);
+			m_IoManager.ecrire(nomTicket);
 		}
 	}
 	return attendreCommandeSuivante;

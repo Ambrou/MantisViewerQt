@@ -76,7 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\MantisViewerConsoleQt\LecteurCommande.cpp" />
+    <ClCompile Include="..\MantisViewerConsoleQt\IOManager.cpp" />
     <ClCompile Include="..\MantisViewerConsoleQt\MantisViewerConsoleQt.cpp" />
     <ClCompile Include="ConsoleTest.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_MantisViewerConsoleQt.cpp">

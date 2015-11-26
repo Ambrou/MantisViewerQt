@@ -2,7 +2,7 @@
 #include <QCoreApplication>
 #include <QSignalSpy>
 #include "../MantisViewerConsoleQt/MantisViewerConsoleQt.h"
-#include "../MantisViewerConsoleQt/LecteurCommande.h"
+#include "../MantisViewerConsoleQt/IOManager.h"
 #include "../MantisViewerConsoleQt/LecteurClavier.h"
 #include "../MantisManager/BaseConnecteur.h"
 #include "fakeit.hpp"
@@ -23,7 +23,7 @@ namespace MantisViewerConsoleQtTest
 			// Contexte
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			Mock<LecteurCommande> mockLecteur;
+			Mock<IOManager> mockLecteur;
 			Mock<BaseConnecteur> mockBase;
 			
 			// Soit la commande saisi est une demande de sortie d'application
@@ -46,7 +46,7 @@ namespace MantisViewerConsoleQtTest
 			class MaConsole : public MantisViewerConsoleQt
 			{
 			public:
-				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, LecteurCommande& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
 				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
 				QString login() const { return MantisViewerConsoleQt::login(); };
 				QString motDePasse() const { return MantisViewerConsoleQt::motDePasse(); };
@@ -54,12 +54,13 @@ namespace MantisViewerConsoleQtTest
 
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			Mock<LecteurCommande> mockLecteur;
+			Mock<IOManager> mockIOManager;
 			Mock<BaseConnecteur> mockBase;
 
-			When(Method(mockLecteur, lireCommande)).Return("login").Return("******");
+			When(Method(mockIOManager, lireCommande)).Return("login").Return("******");
+			Fake(Method(mockIOManager, ecrire));
 
-			MaConsole console(&app, mockBase.get(), mockLecteur.get());
+			MaConsole console(&app, mockBase.get(), mockIOManager.get());
 
 		
 			bool attendreCommandeSuivante = console.traiterCommandeEtAttendreLaSuivante("connecter");
@@ -80,21 +81,21 @@ namespace MantisViewerConsoleQtTest
 			class MaConsole : public MantisViewerConsoleQt
 			{
 			public:
-				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, LecteurCommande& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
 				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
 			};
 
 			int argc = 0;
 			QCoreApplication app(argc, 0);
 			QString texte("");
-			Mock<LecteurCommande> mockLecteur;
+			Mock<IOManager> mockIOManager;
 			Mock<BaseConnecteur> mockBase;
 		
 			When(Method(mockBase, recupererProjets)).Do(recupererProjets_delegate);
-			When(Method(mockLecteur, ecrire)).Do([&](const QString& _texte){ texte = _texte; });
+			When(Method(mockIOManager, ecrire)).Do([&](const QString& _texte){ texte = _texte; });
 
 			// Soit une Console
-			MaConsole console(&app, mockBase.get(), mockLecteur.get());
+			MaConsole console(&app, mockBase.get(), mockIOManager.get());
 
 			// Quand je traite la demande lister Projet
 			bool attendreCommandeSuivante = console.traiterCommandeEtAttendreLaSuivante("lister projets");
@@ -118,21 +119,21 @@ namespace MantisViewerConsoleQtTest
 			class MaConsole : public MantisViewerConsoleQt
 			{
 			public:
-				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, LecteurCommande& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
 				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
 			};
 
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			Mock<LecteurCommande> mockLecteur;
+			Mock<IOManager> mockIOManager;
 			Mock<BaseConnecteur> mockBase;
 			QVector<QString>listeTicketsTrouves;
 			
 			When(Method(mockBase, recupererTicketsDuProjet)).Do(recupererTicketsDuProjet_delegate);
-			When(Method(mockLecteur, lireCommande)).Return("TeTriS");
-			When(Method(mockLecteur, ecrire)).AlwaysDo([&](const QString& _texte){ listeTicketsTrouves.append(_texte); });
+			When(Method(mockIOManager, lireCommande)).Return("TeTriS");
+			When(Method(mockIOManager, ecrire)).AlwaysDo([&](const QString& _texte){ listeTicketsTrouves.append(_texte); });
 			// Soit une Console
-			MaConsole console(&app, mockBase.get(), mockLecteur.get());
+			MaConsole console(&app, mockBase.get(), mockIOManager.get());
 
 			// Quand je traite la demande lister Projet
 			bool attendreCommandeSuivante = console.traiterCommandeEtAttendreLaSuivante("lister tickets");

@@ -159,7 +159,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="LecteurClavier.cpp" />
-    <ClCompile Include="LecteurCommande.cpp" />
+    <ClCompile Include="IOManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MantisViewerConsoleQt.cpp" />
   </ItemGroup>
@@ -185,7 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LecteurClavier.h" />
-    <ClInclude Include="LecteurCommande.h" />
+    <ClInclude Include="IOManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

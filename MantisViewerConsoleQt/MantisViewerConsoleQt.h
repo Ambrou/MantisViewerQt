@@ -2,14 +2,14 @@
 #include <QThread>
 
 class BaseConnecteur;
-class LecteurCommande;
+class IOManager;
 
 class MantisViewerConsoleQt : public QThread
 {
 	Q_OBJECT;
 
 public:
-	MantisViewerConsoleQt(QObject *parent, BaseConnecteur &baseConnecteur, LecteurCommande& lecteurCommande);
+	MantisViewerConsoleQt(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande);
 
 protected:
 	virtual void run();
@@ -22,7 +22,7 @@ signals:
 
 private:
 	BaseConnecteur& m_BaseConnecteur;
-	LecteurCommande& m_LecteurCommande;
+	IOManager& m_IoManager;
 
 	QString m_Login;
 	QString m_MotDePasse;

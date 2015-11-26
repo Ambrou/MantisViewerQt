@@ -1,7 +1,7 @@
 #pragma once
-#include "LecteurCommande.h"
+#include "IOManager.h"
 class LecteurClavier :
-	public LecteurCommande
+	public IOManager
 {
 public:
 	LecteurClavier();

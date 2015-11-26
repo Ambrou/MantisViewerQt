@@ -53,10 +53,10 @@
     <ClCompile Include="GeneratedFiles\Release\moc_MantisViewerConsoleQt.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="LecteurCommande.cpp">
+    <ClCompile Include="LecteurClavier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LecteurClavier.cpp">
+    <ClCompile Include="IOManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release_v100\moc_MantisViewerConsoleQt.cpp">
@@ -72,10 +72,10 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LecteurCommande.h">
+    <ClInclude Include="LecteurClavier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LecteurClavier.h">
+    <ClInclude Include="IOManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

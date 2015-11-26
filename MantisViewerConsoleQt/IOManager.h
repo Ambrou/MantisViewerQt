@@ -2,11 +2,11 @@
 
 class QString;
 
-class LecteurCommande
+class IOManager
 {
 public:
-	LecteurCommande();
-	virtual ~LecteurCommande();
+	IOManager();
+	virtual ~IOManager();
 	virtual QString lireCommande() const = 0;
 	virtual void ecrire(const QString& texte) const = 0;
 };

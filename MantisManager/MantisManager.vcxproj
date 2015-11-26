@@ -175,7 +175,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseConnecteur.cpp" />
-    <ClCompile Include="GeneratedFiles\Debug\moc_mantisconnect.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_mantisconnect.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_v100|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_v100|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug_v100\moc_mantisconnect.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_v100|Win32'">true</ExcludedFromBuild>

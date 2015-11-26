@@ -59,6 +59,12 @@
     <ClCompile Include="LecteurClavier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release_v100\moc_MantisViewerConsoleQt.cpp">
+      <Filter>Generated Files\Release_v100</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug_v100\moc_MantisViewerConsoleQt.cpp">
+      <Filter>Generated Files\Debug_v100</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="MantisViewerConsoleQt.h">

@@ -55,6 +55,46 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 			m_IoManager.ecrire(nomTicket);
 		}
 	}
+	else if (nomCommande == "lister versions")
+	{
+		QVector<QString>listeTickets;
+		QString nomProjet(m_IoManager.lireCommande());
+		m_BaseConnecteur.recupererVersionsDuProjet(listeTickets, nomProjet, login(), motDePasse());
+		foreach(QString nomTicket, listeTickets)
+		{
+			m_IoManager.ecrire(nomTicket);
+		}
+	}
+	else if (nomCommande == "aa")
+	{
+		m_BaseConnecteur.recupererTout();
+		m_IoManager.ecrire("Fait");
+
+	}/*
+	else if (nomCommande == "lister tickets pour une version")
+	{
+		QVector<QString>listeTickets;
+		m_IoManager.ecrire("Projet");
+		QString nomProjet(m_IoManager.lireCommande());
+		m_IoManager.ecrire("Version");
+		QString nomVersion(m_IoManager.lireCommande());
+		m_BaseConnecteur.recupererTicketDeLaVersionsDuProjet(listeTickets, nomProjet, nomVersion, login(), motDePasse());
+		foreach(QString nomTicket, listeTickets)
+		{
+			m_IoManager.ecrire(nomTicket);
+		}
+	}*/
+
+	else if (nomCommande == "aa")
+	{
+		QVector<QString>listeTickets;
+		QString nomProjet(m_IoManager.lireCommande());
+		m_BaseConnecteur.recupererTicketsDuProjet(listeTickets, "TRIXELL-TETRIS", "apetitgenet", "MAg28vkwde");
+		foreach(QString nomTicket, listeTickets)
+		{
+			m_IoManager.ecrire(nomTicket);
+		}
+	}
 	return attendreCommandeSuivante;
 }
 

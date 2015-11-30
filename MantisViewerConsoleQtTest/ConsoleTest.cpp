@@ -147,5 +147,48 @@ namespace MantisViewerConsoleQtTest
 
 		}
 
+		static void recupererTicketDeLaVersionsDuProjet_delegate(QVector<QString>&listeTickets, const QString nomDuProjet, const QString nomVersion, const QString& user, const QString& password)
+		{
+			listeTickets.append("bug 1");
+			listeTickets.append("bug 3");
+			listeTickets.append("evol 7");
+		}
+
+		TEST_METHOD(listerLesTicketsDUneVersionDUnProjet)
+		{
+			// Contexte
+			class MaConsole : public MantisViewerConsoleQt
+			{
+			public:
+				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
+			};
+
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			Mock<IOManager> mockIOManager;
+			Mock<BaseConnecteur> mockBase;
+			QVector<QString>listeTicketsTrouves;
+
+			When(Method(mockBase, recupererTicketDeLaVersionsDuProjet)).Do(recupererTicketDeLaVersionsDuProjet_delegate);
+			When(Method(mockIOManager, lireCommande)).Return("TeTriS", "CD");
+			When(Method(mockIOManager, ecrire)).AlwaysDo([&](const QString& _texte){ listeTicketsTrouves.append(_texte); });
+			// Soit une Console
+			MaConsole console(&app, mockBase.get(), mockIOManager.get());
+
+			// Quand je traite la demande lister Projet
+			bool attendreCommandeSuivante = console.traiterCommandeEtAttendreLaSuivante("lister tickets pour une version");
+
+			// Alors j'attends la commande suivante
+			Assert::AreEqual(true, attendreCommandeSuivante);
+			Assert::AreEqual(3, listeTicketsTrouves.size());
+			Assert::AreEqual("Projet", listeTicketsTrouves.at(0).toStdString().c_str());
+			Assert::AreEqual("Version", listeTicketsTrouves.at(1).toStdString().c_str());
+			Assert::AreEqual("bug 1", listeTicketsTrouves.at(2).toStdString().c_str());
+			Assert::AreEqual("bug 3", listeTicketsTrouves.at(3).toStdString().c_str());
+			Assert::AreEqual("evol 7", listeTicketsTrouves.at(4).toStdString().c_str());
+
+		}
+
 	};
 }

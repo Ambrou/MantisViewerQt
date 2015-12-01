@@ -70,7 +70,7 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 		m_BaseConnecteur.recupererTout();
 		m_IoManager.ecrire("Fait");
 
-	}/*
+	}
 	else if (nomCommande == "lister tickets pour une version")
 	{
 		QVector<QString>listeTickets;
@@ -83,7 +83,7 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 		{
 			m_IoManager.ecrire(nomTicket);
 		}
-	}*/
+	}
 
 	else if (nomCommande == "aa")
 	{

@@ -85,15 +85,14 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 		}
 	}
 
-	else if (nomCommande == "aa")
+	else if (nomCommande == "changer etat ticket")
 	{
-		QVector<QString>listeTickets;
-		QString nomProjet(m_IoManager.lireCommande());
-		m_BaseConnecteur.recupererTicketsDuProjet(listeTickets, "TRIXELL-TETRIS", "apetitgenet", "MAg28vkwde");
-		foreach(QString nomTicket, listeTickets)
-		{
-			m_IoManager.ecrire(nomTicket);
-		}
+		m_IoManager.ecrire("Numero du Ticket");
+		QString idTicket(m_IoManager.lireCommande());
+		m_IoManager.ecrire("Nouvel Etat");
+		QString nouvelEtat(m_IoManager.lireCommande());
+		m_BaseConnecteur.changerEtatTicket(idTicket, nouvelEtat);
+		
 	}
 	return attendreCommandeSuivante;
 }

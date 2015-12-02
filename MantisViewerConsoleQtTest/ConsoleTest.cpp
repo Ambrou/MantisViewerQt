@@ -181,7 +181,7 @@ namespace MantisViewerConsoleQtTest
 
 			// Alors j'attends la commande suivante
 			Assert::AreEqual(true, attendreCommandeSuivante);
-			Assert::AreEqual(3, listeTicketsTrouves.size());
+			Assert::AreEqual(5, listeTicketsTrouves.size());
 			Assert::AreEqual("Projet", listeTicketsTrouves.at(0).toStdString().c_str());
 			Assert::AreEqual("Version", listeTicketsTrouves.at(1).toStdString().c_str());
 			Assert::AreEqual("bug 1", listeTicketsTrouves.at(2).toStdString().c_str());
@@ -207,6 +207,11 @@ namespace MantisViewerConsoleQtTest
 
 			// Soit une console en attente de commande
 			MaConsole console(&app, mockBase.get(), mockIOManager.get());
+			QString id;
+			QString etat;
+			When(Method(mockBase, changerEtatTicket)).Do([&](const QString& _id, const QString& _etat){ id = _id; etat = _etat; });
+			Fake(Method(mockIOManager, ecrire));
+			When(Method(mockIOManager, lireCommande)).Return("12").Return("validé");
 
 			// Lorsque je demande le passage d'un ticket de l'etat nouveau à en analyse
 			bool attendreCommandeSuivante = console.traiterCommandeEtAttendreLaSuivante("changer etat ticket");
@@ -214,6 +219,9 @@ namespace MantisViewerConsoleQtTest
 			// Alors la console attend la prochainne commande
 			Assert::AreEqual(true, attendreCommandeSuivante);
 			// Et le ticket a changer d'état
+			//Verify(Method(mockBase, changerEtatTicket).Using("12", "validé"));
+			Assert::IsTrue(QString("12") == id);
+			Assert::IsTrue(QString("validé") == etat);
 		}
 
 	};

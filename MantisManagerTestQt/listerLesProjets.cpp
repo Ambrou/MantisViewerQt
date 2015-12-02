@@ -17,11 +17,11 @@ namespace MantisManagerTest
 			int argc = 0;
 			QCoreApplication app(argc, 0);
 			QVector<QString>listeProjets;
-			/*MantisConnecteur mantisManager;
+			//MantisConnecteur mantisManager;
 
 			
-			mantisManager.recupererProjets(listeProjets);
-*/
+	//		mantisManager.recupererProjets(listeProjets, "", "");
+
 			Assert::AreEqual(3, listeProjets.size());
 		}
 	};

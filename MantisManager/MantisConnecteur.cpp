@@ -43,7 +43,7 @@ void MantisConnecteur::recupererTicketsDuProjet(QVector<QString>&listeTicket, co
 	}
 }
 
-
+//mc_issue_update
 //void MantisConnecteur::recupererTicketsDuProjetExtended(QVector<QString>&listeTicket, const QString nomDuProjet, const QString& user, const QString& password, const ) const
 //{
 //	MantisConnect mantisConnect;
@@ -311,7 +311,10 @@ void MantisConnecteur::recupererTout() const
 	foreach(issueHeaderData, listIssueHeaderData)
 	{
 		flux << "id " << issueHeaderData.id() << "\tname " << issueHeaderData.summary() << endl;
-	}
-	
+	}	
+}
+
+void MantisConnecteur::changerEtatTicket(const QString& idTicket, const QString& nouvelEtat) const
+{
 
 }

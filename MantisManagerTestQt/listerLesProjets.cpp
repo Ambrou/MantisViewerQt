@@ -3,6 +3,7 @@
 #include <QVector>
 #include <QString>
 #include <QCoreApplication>
+#include "InvalidArgumentException.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -40,9 +41,19 @@ namespace MantisManagerTest
 			QCoreApplication app(argc, 0);
 			MantisConnecteur mantisManager;
 
-			mantisManager.changerEtatTicket("2234", "à penser", "apetitgenet", "MAg28vkwde");
-
-			Assert::AreEqual(15, 14);
+			try
+			{
+				mantisManager.changerEtatTicket("2234", "à penser", "apetitgenet", "MAg28vkwde");
+				Assert::Fail();
+			}
+			catch (InvalidArgumentException &e)
+			{
+				Assert::AreEqual("coucpou", e.what());
+			}
+			catch (...)
+			{
+				Assert::Fail();
+			}
 		}
 
 		TEST_METHOD(changerLEtatDUnTicketDansUnEtatImpossible)
@@ -51,10 +62,20 @@ namespace MantisManagerTest
 			QCoreApplication app(argc, 0);
 			MantisConnecteur mantisManager;
 
-			Assert::ExpectException<invalid_argument>()
-				(mantisManager.changerEtatTicket("2234", "nouveau", "apetitgenet", "MAg28vkwde"));
+			try
+			{
+				mantisManager.changerEtatTicket("2234", "nouveau", "apetitgenet", "MAg28vkwde");
+				Assert::Fail();
+			}
+			/*catch ()
+			{
 
-			Assert::AreEqual(15, 14);
+			}*/
+			catch (...)
+			{
+				Assert::Fail();
+			}
+
 		}
 
 		TEST_METHOD(ajouterUneNoteAUnTicket)

@@ -7,5 +7,9 @@ class InvalidArgumentException :
 public:
 	explicit InvalidArgumentException(const QString& what_arg);
 	virtual ~InvalidArgumentException();
+	const char* what() const;
+
+private:
+	const QString description;
 };
 

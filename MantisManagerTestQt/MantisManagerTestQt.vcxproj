@@ -138,6 +138,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\MantisManager\InvalidArgumentException.cpp" />
     <ClCompile Include="..\MantisManager\mantisconnect.cpp" />
     <ClCompile Include="..\MantisManager\MantisConnecteur.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_mantisconnect.cpp">

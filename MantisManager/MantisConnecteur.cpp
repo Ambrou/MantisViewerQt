@@ -352,7 +352,8 @@ void MantisConnecteur::changerEtatTicket(const QString& idTicket, const QString&
 	}
 	else
 	{
-		QString message("");
+		QString message(nouvelEtat);
+		message += " n'est pas un état connu";
 		throw InvalidArgumentException(message);
 		// Status inconnu
 	}

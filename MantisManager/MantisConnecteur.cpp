@@ -2,6 +2,7 @@
 #include "MantisConnecteur.h"
 #include "mantisconnect.h"
 #include "MantisConnecteur.h"
+#include "InvalidArgumentException.h"
 
 MantisConnecteur::MantisConnecteur()
 {
@@ -314,7 +315,55 @@ void MantisConnecteur::recupererTout() const
 	}	
 }
 
-void MantisConnecteur::changerEtatTicket(const QString& idTicket, const QString& nouvelEtat) const
+void MantisConnecteur::changerEtatTicket(const QString& idTicket, const QString& nouvelEtat, const QString& user, const QString& password) const
 {
+	MantisConnect mantisConnect;
+	TNS__ObjectRef newStatus;
+	bool statusTrouve = false;
 
+	TNS__ObjectRefArray objectStatus = mantisConnect.mc_enum_status(user, password);
+	QList< TNS__ObjectRef > listStatus = objectStatus.items();
+	TNS__ObjectRef status;
+	foreach(status, listStatus)
+	{
+		if (status.name() == nouvelEtat)
+		{
+			newStatus.setId(status.id());
+			newStatus.setName(status.name());
+			statusTrouve = true;
+		}
+	}
+	if (statusTrouve == true)
+	{
+		TNS__IssueData ticket = mantisConnect.mc_issue_get(user, password, idTicket.toInt());
+		ticket.setProject(ticket.project());
+		ticket.setReporter(ticket.reporter());
+		ticket.setHandler(ticket.handler());
+		ticket.setCategory(ticket.category());
+		ticket.setSummary(ticket.summary());
+		ticket.setDescription(ticket.description());
+		ticket.setStatus(newStatus);
+
+
+		if (mantisConnect.mc_issue_update(user, password, idTicket.toInt(), ticket) == false)
+		{
+			// Mise à jour échouée
+		}
+	}
+	else
+	{
+		QString message("");
+		throw InvalidArgumentException(message);
+		// Status inconnu
+	}
+	
+}
+
+void MantisConnecteur::ajouterUneNoteAuTicket(const QString& idTicket, const QString& note, const QString& user, const QString& password) const
+{
+	MantisConnect mantisConnect;
+	TNS__IssueNoteData nouvelNote;
+	nouvelNote.setText(note);
+
+	qint64 idNote = mantisConnect.mc_issue_note_add(user, password, idTicket.toInt(), nouvelNote);
 }

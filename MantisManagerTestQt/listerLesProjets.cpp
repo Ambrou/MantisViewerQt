@@ -17,12 +17,53 @@ namespace MantisManagerTest
 			int argc = 0;
 			QCoreApplication app(argc, 0);
 			QVector<QString>listeProjets;
-			//MantisConnecteur mantisManager;
+			MantisConnecteur mantisManager;
 
-			
-	//		mantisManager.recupererProjets(listeProjets, "", "");
+			mantisManager.recupererProjets(listeProjets, "apetitgenet", "MAg28vkwde");
 
-			Assert::AreEqual(3, listeProjets.size());
+			Assert::AreEqual(15, listeProjets.size());
+		}
+
+		TEST_METHOD(changerLEtatDUnTicket)
+		{
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			MantisConnecteur mantisManager;
+
+			mantisManager.changerEtatTicket("2234", "à valider", "apetitgenet", "MAg28vkwde");
+			Assert::AreEqual(15, 14);
+		}
+
+		TEST_METHOD(changerLEtatDUnTicketDansUnEtatInexistant)
+		{
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			MantisConnecteur mantisManager;
+
+			mantisManager.changerEtatTicket("2234", "à penser", "apetitgenet", "MAg28vkwde");
+
+			Assert::AreEqual(15, 14);
+		}
+
+		TEST_METHOD(changerLEtatDUnTicketDansUnEtatImpossible)
+		{
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			MantisConnecteur mantisManager;
+
+			Assert::ExpectException<invalid_argument>()
+				(mantisManager.changerEtatTicket("2234", "nouveau", "apetitgenet", "MAg28vkwde"));
+
+			Assert::AreEqual(15, 14);
+		}
+
+		TEST_METHOD(ajouterUneNoteAUnTicket)
+		{
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			MantisConnecteur mantisManager;
+
+			mantisManager.ajouterUneNoteAuTicket("2234", "Ceci est une nouvelle note", "apetitgenet", "MAg28vkwde");
 		}
 	};
 }

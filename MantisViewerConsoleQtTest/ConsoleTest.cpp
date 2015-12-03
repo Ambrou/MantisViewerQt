@@ -209,7 +209,7 @@ namespace MantisViewerConsoleQtTest
 			MaConsole console(&app, mockBase.get(), mockIOManager.get());
 			QString id;
 			QString etat;
-			When(Method(mockBase, changerEtatTicket)).Do([&](const QString& _id, const QString& _etat){ id = _id; etat = _etat; });
+			When(Method(mockBase, changerEtatTicket)).Do([&](const QString& _id, const QString& _etat, const QString& , const QString& ){ id = _id; etat = _etat; });
 			Fake(Method(mockIOManager, ecrire));
 			When(Method(mockIOManager, lireCommande)).Return("12").Return("validé");
 

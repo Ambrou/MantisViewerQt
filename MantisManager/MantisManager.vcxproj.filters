@@ -65,6 +65,9 @@
     <ClCompile Include="GeneratedFiles\Debug\moc_mantisconnect.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="InvalidArgumentException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -80,6 +83,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BaseConnecteur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InvalidArgumentException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -91,7 +91,7 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 		QString idTicket(m_IoManager.lireCommande());
 		m_IoManager.ecrire("Nouvel Etat");
 		QString nouvelEtat(m_IoManager.lireCommande());
-		m_BaseConnecteur.changerEtatTicket(idTicket, nouvelEtat);
+		m_BaseConnecteur.changerEtatTicket(idTicket, nouvelEtat, login(), motDePasse());
 		
 	}
 	return attendreCommandeSuivante;

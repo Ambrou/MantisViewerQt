@@ -48,7 +48,7 @@ namespace MantisManagerTest
 			}
 			catch (InvalidArgumentException &e)
 			{
-				Assert::AreEqual("coucpou", e.what());
+				Assert::AreEqual("coucou", e.what());
 			}
 			catch (...)
 			{

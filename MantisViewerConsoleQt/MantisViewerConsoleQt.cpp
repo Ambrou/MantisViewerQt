@@ -2,6 +2,7 @@
 #include <QVector>
 #include "..\MantisManager\BaseConnecteur.h"
 #include "IOManager.h"
+#include <QException>
 
 MantisViewerConsoleQt::MantisViewerConsoleQt(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& _IOManager)
 	: QThread(parent), m_BaseConnecteur(baseConnecteur), m_IoManager(_IOManager)
@@ -87,11 +88,19 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 
 	else if (nomCommande == "changer etat ticket")
 	{
+		try
+		{
 		m_IoManager.ecrire("Numero du Ticket");
 		QString idTicket(m_IoManager.lireCommande());
 		m_IoManager.ecrire("Nouvel Etat");
 		QString nouvelEtat(m_IoManager.lireCommande());
 		m_BaseConnecteur.changerEtatTicket(idTicket, nouvelEtat, login(), motDePasse());
+		}
+		catch (const QException& e)
+		{
+			QString err(e.what());
+			m_IoManager.ecrire(err);
+		}
 		
 	}
 	return attendreCommandeSuivante;

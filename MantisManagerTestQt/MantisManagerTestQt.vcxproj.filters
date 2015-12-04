@@ -72,6 +72,9 @@
     <ClCompile Include="..\MantisManager\InvalidArgumentException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\MantisManager\OperationImpossibleException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mantismanagertestqt.h">

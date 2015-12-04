@@ -3,6 +3,7 @@
 #include "mantisconnect.h"
 #include "MantisConnecteur.h"
 #include "InvalidArgumentException.h"
+#include "OperationImpossibleException.h"
 
 MantisConnecteur::MantisConnecteur()
 {
@@ -347,15 +348,18 @@ void MantisConnecteur::changerEtatTicket(const QString& idTicket, const QString&
 
 		if (mantisConnect.mc_issue_update(user, password, idTicket.toInt(), ticket) == false)
 		{
-			// Mise à jour échouée
+			// N'arrive jamais car on peut toujours changer l'état quelque soit l'état valide
+			QString message("impossible de passer dans l'état ");
+			message += nouvelEtat;
+			throw OperationImpossibleException(message);
 		}
 	}
 	else
 	{
+		// Ne devrait jamais arrivé depuis l'IHM
 		QString message(nouvelEtat);
 		message += " n'est pas un état connu";
 		throw InvalidArgumentException(message);
-		// Status inconnu
 	}
 	
 }

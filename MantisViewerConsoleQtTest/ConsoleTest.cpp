@@ -5,6 +5,8 @@
 #include "../MantisViewerConsoleQt/IOManager.h"
 #include "../MantisViewerConsoleQt/LecteurClavier.h"
 #include "../MantisManager/BaseConnecteur.h"
+#include "../MantisManager/MantisManagerException.h"
+
 #include "fakeit.hpp"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -222,6 +224,41 @@ namespace MantisViewerConsoleQtTest
 			//Verify(Method(mockBase, changerEtatTicket).Using("12", "validé"));
 			Assert::IsTrue(QString("12") == id);
 			Assert::IsTrue(QString("validé") == etat);
+		}
+
+		TEST_METHOD(modifierLEtatDUnTicketAvecEchec)
+		{
+			// Contexte
+			class MaConsole : public MantisViewerConsoleQt
+			{
+			public:
+				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
+			};
+
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			Mock<IOManager> mockIOManager;
+			Mock<BaseConnecteur> mockBase;
+			class ME : public MantisManagerException
+			{
+			public:
+				const QString What() const{ return ""; };
+			};
+
+			// Soit une console en attente de commande
+			MaConsole console(&app, mockBase.get(), mockIOManager.get());
+
+			When(Method(mockBase, changerEtatTicket)).Throw(ME());
+			Fake(Method(mockIOManager, ecrire));
+			When(Method(mockIOManager, lireCommande)).Return("12").Return("validé");
+
+			// Lorsque je demande le passage d'un ticket de l'etat nouveau à en analyse
+			bool attendreCommandeSuivante = console.traiterCommandeEtAttendreLaSuivante("changer etat ticket");
+
+			// Alors la console attend la prochainne commande
+			Assert::AreEqual(true, attendreCommandeSuivante);
+
 		}
 
 	};

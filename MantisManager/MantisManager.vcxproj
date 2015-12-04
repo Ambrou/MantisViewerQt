@@ -194,6 +194,8 @@
     <ClCompile Include="mantisconnect.cpp" />
     <ClCompile Include="MantisConnecteur.cpp" />
     <ClCompile Include="mantismanager.cpp" />
+    <ClCompile Include="MantisManagerException.cpp" />
+    <ClCompile Include="OperationImpossibleException.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug_v100|Win32'">Create</PrecompiledHeader>
@@ -224,7 +226,9 @@
     <ClInclude Include="InvalidArgumentException.h" />
     <ClInclude Include="MantisConnecteur.h" />
     <ClInclude Include="mantismanager.h" />
+    <ClInclude Include="MantisManagerException.h" />
     <ClInclude Include="mantismanager_global.h" />
+    <ClInclude Include="OperationImpossibleException.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

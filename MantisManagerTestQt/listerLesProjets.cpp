@@ -4,6 +4,7 @@
 #include <QString>
 #include <QCoreApplication>
 #include "InvalidArgumentException.h"
+#include "OperationImpossibleException.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -31,8 +32,9 @@ namespace MantisManagerTest
 			QCoreApplication app(argc, 0);
 			MantisConnecteur mantisManager;
 
-			mantisManager.changerEtatTicket("2234", "à valider", "apetitgenet", "MAg28vkwde");
-			Assert::AreEqual(15, 14);
+			mantisManager.changerEtatTicket("2234", QString::fromLocal8Bit("à valider"), "apetitgenet", "MAg28vkwde");
+
+			// Pas d'exception lancé
 		}
 
 		TEST_METHOD(changerLEtatDUnTicketDansUnEtatInexistant)
@@ -46,9 +48,9 @@ namespace MantisManagerTest
 				mantisManager.changerEtatTicket("2234", "à penser", "apetitgenet", "MAg28vkwde");
 				Assert::Fail();
 			}
-			catch (InvalidArgumentException &e)
+			catch (const MantisManagerException &e)
 			{
-				Assert::AreEqual("coucou", e.what());
+				Assert::IsTrue(QString("à penser n'est pas un état connu") == e.What());
 			}
 			catch (...)
 			{
@@ -58,19 +60,21 @@ namespace MantisManagerTest
 
 		TEST_METHOD(changerLEtatDUnTicketDansUnEtatImpossible)
 		{
-			int argc = 0;
-			QCoreApplication app(argc, 0);
-			MantisConnecteur mantisManager;
 
 			try
 			{
-				mantisManager.changerEtatTicket("2234", "nouveau", "apetitgenet", "MAg28vkwde");
-				Assert::Fail();
-			}
-			/*catch ()
-			{
+				int argc = 0;
+				QCoreApplication app(argc, 0);
+				MantisConnecteur mantisManager;
 
-			}*/
+				mantisManager.changerEtatTicket("2234", QString::fromLocal8Bit("validé"), "apetitgenet", "MAg28vkwde");
+				//Assert::Fail();
+				// On peut toujours changer l'état
+			}
+			catch (const OperationImpossibleException& e)
+			{
+				Assert::AreEqual("coucou", e.what());
+			}
 			catch (...)
 			{
 				Assert::Fail();

@@ -141,6 +141,7 @@
     <ClCompile Include="..\MantisManager\InvalidArgumentException.cpp" />
     <ClCompile Include="..\MantisManager\mantisconnect.cpp" />
     <ClCompile Include="..\MantisManager\MantisConnecteur.cpp" />
+    <ClCompile Include="..\MantisManager\OperationImpossibleException.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_mantisconnect.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug_v100|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_v100|Win32'">true</ExcludedFromBuild>

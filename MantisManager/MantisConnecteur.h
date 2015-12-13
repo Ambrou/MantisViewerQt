@@ -12,6 +12,7 @@ public:
 	virtual void recupererTicketDeLaVersionsDuProjet(QVector<QString>&listeVersion, const QString nomDuProjet, const QString nomVersion, const QString& user, const QString& password) const;
 	virtual void changerEtatTicket(const QString& idTicket, const QString& nouvelEtat, const QString& user, const QString& password) const;
 	virtual void ajouterUneNoteAuTicket(const QString& idTicket, const QString& note, const QString& user, const QString& password) const;
+	virtual void creerUnTicket(const QString& user, const QString& password) const;
 	virtual void recupererTout() const;
 };
 

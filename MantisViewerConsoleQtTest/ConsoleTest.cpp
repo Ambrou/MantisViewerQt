@@ -261,5 +261,32 @@ namespace MantisViewerConsoleQtTest
 
 		}
 
+		TEST_METHOD(saisirUnNouveauTicket)
+		{
+			// Contexte
+			class MaConsole : public MantisViewerConsoleQt
+			{
+			public:
+				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
+			};
+
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			Mock<IOManager> mockIOManager;
+			Mock<BaseConnecteur> mockBase;
+
+			MaConsole console(&app, mockBase.get(), mockIOManager.get());
+			// on s'en fout de ce qu'on écrit
+			Fake(Method(mockIOManager, ecrire));
+
+			// Lorsque je demande le passage d'un ticket de l'etat nouveau à en analyse
+			bool attendreCommandeSuivante = console.traiterCommandeEtAttendreLaSuivante("creer ticket");
+
+			// Alors la console attend la prochainne commande
+			Assert::AreEqual(true, attendreCommandeSuivante);
+
+		}
+
 	};
 }

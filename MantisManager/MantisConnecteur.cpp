@@ -4,6 +4,7 @@
 #include "MantisConnecteur.h"
 #include "InvalidArgumentException.h"
 #include "OperationImpossibleException.h"
+#include <QDebug>
 
 MantisConnecteur::MantisConnecteur()
 {
@@ -370,5 +371,24 @@ void MantisConnecteur::ajouterUneNoteAuTicket(const QString& idTicket, const QSt
 	TNS__IssueNoteData nouvelNote;
 	nouvelNote.setText(note);
 
-	qint64 idNote = mantisConnect.mc_issue_note_add(user, password, idTicket.toInt(), nouvelNote);
+	if (mantisConnect.mc_issue_note_add(user, password, idTicket.toInt(), nouvelNote) == 0)
+	{
+		// Ne devrait jamais arrivé depuis l'IHM
+		QString message("Impossible de rajouter la note");
+		throw InvalidArgumentException(message);
+	}
+
+}
+
+void MantisConnecteur::creerUnTicket(const QString& user, const QString& password) const
+{
+	MantisConnect mantisConnect;
+	TNS__IssueData issue;
+
+	if (mantisConnect.mc_issue_add(user, password, issue) == 0)
+	{
+		// Ne devrait jamais arrivé depuis l'IHM
+		QString message("Impossible de créer le ticket");
+		throw InvalidArgumentException(message);
+	}
 }

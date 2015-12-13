@@ -90,5 +90,58 @@ namespace MantisManagerTest
 
 			mantisManager.ajouterUneNoteAuTicket("2234", "Ceci est une nouvelle note", "apetitgenet", "MAg28vkwde");
 		}
+
+		TEST_METHOD(ajouterUneNoteAUnTicketAvecErreur)
+		{
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			MantisConnecteur mantisManager;
+
+			try
+			{
+				mantisManager.ajouterUneNoteAuTicket("2234", "Ceci est une nouvelle note", "apeitgenet", "MAg28vkwde");
+				Assert::Fail();
+			}
+			catch (const MantisManagerException &e)
+			{
+				Assert::IsTrue(QString("Impossible de rajouter la note") == e.What());
+			}
+			catch (...)
+			{
+				Assert::Fail();
+			}
+			
+		}
+
+		TEST_METHOD(creerUnTicket)
+		{
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			MantisConnecteur mantisManager;
+
+			mantisManager.creerUnTicket("apetitgenet", "MAg28vkwde");
+		}
+
+
+
+		TEST_METHOD(creerUnTicketAvecErreur)
+		{
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			MantisConnecteur mantisManager;
+			try
+			{
+				mantisManager.creerUnTicket("apetitgenet", "MAg28vkwde");
+				Assert::Fail();
+			}
+			catch (const MantisManagerException &e)
+			{
+				Assert::IsTrue(QString("Impossible de créer le ticket") == e.What());
+			}
+			catch (...)
+			{
+				Assert::Fail();
+			}
+		}
 	};
 }

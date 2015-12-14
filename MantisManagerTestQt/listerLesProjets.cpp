@@ -119,7 +119,8 @@ namespace MantisManagerTest
 			QCoreApplication app(argc, 0);
 			MantisConnecteur mantisManager;
 
-			mantisManager.creerUnTicket("apetitgenet", "MAg28vkwde");
+			mantisManager.creerUnTicket("Demo Project", "demo", "demo");
+			
 		}
 
 
@@ -131,7 +132,7 @@ namespace MantisManagerTest
 			MantisConnecteur mantisManager;
 			try
 			{
-				mantisManager.creerUnTicket("apetitgenet", "MAg28vkwde");
+				mantisManager.creerUnTicket("Demo Project","demo", "demo");
 				Assert::Fail();
 			}
 			catch (const MantisManagerException &e)

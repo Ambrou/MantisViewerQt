@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "MantisConnecteur.h"
 #include "mantisconnect.h"
-#include "MantisConnecteur.h"
 #include "InvalidArgumentException.h"
 #include "OperationImpossibleException.h"
 #include <QDebug>
@@ -108,11 +107,16 @@ void MantisConnecteur::recupererTicketDeLaVersionsDuProjet(QVector<QString>&list
 
 void MantisConnecteur::recupererTout() const
 {
-	QFile file("Mantis.txt");
+	QFile file("Mantis2.txt");
 	MantisConnect mantisConnect;
+	mantisConnect.setEndPoint("http://mantiskanban.com/mantisbt/api/soap/mantisconnect.php");
+	/*
 	QString user("apetitgenet");
 	QString password("MAg28vkwde");
-	QString projectName("TRIXELL-TETRIS");
+	QString projectName("TRIXELL-TETRIS");*/
+	QString user("demo");
+	QString password("demo");
+	QString projectName("Demo Project");
 	qint64 idProjet = mantisConnect.mc_project_get_id_from_name(user, password, projectName);
 	qint64 idVersion = 1576;
 
@@ -314,7 +318,33 @@ void MantisConnecteur::recupererTout() const
 	foreach(issueHeaderData, listIssueHeaderData)
 	{
 		flux << "id " << issueHeaderData.id() << "\tname " << issueHeaderData.summary() << endl;
-	}	
+	}
+
+	flux << "=============================" << endl << "Projet Users" << endl;
+	TNS__AccountDataArray accountDataArray = mantisConnect.mc_project_get_users(user, password, idProjet, 10);
+
+	QList< TNS__AccountData > lisAccountData = accountDataArray.items();
+	TNS__AccountData accountData;
+	foreach(accountData, lisAccountData)
+	{
+		flux << "id " << accountData.id() << "\tname " << accountData.name() << endl;
+	}
+
+	flux << "=============================" << endl << "Project custom field" << endl;
+	TNS__CustomFieldDefinitionDataArray customFieldDefinitionDataArray = mantisConnect.mc_project_get_custom_fields(user, password, idProjet);
+
+	QList< TNS__CustomFieldDefinitionData > listCustumFieldDefinitiontData = customFieldDefinitionDataArray.items();
+	TNS__CustomFieldDefinitionData customFieldDefinitionData;
+	foreach(customFieldDefinitionData, listCustumFieldDefinitiontData)
+	{
+		TNS__ObjectRef field = customFieldDefinitionData.field();
+		flux << "id " << field.id() << "\tname " << field.name() << "\tvalues " << customFieldDefinitionData.possible_values() << endl;
+		
+
+	}
+
+		
+	
 }
 
 void MantisConnecteur::changerEtatTicket(const QString& idTicket, const QString& nouvelEtat, const QString& user, const QString& password) const
@@ -380,10 +410,31 @@ void MantisConnecteur::ajouterUneNoteAuTicket(const QString& idTicket, const QSt
 
 }
 
-void MantisConnecteur::creerUnTicket(const QString& user, const QString& password) const
+void MantisConnecteur::creerUnTicket(const QString& nomDuProjet, const QString& user, const QString& password) const
 {
-	MantisConnect mantisConnect;
+	TNS__ObjectRef project;
 	TNS__IssueData issue;
+	TNS__ObjectRef status;
+	TNS__ObjectRef priority;
+
+	MantisConnect mantisConnect;
+	mantisConnect.setEndPoint("http://mantiskanban.com/mantisbt/api/soap/mantisconnect.php");
+	qint64 idProjet = mantisConnect.mc_project_get_id_from_name(user, password, nomDuProjet);
+
+	project.setId(idProjet);
+	project.setName(nomDuProjet);
+
+	status.setId(10);
+	//status.setName("new");
+
+	priority.setId(10);
+
+
+	issue.setProject(project);
+	issue.setSummary("ceci est un résumé");
+	issue.setDescription("ceci est la description");
+	issue.setStatus(status);
+	issue.setPriority(priority);
 
 	if (mantisConnect.mc_issue_add(user, password, issue) == 0)
 	{
@@ -391,4 +442,64 @@ void MantisConnecteur::creerUnTicket(const QString& user, const QString& passwor
 		QString message("Impossible de créer le ticket");
 		throw InvalidArgumentException(message);
 	}
+	/*MantisConnect mantisConnect;
+	TNS__IssueData issue;
+	TNS__ObjectRef project;
+	TNS__ObjectRef viewState;
+	TNS__AccountData reporter;
+	TNS__AccountData handler;
+	TNS__ObjectRef status;
+	TNS__ObjectRef customField;
+	TNS__CustomFieldValueForIssueDataArray customFieldValueForIssueDataArray;
+	QList< TNS__CustomFieldValueForIssueData > listcustomFieldValueForIssueData;
+
+	mantisConnect.setEndPoint("http://mantiskanban.com/mantisbt/mantiskanban/");
+
+	qint64 idProjet = mantisConnect.mc_project_get_id_from_name(user, password, nomDuProjet);
+	project.setId(idProjet);
+	project.setName("TRIXELL-TETRIS");
+	//viewState.setName("privé");
+	viewState.setId(50);
+	handler.setName("GroupeTXL");
+	handler.setId(122);
+	reporter.setName("apetitgenet");
+	reporter.setId(70);
+	status.setId(10);
+	status.setName("nouveau");
+	TNS__CustomFieldValueForIssueData customFieldValue;
+
+	customFieldValue.setValue("Intégration Astek");
+	customField.setName("Plate-forme de détection");
+	customField.setId(5);
+	customFieldValue.setField(customField);
+	listcustomFieldValueForIssueData.append(customFieldValue);
+
+
+	customFieldValue.setValue("Support");
+	customField.setName("Type de FFT");
+	customField.setId(1);
+	customFieldValue.setField(customField);
+	listcustomFieldValueForIssueData.append(customFieldValue);
+
+	customFieldValueForIssueDataArray.setItems(listcustomFieldValueForIssueData);
+
+
+	issue.setProject(project);
+	issue.setSummary("ceci est un résumé");
+	issue.setDescription("ceci est la description");
+	issue.setView_state(viewState);
+	issue.setCategory("IHM");
+	issue.setReporter(reporter);
+	issue.setHandler(handler);
+	issue.setStatus(status);
+	issue.setCustom_fields(customFieldValueForIssueDataArray);
+
+
+	if (mantisConnect.mc_issue_add(user, password, issue) == 0)
+	{
+		// Ne devrait jamais arrivé depuis l'IHM
+		QString message("Impossible de créer le ticket");
+		throw InvalidArgumentException(message);
+	}*/
+
 }

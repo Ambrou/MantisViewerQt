@@ -224,7 +224,32 @@
     </CustomBuild>
     <ClInclude Include="BaseConnecteur.h" />
     <ClInclude Include="InvalidArgumentException.h" />
-    <ClInclude Include="MantisConnecteur.h" />
+    <CustomBuild Include="MantisConnecteur.h">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug_v100|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug_v100|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug_v100|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release_v100|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release_v100|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release_v100|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+    </CustomBuild>
     <ClInclude Include="mantismanager.h" />
     <ClInclude Include="MantisManagerException.h" />
     <ClInclude Include="mantismanager_global.h" />

@@ -85,9 +85,6 @@
     <ClInclude Include="mantismanager_global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MantisConnecteur.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="BaseConnecteur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -103,6 +100,9 @@
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mantisconnect.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="MantisConnecteur.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

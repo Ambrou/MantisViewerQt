@@ -416,6 +416,8 @@ void MantisConnecteur::creerUnTicket(const QString& nomDuProjet, const QString& 
 	TNS__IssueData issue;
 	TNS__ObjectRef status;
 	TNS__ObjectRef priority;
+	TNS__AccountData reporter;
+	TNS__AccountData handler;
 
 	MantisConnect mantisConnect;
 	mantisConnect.setEndPoint("http://mantiskanban.com/mantisbt/api/soap/mantisconnect.php");
@@ -425,9 +427,16 @@ void MantisConnecteur::creerUnTicket(const QString& nomDuProjet, const QString& 
 	project.setName(nomDuProjet);
 
 	status.setId(10);
-	//status.setName("new");
+	status.setName("new");
 
-	priority.setId(10);
+	priority.setName("low");
+	priority.setId(20);
+
+	reporter.setId(3);
+	reporter.setName("demo");
+
+	handler.setId(3);
+	handler.setName("demo");
 
 
 	issue.setProject(project);
@@ -435,6 +444,9 @@ void MantisConnecteur::creerUnTicket(const QString& nomDuProjet, const QString& 
 	issue.setDescription("ceci est la description");
 	issue.setStatus(status);
 	issue.setPriority(priority);
+	issue.setCategory("Bug");
+	issue.setReporter(reporter);
+	issue.setHandler(handler);
 
 	if (mantisConnect.mc_issue_add(user, password, issue) == 0)
 	{

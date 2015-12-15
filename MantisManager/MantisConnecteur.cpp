@@ -410,9 +410,30 @@ void MantisConnecteur::ajouterUneNoteAuTicket(const QString& idTicket, const QSt
 
 }
 
-void MantisConnecteur::creerUnTicket(const QString& nomDuProjet, const QString& user, const QString& password) const
+void MantisConnecteur::creerUnTicket(const QString& nomDuProjet, const QString& description, const QString& resume, const QString& categorie, const QString& user, const QString& password) const
 {
+	TNS__IssueData issue;
 	TNS__ObjectRef project;
+	MantisConnect mantisConnect;
+
+	qint64 idProjet = mantisConnect.mc_project_get_id_from_name(user, password, nomDuProjet);
+
+	project.setId(idProjet);
+	//project.setName(nomDuProjet);
+
+	issue.setDescription(description);
+	issue.setProject(project);
+	issue.setSummary(resume);
+	issue.setCategory(categorie);
+
+	if (mantisConnect.mc_issue_add(user, password, issue) == 0)
+	{
+		// Ne devrait jamais arrivé depuis l'IHM
+		QString message("Impossible de créer le ticket");
+		throw InvalidArgumentException(message);
+	}
+
+	/*TNS__ObjectRef project;
 	TNS__IssueData issue;
 	TNS__ObjectRef status;
 	TNS__ObjectRef priority;
@@ -453,7 +474,72 @@ void MantisConnecteur::creerUnTicket(const QString& nomDuProjet, const QString& 
 		// Ne devrait jamais arrivé depuis l'IHM
 		QString message("Impossible de créer le ticket");
 		throw InvalidArgumentException(message);
+	}*/
+
+	/*TNS__ObjectRef project;
+	TNS__IssueData issue;
+	TNS__ObjectRef status;
+	TNS__ObjectRef priority;
+	TNS__AccountData reporter;
+	TNS__AccountData handler;
+	TNS__ObjectRef customField;
+	TNS__CustomFieldValueForIssueDataArray customFieldValueForIssueDataArray;
+	QList< TNS__CustomFieldValueForIssueData > listcustomFieldValueForIssueData;
+	TNS__CustomFieldValueForIssueData customFieldValue;
+
+	MantisConnect mantisConnect;
+
+	qint64 idProjet = mantisConnect.mc_project_get_id_from_name("apetitgenet", "MAg28vkwde", "TRIXELL-TETRIS");
+
+	project.setId(idProjet);
+	project.setName("TRIXELL-TETRIS");
+
+	status.setId(10);
+	status.setName("nouveau");
+
+	priority.setName("normale");
+	priority.setId(30);
+
+
+	reporter.setName("apetitgenet");
+	reporter.setId(70);
+
+	handler.setName("GroupeTXL");
+	handler.setId(122);
+
+	customFieldValue.setValue("Intégration Astek");
+	customField.setName("Plate-forme de détection");
+	customField.setId(5);
+	customFieldValue.setField(customField);
+	listcustomFieldValueForIssueData.append(customFieldValue);
+
+
+	customFieldValue.setValue("Support");
+	customField.setName("Type de FFT");
+	customField.setId(1);
+	customFieldValue.setField(customField);
+	listcustomFieldValueForIssueData.append(customFieldValue);
+
+	customFieldValueForIssueDataArray.setItems(listcustomFieldValueForIssueData);
+
+
+	issue.setProject(project);
+	issue.setSummary("ceci est un résumé");
+	issue.setDescription("ceci est la description");
+	issue.setStatus(status);
+	issue.setPriority(priority);
+	issue.setCategory("Bug");
+	issue.setReporter(reporter);
+	issue.setHandler(handler);
+	issue.setCustom_fields(customFieldValueForIssueDataArray);
+
+	if (mantisConnect.mc_issue_add("apetitgenet", "MAg28vkwde", issue) == 0)
+	{
+		// Ne devrait jamais arrivé depuis l'IHM
+		QString message("Impossible de créer le ticket");
+		throw InvalidArgumentException(message);
 	}
+	*/
 	/*MantisConnect mantisConnect;
 	TNS__IssueData issue;
 	TNS__ObjectRef project;
@@ -513,5 +599,35 @@ void MantisConnecteur::creerUnTicket(const QString& nomDuProjet, const QString& 
 		QString message("Impossible de créer le ticket");
 		throw InvalidArgumentException(message);
 	}*/
+
+}
+
+void MantisConnecteur::creerUneVersion(const QString& nomVersion, const QString& projet, const QString& user, const QString& password/*const QString& nomDuProjet, */) const
+{
+	MantisConnect mantisConnect;
+	TNS__ProjectVersionData version;
+	KDDateTime dateTime;
+	QDate date(QDate::currentDate());
+	QTime time(QTime::currentTime());
+
+	
+	qint64 idProjet = mantisConnect.mc_project_get_id_from_name(user, password, projet);
+
+	dateTime.setDate(date);
+	dateTime.setTime(time);
+
+	version.setName(nomVersion);
+	version.setProject_id(idProjet);
+	version.setDate_order(dateTime);
+	version.setDescription("bla bla");
+	version.setReleased(false);
+	
+
+	if (mantisConnect.mc_project_version_add(user, password, version) == 0)
+	{
+		// Ne devrait jamais arrivé depuis l'IHM
+		QString message("Impossible de créer la version");
+		throw InvalidArgumentException(message);
+	}
 
 }

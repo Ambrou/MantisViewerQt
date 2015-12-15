@@ -119,11 +119,9 @@ namespace MantisManagerTest
 			QCoreApplication app(argc, 0);
 			MantisConnecteur mantisManager;
 
-			mantisManager.creerUnTicket("Demo Project", "demo", "demo");
+			mantisManager.creerUnTicket("TRIXELL-TETRIS", "ceci est la description", QString::fromLatin1("ceci est un résumé"), "IHM","apetitgenet", "MAg28vkwde");
 			
 		}
-
-
 
 		TEST_METHOD(creerUnTicketAvecErreur)
 		{
@@ -132,12 +130,43 @@ namespace MantisManagerTest
 			MantisConnecteur mantisManager;
 			try
 			{
-				mantisManager.creerUnTicket("Demo Project","demo", "demo");
+				mantisManager.creerUnTicket("TRIXELL-TETRIS", "ceci est la description", QString::fromLatin1("ceci est un résumé"), "IHM","apetitgenet", "MAg2vkwde");
 				Assert::Fail();
 			}
 			catch (const MantisManagerException &e)
 			{
 				Assert::IsTrue(QString("Impossible de créer le ticket") == e.What());
+			}
+			catch (...)
+			{
+				Assert::Fail();
+			}
+		}
+		
+		TEST_METHOD(creerUneVersion)
+		{
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			MantisConnecteur mantisManager;
+
+			mantisManager.creerUneVersion("APT", "TRIXELL-TETRIS", "apetitgenet", "MAg28vkwde");
+		}
+
+		TEST_METHOD(creerUneVersionAvecErreur)
+		{
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			MantisConnecteur mantisManager;
+
+			
+			try
+			{
+				mantisManager.creerUneVersion("APT", "TRIXTETRIS", "apetitgenet", "MAg28vkwde");
+				Assert::Fail();
+			}
+			catch (const MantisManagerException &e)
+			{
+				Assert::IsTrue(QString("Impossible de créer la version") == e.What());
 			}
 			catch (...)
 			{

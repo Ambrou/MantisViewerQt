@@ -10166,8 +10166,12 @@ qint64 MantisConnect::mc_issue_add( const QString& username, const QString& pass
     _valueIssue.setNamespaceUri(QString::fromLatin1("http://futureware.biz/mantisconnect"));
     message.childValues().append(_valueIssue);
     d_ptr->m_lastReply = clientInterface()->call(QLatin1String("mc_issue_add"), message, action);
-    if (d_ptr->m_lastReply.isFault())
-        return qint64();
+	if (d_ptr->m_lastReply.isFault())
+	{
+		QString texte = d_ptr->m_lastReply.faultAsString();
+		return qint64();
+	}
+        
     if (d_ptr->m_lastReply.childValues().isEmpty()) {
         d_ptr->m_lastReply.setFault(true);
         d_ptr->m_lastReply.addArgument(QString::fromLatin1("faultcode"), QString::fromLatin1("Server.EmptyResponse"));
@@ -11660,8 +11664,12 @@ qint64 MantisConnect::mc_project_version_add( const QString& username, const QSt
     _valueVersion.setNamespaceUri(QString::fromLatin1("http://futureware.biz/mantisconnect"));
     message.childValues().append(_valueVersion);
     d_ptr->m_lastReply = clientInterface()->call(QLatin1String("mc_project_version_add"), message, action);
-    if (d_ptr->m_lastReply.isFault())
-        return qint64();
+	if (d_ptr->m_lastReply.isFault())
+	{
+		QString text = d_ptr->m_lastReply.faultAsString();
+		return qint64();
+	}
+        
     if (d_ptr->m_lastReply.childValues().isEmpty()) {
         d_ptr->m_lastReply.setFault(true);
         d_ptr->m_lastReply.addArgument(QString::fromLatin1("faultcode"), QString::fromLatin1("Server.EmptyResponse"));

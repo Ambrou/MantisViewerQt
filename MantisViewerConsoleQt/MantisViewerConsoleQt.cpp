@@ -106,11 +106,11 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 	{
 		try
 		{
-		m_IoManager.ecrire("Nom du projet");
-		QString nomProjet(m_IoManager.lireCommande());
-		m_IoManager.ecrire("Nom nouvelle version");
-		QString nouvelleVersion(m_IoManager.lireCommande());
-		m_BaseConnecteur.creerUneVersion(nomProjet, nouvelleVersion, login(), motDePasse());
+			m_IoManager.ecrire("Nom du projet");
+			QString nomProjet(m_IoManager.lireCommande());
+			m_IoManager.ecrire("Nom nouvelle version");
+			QString nouvelleVersion(m_IoManager.lireCommande());
+			m_BaseConnecteur.creerUneVersion(nouvelleVersion, nomProjet, login(), motDePasse());
 		}
 		catch (const QException& e)
 		{
@@ -118,6 +118,26 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 			m_IoManager.ecrire(err);
 		}
 		
+	}
+	else if (nomCommande == "creer ticket")
+	{
+		try
+		{
+			m_IoManager.ecrire("Nom du projet");
+			QString nomProjet(m_IoManager.lireCommande());
+			m_IoManager.ecrire("Description du ticket");
+			QString description(m_IoManager.lireCommande());
+			m_IoManager.ecrire("Résumé du ticket");
+			QString resume(m_IoManager.lireCommande());
+			m_IoManager.ecrire("Categorie");
+			QString categorie(m_IoManager.lireCommande());
+			m_BaseConnecteur.creerUnTicket(nomProjet, description, resume, categorie, login(), motDePasse());
+		}
+		catch (const QException& e)
+		{
+			QString err(e.what());
+			m_IoManager.ecrire(err);
+		}
 	}
 	return attendreCommandeSuivante;
 }

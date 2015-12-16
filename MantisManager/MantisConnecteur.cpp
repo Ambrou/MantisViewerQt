@@ -419,7 +419,6 @@ void MantisConnecteur::creerUnTicket(const QString& nomDuProjet, const QString& 
 	qint64 idProjet = mantisConnect.mc_project_get_id_from_name(user, password, nomDuProjet);
 
 	project.setId(idProjet);
-	//project.setName(nomDuProjet);
 
 	issue.setDescription(description);
 	issue.setProject(project);
@@ -432,177 +431,9 @@ void MantisConnecteur::creerUnTicket(const QString& nomDuProjet, const QString& 
 		QString message("Impossible de créer le ticket");
 		throw InvalidArgumentException(message);
 	}
-
-	/*TNS__ObjectRef project;
-	TNS__IssueData issue;
-	TNS__ObjectRef status;
-	TNS__ObjectRef priority;
-	TNS__AccountData reporter;
-	TNS__AccountData handler;
-
-	MantisConnect mantisConnect;
-	mantisConnect.setEndPoint("http://mantiskanban.com/mantisbt/api/soap/mantisconnect.php");
-	qint64 idProjet = mantisConnect.mc_project_get_id_from_name(user, password, nomDuProjet);
-
-	project.setId(idProjet);
-	project.setName(nomDuProjet);
-
-	status.setId(10);
-	status.setName("new");
-
-	priority.setName("low");
-	priority.setId(20);
-
-	reporter.setId(3);
-	reporter.setName("demo");
-
-	handler.setId(3);
-	handler.setName("demo");
-
-
-	issue.setProject(project);
-	issue.setSummary("ceci est un résumé");
-	issue.setDescription("ceci est la description");
-	issue.setStatus(status);
-	issue.setPriority(priority);
-	issue.setCategory("Bug");
-	issue.setReporter(reporter);
-	issue.setHandler(handler);
-
-	if (mantisConnect.mc_issue_add(user, password, issue) == 0)
-	{
-		// Ne devrait jamais arrivé depuis l'IHM
-		QString message("Impossible de créer le ticket");
-		throw InvalidArgumentException(message);
-	}*/
-
-	/*TNS__ObjectRef project;
-	TNS__IssueData issue;
-	TNS__ObjectRef status;
-	TNS__ObjectRef priority;
-	TNS__AccountData reporter;
-	TNS__AccountData handler;
-	TNS__ObjectRef customField;
-	TNS__CustomFieldValueForIssueDataArray customFieldValueForIssueDataArray;
-	QList< TNS__CustomFieldValueForIssueData > listcustomFieldValueForIssueData;
-	TNS__CustomFieldValueForIssueData customFieldValue;
-
-	MantisConnect mantisConnect;
-
-	qint64 idProjet = mantisConnect.mc_project_get_id_from_name("apetitgenet", "MAg28vkwde", "TRIXELL-TETRIS");
-
-	project.setId(idProjet);
-	project.setName("TRIXELL-TETRIS");
-
-	status.setId(10);
-	status.setName("nouveau");
-
-	priority.setName("normale");
-	priority.setId(30);
-
-
-	reporter.setName("apetitgenet");
-	reporter.setId(70);
-
-	handler.setName("GroupeTXL");
-	handler.setId(122);
-
-	customFieldValue.setValue("Intégration Astek");
-	customField.setName("Plate-forme de détection");
-	customField.setId(5);
-	customFieldValue.setField(customField);
-	listcustomFieldValueForIssueData.append(customFieldValue);
-
-
-	customFieldValue.setValue("Support");
-	customField.setName("Type de FFT");
-	customField.setId(1);
-	customFieldValue.setField(customField);
-	listcustomFieldValueForIssueData.append(customFieldValue);
-
-	customFieldValueForIssueDataArray.setItems(listcustomFieldValueForIssueData);
-
-
-	issue.setProject(project);
-	issue.setSummary("ceci est un résumé");
-	issue.setDescription("ceci est la description");
-	issue.setStatus(status);
-	issue.setPriority(priority);
-	issue.setCategory("Bug");
-	issue.setReporter(reporter);
-	issue.setHandler(handler);
-	issue.setCustom_fields(customFieldValueForIssueDataArray);
-
-	if (mantisConnect.mc_issue_add("apetitgenet", "MAg28vkwde", issue) == 0)
-	{
-		// Ne devrait jamais arrivé depuis l'IHM
-		QString message("Impossible de créer le ticket");
-		throw InvalidArgumentException(message);
-	}
-	*/
-	/*MantisConnect mantisConnect;
-	TNS__IssueData issue;
-	TNS__ObjectRef project;
-	TNS__ObjectRef viewState;
-	TNS__AccountData reporter;
-	TNS__AccountData handler;
-	TNS__ObjectRef status;
-	TNS__ObjectRef customField;
-	TNS__CustomFieldValueForIssueDataArray customFieldValueForIssueDataArray;
-	QList< TNS__CustomFieldValueForIssueData > listcustomFieldValueForIssueData;
-
-	mantisConnect.setEndPoint("http://mantiskanban.com/mantisbt/mantiskanban/");
-
-	qint64 idProjet = mantisConnect.mc_project_get_id_from_name(user, password, nomDuProjet);
-	project.setId(idProjet);
-	project.setName("TRIXELL-TETRIS");
-	//viewState.setName("privé");
-	viewState.setId(50);
-	handler.setName("GroupeTXL");
-	handler.setId(122);
-	reporter.setName("apetitgenet");
-	reporter.setId(70);
-	status.setId(10);
-	status.setName("nouveau");
-	TNS__CustomFieldValueForIssueData customFieldValue;
-
-	customFieldValue.setValue("Intégration Astek");
-	customField.setName("Plate-forme de détection");
-	customField.setId(5);
-	customFieldValue.setField(customField);
-	listcustomFieldValueForIssueData.append(customFieldValue);
-
-
-	customFieldValue.setValue("Support");
-	customField.setName("Type de FFT");
-	customField.setId(1);
-	customFieldValue.setField(customField);
-	listcustomFieldValueForIssueData.append(customFieldValue);
-
-	customFieldValueForIssueDataArray.setItems(listcustomFieldValueForIssueData);
-
-
-	issue.setProject(project);
-	issue.setSummary("ceci est un résumé");
-	issue.setDescription("ceci est la description");
-	issue.setView_state(viewState);
-	issue.setCategory("IHM");
-	issue.setReporter(reporter);
-	issue.setHandler(handler);
-	issue.setStatus(status);
-	issue.setCustom_fields(customFieldValueForIssueDataArray);
-
-
-	if (mantisConnect.mc_issue_add(user, password, issue) == 0)
-	{
-		// Ne devrait jamais arrivé depuis l'IHM
-		QString message("Impossible de créer le ticket");
-		throw InvalidArgumentException(message);
-	}*/
-
 }
 
-void MantisConnecteur::creerUneVersion(const QString& nomVersion, const QString& projet, const QString& user, const QString& password/*const QString& nomDuProjet, */) const
+void MantisConnecteur::creerUneVersion(const QString& nomVersion, const QString& projet, const QString& user, const QString& password) const
 {
 	MantisConnect mantisConnect;
 	TNS__ProjectVersionData version;
@@ -619,7 +450,6 @@ void MantisConnecteur::creerUneVersion(const QString& nomVersion, const QString&
 	version.setName(nomVersion);
 	version.setProject_id(idProjet);
 	version.setDate_order(dateTime);
-	version.setDescription("bla bla");
 	version.setReleased(false);
 	
 

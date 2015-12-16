@@ -173,5 +173,38 @@ namespace MantisManagerTest
 				Assert::Fail();
 			}
 		}
+
+		TEST_METHOD(definirUneDateDeLivraisonDUneVersion)
+		{
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			MantisConnecteur mantisManager;
+			QDate date;
+			QTime time;
+			date.setDate(2015, 12, 17);
+			time.setHMS(17, 30, 0);
+
+			mantisManager.definirDateLivraisonDUneVersion("CD_Patch1", date, time, "TRIXELL-TETRIS", "apetitgenet", "MAg28vkwde");
+		}
+
+		TEST_METHOD(definirUneDateDeLivraisonDUneVersionAvecErreur)
+		{
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			MantisConnecteur mantisManager;
+
+			try
+			{
+				mantisManager.definirDateLivraisonDUneVersion("APT", QDate::currentDate(), QTime::currentTime(), "TRIXELL-TETRIS", "apetitgenet", "MAg28vkwde");
+			}
+			catch (const MantisManagerException &e)
+			{
+			}
+			catch (...)
+			{
+				Assert::Fail();
+			}
+		}
+
 	};
 }

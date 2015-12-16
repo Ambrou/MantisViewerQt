@@ -2,6 +2,8 @@
 
 #include "mantismanager_global.h"
 #include <QString>
+#include <QDate>
+#include <QTime>
 
 class MANTISMANAGER_EXPORT BaseConnecteur
 {

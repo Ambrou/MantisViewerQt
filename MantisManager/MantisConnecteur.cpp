@@ -461,3 +461,38 @@ void MantisConnecteur::creerUneVersion(const QString& nomVersion, const QString&
 	}
 
 }
+
+void MantisConnecteur::definirDateLivraisonDUneVersion(const QString& version, const QDate& date, const QTime& time, const QString& projet, const QString& user, const QString& password) const
+{
+	MantisConnect mantisConnect;
+	qint64 version_id;
+	qint64 projet_id = mantisConnect.mc_project_get_id_from_name(user, password, projet);
+	TNS__ProjectVersionData versionData;
+	KDDateTime dateTime;
+	bool versionFound = false;
+	
+	TNS__ProjectVersionDataArray projectVersionDataArray = mantisConnect.mc_project_get_versions(user, password, projet_id);
+	QList< TNS__ProjectVersionData > listProjectVersionData = projectVersionDataArray.items();
+	foreach(versionData, listProjectVersionData)
+	{
+		if (versionData.name() == version)
+		{
+			versionFound = true;
+			break;
+		}
+	}
+
+	if (versionFound == false)
+	{
+		throw InvalidArgumentException("Version non trouvée");
+	}
+	dateTime.setDate(date);
+	dateTime.setTime(time);
+
+	versionData.setDescription("");
+	versionData.setDate_order(dateTime);
+	if (mantisConnect.mc_project_version_update(user, password, versionData.id(), versionData) == false)
+	{
+		throw OperationImpossibleException(mantisConnect.lastError());
+	}
+}

@@ -139,6 +139,22 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 			m_IoManager.ecrire(err);
 		}
 	}
+	else if (nomCommande == "definir date de livraison")
+	{
+		m_IoManager.ecrire("Nom du projet");
+		QString nomProjet(m_IoManager.lireCommande());
+		m_IoManager.ecrire("Nom version à livrer");
+		QString version(m_IoManager.lireCommande());
+		m_IoManager.ecrire("Date de livraison");
+		QString strDate(m_IoManager.lireCommande());
+		QDate date = QDate::fromString(strDate, "d/M/yyyy");
+		m_IoManager.ecrire("Heure de livraison");
+		QString strTime(m_IoManager.lireCommande());
+		QTime time = QTime::fromString(strTime, "h:m:s");
+
+
+		m_BaseConnecteur.definirDateLivraisonDUneVersion(version, date, time, nomProjet, login(), motDePasse());
+	}
 	return attendreCommandeSuivante;
 }
 

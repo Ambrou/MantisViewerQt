@@ -331,5 +331,44 @@ namespace MantisViewerConsoleQtTest
 
 		}
 
+
+
+		TEST_METHOD(definirUneDateDeLivraisonDUneVersion)
+		{
+			// Contexte
+			class MaConsole : public MantisViewerConsoleQt
+			{
+			public:
+				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
+			};
+
+			int argc = 0;
+			QString nomProjet;
+			QString version;
+			QDate date;
+			QTime time;
+			QCoreApplication app(argc, 0);
+			Mock<IOManager> mockIOManager;
+			Mock<BaseConnecteur> mockBase;
+
+			MaConsole console(&app, mockBase.get(), mockIOManager.get());
+			// on s'en fout de ce qu'on écrit
+			Fake(Method(mockIOManager, ecrire));
+			When(Method(mockIOManager, lireCommande)).Return("Projet").Return("Version").Return("15/12/2015").Return("17:30:15");
+			When(Method(mockBase, definirDateLivraisonDUneVersion)).Do([&](const QString& _version, const QDate& _date, const QTime& _time, const QString& projet, const QString&, const QString&){ nomProjet = projet; version = _version; date = _date; time = _time; });
+
+			// Lorsque je demande le passage d'un ticket de l'etat nouveau à en analyse
+			bool attendreCommandeSuivante = console.traiterCommandeEtAttendreLaSuivante("definir date de livraison");
+
+			// Alors la console attend la prochainne commande
+			Assert::AreEqual(true, attendreCommandeSuivante);
+			Assert::IsTrue(QString("Version") == version);
+			Assert::IsTrue(QString("Projet") == nomProjet);
+			Assert::IsTrue(QDate(2015,12,15) == date);
+			Assert::IsTrue(QTime(17,30,15) == time);
+
+		}
+
 	};
 }

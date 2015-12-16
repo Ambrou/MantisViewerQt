@@ -85,7 +85,6 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 			m_IoManager.ecrire(nomTicket);
 		}
 	}
-
 	else if (nomCommande == "changer etat ticket")
 	{
 		try
@@ -95,6 +94,23 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 		m_IoManager.ecrire("Nouvel Etat");
 		QString nouvelEtat(m_IoManager.lireCommande());
 		m_BaseConnecteur.changerEtatTicket(idTicket, nouvelEtat, login(), motDePasse());
+		}
+		catch (const QException& e)
+		{
+			QString err(e.what());
+			m_IoManager.ecrire(err);
+		}
+		
+	}
+	else if (nomCommande == "creer version")
+	{
+		try
+		{
+		m_IoManager.ecrire("Nom du projet");
+		QString nomProjet(m_IoManager.lireCommande());
+		m_IoManager.ecrire("Nom nouvelle version");
+		QString nouvelleVersion(m_IoManager.lireCommande());
+		m_BaseConnecteur.creerUneVersion(nomProjet, nouvelleVersion, login(), motDePasse());
 		}
 		catch (const QException& e)
 		{

@@ -299,6 +299,8 @@ namespace MantisViewerConsoleQtTest
 			};
 
 			int argc = 0;
+			QString nomProjet;
+			QString nouvelleVersion;
 			QCoreApplication app(argc, 0);
 			Mock<IOManager> mockIOManager;
 			Mock<BaseConnecteur> mockBase;
@@ -307,12 +309,15 @@ namespace MantisViewerConsoleQtTest
 			// on s'en fout de ce qu'on �crit
 			Fake(Method(mockIOManager, ecrire));
 			When(Method(mockIOManager, lireCommande)).Return("Projet").Return("Version");
+			When(Method(mockBase, creerUneVersion)).Do([&](const QString& nomVersion, const QString& projet, const QString& user, const QString& password ){ nomProjet = projet; nouvelleVersion = nomVersion; });
 
 			// Lorsque je demande le passage d'un ticket de l'etat nouveau � en analyse
 			bool attendreCommandeSuivante = console.traiterCommandeEtAttendreLaSuivante("creer version");
 
 			// Alors la console attend la prochainne commande
 			Assert::AreEqual(true, attendreCommandeSuivante);
+			Assert::IsTrue(QString("Version") == nouvelleVersion);
+			Assert::IsTrue(QString("Projet") == nomProjet);
 
 		}
 

@@ -17,6 +17,7 @@ public:
 	virtual void creerUnTicket(const QString& nomDuProjet, const QString& description, const QString& resume, const QString& categorie, const QString& user, const QString& password) const;
 	virtual void creerUneVersion(const QString& nomVersion, const QString& projet, const QString& user, const QString& password) const;
 	virtual void definirDateLivraisonDUneVersion(const QString& version, const QDate& date, const QTime& time, const QString& projet, const QString& user, const QString& password) const;
+	virtual void livrerVersion(const QString& version, const QString& projet, const QString& user, const QString& password) const;
 	virtual void recupererTout() const;
 	
 };

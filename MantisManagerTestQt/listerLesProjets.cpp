@@ -206,5 +206,33 @@ namespace MantisManagerTest
 			}
 		}
 
+		TEST_METHOD(livrerUneVersion)
+		{
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			MantisConnecteur mantisManager;
+
+			mantisManager.livrerVersion("CD_Patch1", "TRIXELL-TETRIS", "apetitgenet", "MAg28vkwde");
+		}
+
+		TEST_METHOD(livrerUneVersionAvecErreur)
+		{
+			int argc = 0;
+			QCoreApplication app(argc, 0);
+			MantisConnecteur mantisManager;
+
+			try
+			{
+				mantisManager.livrerVersion("APT", "TRIXELL-TETRIS", "apetitgenet", "MAg28vkwde");
+			}
+			catch (const MantisManagerException &e)
+			{
+			}
+			catch (...)
+			{
+				Assert::Fail();
+			}
+		}
+
 	};
 }

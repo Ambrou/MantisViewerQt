@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MantisManager", "MantisManager\MantisManager.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MantisViewerConsoleQt", "MantisViewerConsoleQt\MantisViewerConsoleQt.vcxproj", "{05DE7572-FB0F-444C-988F-EAEA6E0B9689}"
@@ -14,6 +16,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MantisManagerTestQt", "Mant
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MantisViewerConsoleQtTest", "MantisViewerConsoleQtTest\MantisViewerConsoleQtTest.vcxproj", "{5534913E-287E-4AC9-AB61-D97727AAA94A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MantisViewerIHMQt", "MantisViewerIHMQt\MantisViewerIHMQt.vcxproj", "{C7BE1D66-AEBA-4DE8-AFE2-2CED9CE93A8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{5534913E-287E-4AC9-AB61-D97727AAA94A}.Release_v100|Win32.ActiveCfg = Release|Win32
 		{5534913E-287E-4AC9-AB61-D97727AAA94A}.Release|Win32.ActiveCfg = Release|Win32
 		{5534913E-287E-4AC9-AB61-D97727AAA94A}.Release|Win32.Build.0 = Release|Win32
+		{C7BE1D66-AEBA-4DE8-AFE2-2CED9CE93A8B}.Debug_v100|Win32.ActiveCfg = Debug|Win32
+		{C7BE1D66-AEBA-4DE8-AFE2-2CED9CE93A8B}.Debug_v100|Win32.Build.0 = Debug|Win32
+		{C7BE1D66-AEBA-4DE8-AFE2-2CED9CE93A8B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C7BE1D66-AEBA-4DE8-AFE2-2CED9CE93A8B}.Debug|Win32.Build.0 = Debug|Win32
+		{C7BE1D66-AEBA-4DE8-AFE2-2CED9CE93A8B}.Release_v100|Win32.ActiveCfg = Release|Win32
+		{C7BE1D66-AEBA-4DE8-AFE2-2CED9CE93A8B}.Release_v100|Win32.Build.0 = Release|Win32
+		{C7BE1D66-AEBA-4DE8-AFE2-2CED9CE93A8B}.Release|Win32.ActiveCfg = Release|Win32
+		{C7BE1D66-AEBA-4DE8-AFE2-2CED9CE93A8B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

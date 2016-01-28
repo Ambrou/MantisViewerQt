@@ -108,11 +108,11 @@ namespace MantisViewerConsoleQtTest
 			Assert::AreEqual("TeTriS", texte.toStdString().c_str());
 		}
 
-		static void recupererTicketsDuProjet_delegate(QVector<QString>&listeTicket, const QString nomDuProjet, const QString& user, const QString& password)
+		static void recupererTicketsDuProjet_delegate(QVector<Ticket>&listeTicket, const QString nomDuProjet, const QString& user, const QString& password)
 		{
-			listeTicket.append("bug 1");
-			listeTicket.append("bug 3");
-			listeTicket.append("evol 7");
+			listeTicket.append(Ticket(1, "bug 1", "nouveau"));
+			listeTicket.append(Ticket(5, "bug 3", "nouveau"));
+			listeTicket.append(Ticket(8, "evol 7", "nouveau"));
 		}
 
 		TEST_METHOD(listerLesTicketsDUnProjet)

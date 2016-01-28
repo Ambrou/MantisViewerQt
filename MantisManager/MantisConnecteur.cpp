@@ -29,7 +29,7 @@ void MantisConnecteur::recupererProjets(QVector<QString>&listeProjets, const QSt
 	}
 }
 
-void MantisConnecteur::recupererTicketsDuProjet(QVector<QString>&listeTicket, const QString nomDuProjet, const QString& user, const QString& password) const
+void MantisConnecteur::recupererTicketsDuProjet(QVector<Ticket>&listeTicket, const QString nomDuProjet, const QString& user, const QString& password) const
 {
 	MantisConnect mantisConnect;
 	qint64 idProjet = mantisConnect.mc_project_get_id_from_name(user, password, nomDuProjet);
@@ -41,7 +41,8 @@ void MantisConnecteur::recupererTicketsDuProjet(QVector<QString>&listeTicket, co
 	TNS__IssueData ticket;
 	foreach(ticket, list)
 	{
-		listeTicket.append(ticket.summary());
+		Ticket ticketMantis(ticket.id(), ticket.summary(), ticket.status().name());
+		listeTicket.append(ticketMantis);
 	}
 }
 
@@ -527,5 +528,19 @@ void MantisConnecteur::livrerVersion(const QString& version, const QString& proj
 	if (mantisConnect.mc_project_version_update(user, password, versionData.id(), versionData) == false)
 	{
 		throw OperationImpossibleException(mantisConnect.lastError());
+	}
+}
+
+
+void MantisConnecteur::recupererStatut(QVector<QString>&listeStatuts, const QString& user, const QString& password) const
+{
+	MantisConnect mantisConnect;
+
+	TNS__ObjectRefArray objectStatus = mantisConnect.mc_enum_status(user, password);
+	QList< TNS__ObjectRef > listStatus = objectStatus.items();
+	TNS__ObjectRef status;
+	foreach(status, listStatus)
+	{
+		listeStatuts.append(status.name());
 	}
 }

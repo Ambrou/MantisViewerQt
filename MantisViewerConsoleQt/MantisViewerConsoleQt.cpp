@@ -48,12 +48,12 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 	}
 	else if (nomCommande == "lister tickets")
 	{
-		QVector<QString>listeTickets;
+		QVector<Ticket>listeTickets;
 		QString nomProjet(m_IoManager.lireCommande());
 		m_BaseConnecteur.recupererTicketsDuProjet(listeTickets, nomProjet, login(), motDePasse());
-		foreach(QString nomTicket, listeTickets)
+		foreach(Ticket ticket, listeTickets)
 		{
-			m_IoManager.ecrire(nomTicket);
+			m_IoManager.ecrire(ticket.titre());
 		}
 	}
 	else if (nomCommande == "lister versions")

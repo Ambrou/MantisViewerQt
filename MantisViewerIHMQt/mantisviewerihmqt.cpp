@@ -1,5 +1,6 @@
 #include "mantisviewerihmqt.h"
 #include "..\MantisManager\BaseConnecteur.h"
+#include "mantisviewerihm_connexion.h"
 
 MantisViewerIHMQt::MantisViewerIHMQt(BaseConnecteur &baseConnecteur, QWidget *parent)
 	: QMainWindow(parent), m_BaseConnecteur(baseConnecteur)
@@ -7,8 +8,13 @@ MantisViewerIHMQt::MantisViewerIHMQt(BaseConnecteur &baseConnecteur, QWidget *pa
 	// Initialisation IHM
 	ui.setupUi(this);
 
-	m_user = "arivier";
-	m_password = "bmanpj10";
+	mantisviewerihm_connexion connexionDlg;
+	int iRetour = connexionDlg.exec();
+	if (iRetour == QDialog::Accepted)
+	{
+		m_user = connexionDlg.getUser();
+		m_password = connexionDlg.getPassword();
+	}
 
 	// récupération de la liste des projets
 	QVector<QString> listeProjets;

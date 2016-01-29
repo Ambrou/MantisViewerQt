@@ -110,9 +110,9 @@ namespace MantisViewerConsoleQtTest
 
 		static void recupererTicketsDuProjet_delegate(QVector<Ticket>&listeTicket, const QString nomDuProjet, const QString& user, const QString& password)
 		{
-			listeTicket.append(Ticket(1, "bug 1", "nouveau"));
-			listeTicket.append(Ticket(5, "bug 3", "nouveau"));
-			listeTicket.append(Ticket(8, "evol 7", "nouveau"));
+			listeTicket.append(Ticket(1, "bug 1", 10));
+			listeTicket.append(Ticket(5, "bug 3", 10));
+			listeTicket.append(Ticket(8, "evol 7", 10));
 		}
 
 		TEST_METHOD(listerLesTicketsDUnProjet)
@@ -143,17 +143,17 @@ namespace MantisViewerConsoleQtTest
 			// Alors j'attends la commande suivante
 			Assert::AreEqual(true, attendreCommandeSuivante);
 			Assert::AreEqual(3, listeTicketsTrouves.size());
-			Assert::AreEqual("bug 1",  listeTicketsTrouves.at(0).toStdString().c_str());
-			Assert::AreEqual("bug 3",  listeTicketsTrouves.at(1).toStdString().c_str());
-			Assert::AreEqual("evol 7", listeTicketsTrouves.at(2).toStdString().c_str());
+			Assert::AreEqual("1	10	bug 1",  listeTicketsTrouves.at(0).toStdString().c_str());
+			Assert::AreEqual("5	10	bug 3",  listeTicketsTrouves.at(1).toStdString().c_str());
+			Assert::AreEqual("8	10	evol 7", listeTicketsTrouves.at(2).toStdString().c_str());
 
 		}
 
-		static void recupererTicketDeLaVersionsDuProjet_delegate(QVector<QString>&listeTickets, const QString nomDuProjet, const QString nomVersion, const QString& user, const QString& password)
+		static void recupererTicketDeLaVersionsDuProjet_delegate(QVector<Ticket>&listeTickets, const QString nomDuProjet, const QString nomVersion, const QString& user, const QString& password)
 		{
-			listeTickets.append("bug 1");
-			listeTickets.append("bug 3");
-			listeTickets.append("evol 7");
+			listeTickets.append(Ticket(1, "bug 1", 10));
+			listeTickets.append(Ticket(5, "bug 3", 10));
+			listeTickets.append(Ticket(8, "evol 7", 10));
 		}
 
 		TEST_METHOD(listerLesTicketsDUneVersionDUnProjet)
@@ -186,9 +186,9 @@ namespace MantisViewerConsoleQtTest
 			Assert::AreEqual(5, listeTicketsTrouves.size());
 			Assert::AreEqual("Projet", listeTicketsTrouves.at(0).toStdString().c_str());
 			Assert::AreEqual("Version", listeTicketsTrouves.at(1).toStdString().c_str());
-			Assert::AreEqual("bug 1", listeTicketsTrouves.at(2).toStdString().c_str());
-			Assert::AreEqual("bug 3", listeTicketsTrouves.at(3).toStdString().c_str());
-			Assert::AreEqual("evol 7", listeTicketsTrouves.at(4).toStdString().c_str());
+			Assert::AreEqual("1	10	bug 1", listeTicketsTrouves.at(2).toStdString().c_str());
+			Assert::AreEqual("5	10	bug 3", listeTicketsTrouves.at(3).toStdString().c_str());
+			Assert::AreEqual("8	10	evol 7", listeTicketsTrouves.at(4).toStdString().c_str());
 
 		}
 

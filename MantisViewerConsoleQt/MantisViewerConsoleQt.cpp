@@ -53,7 +53,7 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 		m_BaseConnecteur.recupererTicketsDuProjet(listeTickets, nomProjet, login(), motDePasse());
 		foreach(Ticket ticket, listeTickets)
 		{
-			m_IoManager.ecrire(QString::number(ticket.numero()) + "\t" + ticket.status() + "\t" + ticket.titre());
+			m_IoManager.ecrire(QString::number(ticket.numero()) + "\t" + QString::number(ticket.status()) + "\t" + ticket.titre());
 		}
 	}
 	else if (nomCommande == "lister versions")
@@ -74,15 +74,15 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 	}
 	else if (nomCommande == "lister tickets pour une version")
 	{
-		QVector<QString>listeTickets;
+		QVector<Ticket>listeTickets;
 		m_IoManager.ecrire("Projet");
 		QString nomProjet(m_IoManager.lireCommande());
 		m_IoManager.ecrire("Version");
 		QString nomVersion(m_IoManager.lireCommande());
 		m_BaseConnecteur.recupererTicketDeLaVersionsDuProjet(listeTickets, nomProjet, nomVersion, login(), motDePasse());
-		foreach(QString nomTicket, listeTickets)
+		foreach(Ticket ticket, listeTickets)
 		{
-			m_IoManager.ecrire(nomTicket);
+			m_IoManager.ecrire(QString::number(ticket.numero()) + "\t" + QString::number(ticket.status()) + "\t" + ticket.titre());
 		}
 	}
 	else if (nomCommande == "changer etat ticket")
@@ -157,11 +157,11 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 	}
 	else if (nomCommande == "lister statut")
 	{
-		QVector<QString>listeStatuts;
+		QVector<Status>listeStatuts;
 		m_BaseConnecteur.recupererStatut(listeStatuts, login(), motDePasse());
-		foreach(QString nomStatut, listeStatuts)
+		foreach(Status nomStatut, listeStatuts)
 		{
-			m_IoManager.ecrire(nomStatut);
+			m_IoManager.ecrire(QString::number(nomStatut.id()) + "\t" + nomStatut.nom());
 		}
 	}
 	return attendreCommandeSuivante;

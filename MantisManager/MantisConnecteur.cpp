@@ -41,7 +41,7 @@ void MantisConnecteur::recupererTicketsDuProjet(QVector<Ticket>&listeTicket, con
 	TNS__IssueData ticket;
 	foreach(ticket, list)
 	{
-		Ticket ticketMantis(ticket.id(), ticket.summary(), ticket.status().name());
+		Ticket ticketMantis(ticket.id(), ticket.summary(), ticket.status().id());
 		listeTicket.append(ticketMantis);
 	}
 }
@@ -78,7 +78,7 @@ void MantisConnecteur::recupererVersionsDuProjet(QVector<QString>&listeVersion, 
 	}
 }
 
-void MantisConnecteur::recupererTicketDeLaVersionsDuProjet(QVector<QString>&listeTickets, const QString nomDuProjet, const QString nomVersion, const QString& user, const QString& password) const
+void MantisConnecteur::recupererTicketDeLaVersionsDuProjet(QVector<Ticket>&listeTickets, const QString nomDuProjet, const QString nomVersion, const QString& user, const QString& password) const
 {
 	MantisConnect mantisConnect;
 	qint64 idProjet = mantisConnect.mc_project_get_id_from_name(user, password, nomDuProjet);
@@ -96,7 +96,8 @@ void MantisConnecteur::recupererTicketDeLaVersionsDuProjet(QVector<QString>&list
 			TNS__IssueHeaderData ticket;
 			foreach(ticket, listTicket)
 			{
-				listeTickets.append(ticket.summary());
+				Ticket ticketMantis(ticket.id(), ticket.summary(), ticket.status());
+				listeTickets.append(ticketMantis);
 			}
 			break;
 		}
@@ -343,9 +344,6 @@ void MantisConnecteur::recupererTout() const
 		
 
 	}
-
-		
-	
 }
 
 void MantisConnecteur::changerEtatTicket(const QString& idTicket, const QString& nouvelEtat, const QString& user, const QString& password) const
@@ -532,7 +530,7 @@ void MantisConnecteur::livrerVersion(const QString& version, const QString& proj
 }
 
 
-void MantisConnecteur::recupererStatut(QVector<QString>&listeStatuts, const QString& user, const QString& password) const
+void MantisConnecteur::recupererStatut(QVector<Status>&listeStatuts, const QString& user, const QString& password) const
 {
 	MantisConnect mantisConnect;
 
@@ -541,6 +539,6 @@ void MantisConnecteur::recupererStatut(QVector<QString>&listeStatuts, const QStr
 	TNS__ObjectRef status;
 	foreach(status, listStatus)
 	{
-		listeStatuts.append(status.name());
+		listeStatuts.append(Status(status.id(), status.name()));
 	}
 }

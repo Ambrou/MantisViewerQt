@@ -53,7 +53,7 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 		m_BaseConnecteur.recupererTicketsDuProjet(listeTickets, nomProjet, login(), motDePasse());
 		foreach(Ticket ticket, listeTickets)
 		{
-			m_IoManager.ecrire(ticket.titre());
+			m_IoManager.ecrire(QString::number(ticket.numero()) + "\t" + ticket.status() + "\t" + ticket.titre());
 		}
 	}
 	else if (nomCommande == "lister versions")
@@ -154,6 +154,15 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 
 
 		m_BaseConnecteur.definirDateLivraisonDUneVersion(version, date, time, nomProjet, login(), motDePasse());
+	}
+	else if (nomCommande == "lister statut")
+	{
+		QVector<QString>listeStatuts;
+		m_BaseConnecteur.recupererStatut(listeStatuts, login(), motDePasse());
+		foreach(QString nomStatut, listeStatuts)
+		{
+			m_IoManager.ecrire(nomStatut);
+		}
 	}
 	return attendreCommandeSuivante;
 }

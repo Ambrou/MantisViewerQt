@@ -90,7 +90,6 @@
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mantisviewerihmqt.cpp" />
-    <ClCompile Include="mantisviewerihm_connexion.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mantisviewerihmqt.h">
@@ -119,7 +118,6 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_mantisviewerihmqt.h" />
     <ClInclude Include="GeneratedFiles\ui_mantisviewerihm_connexion.h" />
-    <ClInclude Include="mantisviewerihm_connexion.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mantisviewerihmqt.qrc">

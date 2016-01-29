@@ -50,9 +50,6 @@
     <ClCompile Include="GeneratedFiles\qrc_mantisviewerihmqt.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="mantisviewerihm_connexion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mantisviewerihmqt.h">
@@ -74,9 +71,6 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_mantisviewerihm_connexion.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="mantisviewerihm_connexion.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

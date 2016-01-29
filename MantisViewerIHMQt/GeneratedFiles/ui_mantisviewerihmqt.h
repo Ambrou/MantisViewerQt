@@ -56,6 +56,13 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
+        QFont font;
+        font.setFamily(QStringLiteral("Onyx"));
+        font.setPointSize(12);
+        font.setBold(true);
+        font.setWeight(75);
+        label->setFont(font);
+        label->setAlignment(Qt::AlignCenter);
 
         verticalLayout->addWidget(label);
 
@@ -110,7 +117,7 @@ public:
     void retranslateUi(QMainWindow *MantisViewerIHMQtClass)
     {
         MantisViewerIHMQtClass->setWindowTitle(QApplication::translate("MantisViewerIHMQtClass", "MantisViewerIHMQt", 0));
-        label->setText(QApplication::translate("MantisViewerIHMQtClass", "TextLabel", 0));
+        label->setText(QApplication::translate("MantisViewerIHMQtClass", "Mon Mantis a moi que j'ai fait toute seule avec mes petites mains", 0));
         label_3->setText(QApplication::translate("MantisViewerIHMQtClass", "Projet", 0));
         label_2->setText(QApplication::translate("MantisViewerIHMQtClass", "Version", 0));
     } // retranslateUi

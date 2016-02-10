@@ -5,6 +5,7 @@
 #include "ui_mantisviewerihmqt.h"
 
 class BaseConnecteur;
+class modelMantis;
 
 class MantisViewerIHMQt : public QMainWindow
 {
@@ -21,6 +22,8 @@ private:
 
 	QString m_user;
 	QString m_password;
+
+	modelMantis* m_MantisModel;
 
 private slots :
 	void onModificationProjet(QString newProjet);

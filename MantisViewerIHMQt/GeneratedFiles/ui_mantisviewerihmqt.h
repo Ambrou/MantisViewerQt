@@ -19,8 +19,8 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -38,7 +38,7 @@ public:
     QComboBox *comboBox_Projet;
     QLabel *label_2;
     QComboBox *comboBox_Version;
-    QSpacerItem *verticalSpacer;
+    QTableView *tableView;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -92,9 +92,10 @@ public:
 
         verticalLayout->addLayout(horizontalLayout);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        tableView = new QTableView(centralWidget);
+        tableView->setObjectName(QStringLiteral("tableView"));
 
-        verticalLayout->addItem(verticalSpacer);
+        verticalLayout->addWidget(tableView);
 
         MantisViewerIHMQtClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MantisViewerIHMQtClass);

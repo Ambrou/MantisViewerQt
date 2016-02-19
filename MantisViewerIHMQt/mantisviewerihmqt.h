@@ -4,6 +4,7 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_mantisviewerihmqt.h"
 #include "TableModel.h"
+#include "QStandardItemModel"
 
 class BaseConnecteur;
 
@@ -24,6 +25,8 @@ private:
 	QString m_password;
 
 	TableModel m_tableModel;
+	QStandardItemModel m_standardModel;
+	QVector<int> maxFromColonne;
 
 private slots :
 	void onModificationProjet(QString newProjet);

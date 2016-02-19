@@ -22,6 +22,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableView>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -40,6 +41,7 @@ public:
     QLabel *label_2;
     QComboBox *comboBox_Version;
     QTableView *tableView;
+    QTableWidget *tableWidget;
     QSpacerItem *verticalSpacer;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
@@ -98,6 +100,11 @@ public:
         tableView->setObjectName(QStringLiteral("tableView"));
 
         verticalLayout->addWidget(tableView);
+
+        tableWidget = new QTableWidget(centralWidget);
+        tableWidget->setObjectName(QStringLiteral("tableWidget"));
+
+        verticalLayout->addWidget(tableWidget);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 

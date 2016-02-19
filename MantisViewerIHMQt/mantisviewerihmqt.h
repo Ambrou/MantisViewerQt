@@ -3,6 +3,7 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_mantisviewerihmqt.h"
+#include "TableModel.h"
 
 class BaseConnecteur;
 
@@ -22,8 +23,11 @@ private:
 	QString m_user;
 	QString m_password;
 
+	TableModel m_tableModel;
+
 private slots :
 	void onModificationProjet(QString newProjet);
+	void onModificationVersion(QString newVersion);
 };
 
 #endif // MANTISVIEWERIHMQT_H

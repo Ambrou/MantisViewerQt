@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mantisviewerihmqt.ui'
 **
-** Created by: Qt User Interface Compiler version 5.5.1
+** Created by: Qt User Interface Compiler version 5.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -21,6 +21,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -38,6 +39,7 @@ public:
     QComboBox *comboBox_Projet;
     QLabel *label_2;
     QComboBox *comboBox_Version;
+    QTableView *tableView;
     QSpacerItem *verticalSpacer;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
@@ -47,7 +49,7 @@ public:
     {
         if (MantisViewerIHMQtClass->objectName().isEmpty())
             MantisViewerIHMQtClass->setObjectName(QStringLiteral("MantisViewerIHMQtClass"));
-        MantisViewerIHMQtClass->resize(679, 601);
+        MantisViewerIHMQtClass->resize(712, 586);
         centralWidget = new QWidget(MantisViewerIHMQtClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -92,6 +94,11 @@ public:
 
         verticalLayout->addLayout(horizontalLayout);
 
+        tableView = new QTableView(centralWidget);
+        tableView->setObjectName(QStringLiteral("tableView"));
+
+        verticalLayout->addWidget(tableView);
+
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer);
@@ -99,7 +106,7 @@ public:
         MantisViewerIHMQtClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MantisViewerIHMQtClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 679, 21));
+        menuBar->setGeometry(QRect(0, 0, 712, 21));
         MantisViewerIHMQtClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MantisViewerIHMQtClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -110,6 +117,7 @@ public:
 
         retranslateUi(MantisViewerIHMQtClass);
         QObject::connect(comboBox_Projet, SIGNAL(currentTextChanged(QString)), MantisViewerIHMQtClass, SLOT(onModificationProjet(QString)));
+        QObject::connect(comboBox_Version, SIGNAL(currentTextChanged(QString)), MantisViewerIHMQtClass, SLOT(onModificationVersion(QString)));
 
         QMetaObject::connectSlotsByName(MantisViewerIHMQtClass);
     } // setupUi

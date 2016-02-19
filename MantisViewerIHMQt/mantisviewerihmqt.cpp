@@ -2,6 +2,7 @@
 #include "..\MantisManager\BaseConnecteur.h"
 #include "mantisviewerihm_connexion.h"
 
+
 MantisViewerIHMQt::MantisViewerIHMQt(BaseConnecteur &baseConnecteur, QWidget *parent)
 	: QMainWindow(parent), m_BaseConnecteur(baseConnecteur)
 {
@@ -26,6 +27,8 @@ MantisViewerIHMQt::MantisViewerIHMQt(BaseConnecteur &baseConnecteur, QWidget *pa
 		ui.comboBox_Projet->addItem(nomProjet);
 	}
 
+	ui.tableView->setModel(&m_tableModel);
+
 }
 
 MantisViewerIHMQt::~MantisViewerIHMQt()
@@ -46,4 +49,13 @@ void MantisViewerIHMQt::onModificationProjet(QString newProjet)
 	{
 		ui.comboBox_Version->addItem(nomVersion);
 	}
+}
+
+void MantisViewerIHMQt::onModificationVersion(QString newVersion)
+{
+	QVector<Ticket> listeTickets;
+
+	m_BaseConnecteur.recupererTicketDeLaVersionsDuProjet(listeTickets, ui.comboBox_Projet->currentText(), newVersion, m_user, m_password);
+
+	
 }

@@ -38,6 +38,7 @@ Test_Drag_Drop::Test_Drag_Drop(QWidget *parent)
 	myModel->setItem(0, 1, new QStandardItem("2"));
 	myModel->setItem(1, 0, new QStandardItem("3"));
 	myModel->setItem(1, 1, new QStandardItem("4"));
+	myTableView->setModel(myModel);
 }
 
 Test_Drag_Drop::~Test_Drag_Drop()

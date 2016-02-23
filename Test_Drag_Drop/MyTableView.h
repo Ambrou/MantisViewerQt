@@ -8,6 +8,7 @@ public:
 	MyTableView(QWidget *parent);
 	~MyTableView();
 	void dragEnterEvent(QDragEnterEvent *event);
-	void dragLeaveEvent(QDragLeaveEvent * event);
+//	void dragLeaveEvent(QDragLeaveEvent * event);
+	void dropEvent(QDropEvent *event);
 };
 

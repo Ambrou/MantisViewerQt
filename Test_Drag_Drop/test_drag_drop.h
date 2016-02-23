@@ -5,6 +5,9 @@
 #include <QStandardItemModel>
 #include "ui_test_drag_drop.h"
 
+class MyTableView;
+class MyModel;
+
 class Test_Drag_Drop : public QMainWindow
 {
 	Q_OBJECT
@@ -14,6 +17,9 @@ public:
 	~Test_Drag_Drop();
 
 	QStandardItemModel modelStandard;
+
+	MyTableView* myTableView;
+	MyModel* myModel;
 private:
 	Ui::Test_Drag_DropClass ui;
 };

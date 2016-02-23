@@ -50,6 +50,12 @@
     <ClCompile Include="GeneratedFiles\qrc_test_drag_drop.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="MyTableView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="test_drag_drop.h">
@@ -65,6 +71,12 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_test_drag_drop.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyTableView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyModel.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

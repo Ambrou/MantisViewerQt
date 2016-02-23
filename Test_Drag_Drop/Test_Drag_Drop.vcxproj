@@ -89,6 +89,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MyModel.cpp" />
+    <ClCompile Include="MyTableView.cpp" />
     <ClCompile Include="test_drag_drop.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +119,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_test_drag_drop.h" />
+    <ClInclude Include="MyModel.h" />
+    <ClInclude Include="MyTableView.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="test_drag_drop.qrc">

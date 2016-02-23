@@ -3,18 +3,18 @@
   <PropertyGroup />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <QTDIR>C:\Ambroise\Qt\5.5\msvc2013</QTDIR>
-    <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b"$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
+    <LocalDebuggerEnvironment>PATH="$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_v100|Win32'">
     <QTDIR>C:\Ambroise\Qt\5.5\msvc2013</QTDIR>
-    <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b"$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
+    <LocalDebuggerEnvironment>PATH="$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <QTDIR>C:\Ambroise\Qt\5.5\msvc2013</QTDIR>
-    <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b"$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
+    <LocalDebuggerEnvironment>PATH="$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_v100|Win32'">
     <QTDIR>C:\Ambroise\Qt\5.5\msvc2013</QTDIR>
-    <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b"$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
+    <LocalDebuggerEnvironment>PATH="$(QTDIR)\bin%3b$(PATH)</LocalDebuggerEnvironment>
   </PropertyGroup>
 </Project>

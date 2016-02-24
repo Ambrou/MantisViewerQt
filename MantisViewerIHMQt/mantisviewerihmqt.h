@@ -3,10 +3,10 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_mantisviewerihmqt.h"
-#include "TableModel.h"
-#include "MyModel.h"
+#include "MantisItemModel.h"
 
 class BaseConnecteur;
+class MantisTableView;
 
 class MantisViewerIHMQt : public QMainWindow
 {
@@ -17,7 +17,9 @@ public:
 	~MantisViewerIHMQt();
 
 private:
+	void initialiserIHM();
 	void identifierUtilisateur();
+	void mettreAJourNomDesColonnes();
 	void mettreAJourLaListeDesProjets();
 
 	Ui::MantisViewerIHMQtClass ui;
@@ -27,8 +29,8 @@ private:
 	QString m_user;
 	QString m_password;
 
-	TableModel m_tableModel;
-	MyModel m_standardModel;
+	MantisTableView *mantisTableView;
+	MantisItemModel m_standardModel;
 	QVector<int> maxFromColonne;
 
 private slots :

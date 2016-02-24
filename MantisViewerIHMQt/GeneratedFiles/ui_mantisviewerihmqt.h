@@ -21,7 +21,6 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTableView>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -39,8 +38,6 @@ public:
     QComboBox *comboBox_Projet;
     QLabel *label_2;
     QComboBox *comboBox_Version;
-    QTableView *tableView;
-    QHBoxLayout *horizontalLayout_2;
     QSpacerItem *verticalSpacer;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
@@ -94,19 +91,6 @@ public:
 
 
         verticalLayout->addLayout(horizontalLayout);
-
-        tableView = new QTableView(centralWidget);
-        tableView->setObjectName(QStringLiteral("tableView"));
-        tableView->setSelectionMode(QAbstractItemView::SingleSelection);
-        tableView->verticalHeader()->setVisible(false);
-
-        verticalLayout->addWidget(tableView);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-
-        verticalLayout->addLayout(horizontalLayout_2);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 

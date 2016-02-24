@@ -2,19 +2,57 @@
 #include "..\MantisManager\BaseConnecteur.h"
 #include "mantisviewerihm_connexion.h"
 #include "..\MantisManager\Status.h"
+#include "MantisTableView.h"
 
 MantisViewerIHMQt::MantisViewerIHMQt(BaseConnecteur &baseConnecteur, QWidget *parent)
-	: QMainWindow(parent), m_BaseConnecteur(baseConnecteur)
+	: QMainWindow(parent), m_BaseConnecteur(baseConnecteur), m_standardModel(this)
 {
-	// Initialisation IHM
-	ui.setupUi(this);
-
+	initialiserIHM();
 	identifierUtilisateur();
-
 	mettreAJourLaListeDesProjets();
 	
-	//------------------------------------------------------------
-	// recupération des status
+	
+	//------------------------------------------
+
+	//--------------------------------------------------------------
+	// Table View
+	m_standardModel.setHorizontalHeaderLabels(headerList);
+	mantisTableView->setModel(&m_standardModel);
+
+}
+
+MantisViewerIHMQt::~MantisViewerIHMQt()
+{
+	ui.setupUi(this);
+	mantisTableView = new MantisTableView(ui.centralWidget);
+	mantisTableView->setObjectName(QStringLiteral("tableView"));
+	ui.verticalLayout->addWidget(mantisTableView);
+}
+
+void MantisViewerIHMQt::initialiserIHM()
+{
+	mantisviewerihm_connexion connexionDlg;
+
+	if (connexionDlg.exec() == QDialog::Accepted)
+	{
+		m_user = connexionDlg.getUser();
+		m_password = connexionDlg.getPassword();
+	}
+}
+
+void MantisViewerIHMQt::identifierUtilisateur()
+{
+	mantisviewerihm_connexion connexionDlg;
+
+	if (connexionDlg.exec() == QDialog::Accepted)
+	{
+		m_user = connexionDlg.getUser();
+		m_password = connexionDlg.getPassword();
+	}
+}
+
+void MantisViewerIHMQt::mettreAJourNomDesColonnes()
+{
 	QVector<Status> listeStatuts;
 	m_BaseConnecteur.recupererStatut(listeStatuts, m_user, m_password);
 	QStringList headerList;
@@ -23,29 +61,6 @@ MantisViewerIHMQt::MantisViewerIHMQt(BaseConnecteur &baseConnecteur, QWidget *pa
 	{
 		headerList << status.nom();
 		maxFromColonne.append(0);
-	}
-	//------------------------------------------
-
-	//--------------------------------------------------------------
-	// Table View
-	m_standardModel.setHorizontalHeaderLabels(headerList);
-	ui.tableView->setModel(&m_standardModel);
-
-}
-
-MantisViewerIHMQt::~MantisViewerIHMQt()
-{
-
-}
-
-void MantisViewerIHMQt::identifierUtilisateur()
-{
-	mantisviewerihm_connexion connexionDlg;
-	int iRetour = connexionDlg.exec();
-	if (iRetour == QDialog::Accepted)
-	{
-		m_user = connexionDlg.getUser();
-		m_password = connexionDlg.getPassword();
 	}
 }
 

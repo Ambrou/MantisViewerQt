@@ -53,10 +53,10 @@
     <ClCompile Include="mantisviewerihm_connexion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TableModel.cpp">
+    <ClCompile Include="MantisItemModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MyModel.cpp">
+    <ClCompile Include="MantisTableView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -84,10 +84,10 @@
     <ClInclude Include="mantisviewerihm_connexion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TableModel.h">
+    <ClInclude Include="MantisItemModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyModel.h">
+    <ClInclude Include="MantisTableView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

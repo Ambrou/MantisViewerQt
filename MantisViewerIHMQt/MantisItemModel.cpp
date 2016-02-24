@@ -1,12 +1,13 @@
-#include "MyModel.h"
+#include "MantisItemModel.h"
 
 
-MyModel::MyModel()
+MantisItemModel::MantisItemModel(QObject *parent)
+	: QStandardItemModel(parent)
 {
 }
 
 
-MyModel::~MyModel()
+MantisItemModel::~MantisItemModel()
 {
 }
 

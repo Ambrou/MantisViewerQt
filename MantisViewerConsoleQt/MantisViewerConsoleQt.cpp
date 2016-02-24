@@ -38,7 +38,7 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 	}
 	else if (nomCommande == "lister projets")
 	{
-		QVector<QString>listeProjets;
+		QStringList listeProjets;
 		QString nomProjet("");
 		m_BaseConnecteur.recupererProjets(listeProjets, login(), motDePasse());
 		foreach(nomProjet, listeProjets)

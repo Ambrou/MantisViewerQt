@@ -22,9 +22,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTableView>
-#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QToolBar>
-#include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
@@ -42,10 +40,7 @@ public:
     QLabel *label_2;
     QComboBox *comboBox_Version;
     QTableView *tableView;
-    QTableWidget *tableWidget;
     QHBoxLayout *horizontalLayout_2;
-    QTreeWidget *treeWidget;
-    QTableWidget *tableWidget_2;
     QSpacerItem *verticalSpacer;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
@@ -107,29 +102,9 @@ public:
 
         verticalLayout->addWidget(tableView);
 
-        tableWidget = new QTableWidget(centralWidget);
-        tableWidget->setObjectName(QStringLiteral("tableWidget"));
-        tableWidget->setDragDropMode(QAbstractItemView::InternalMove);
-        tableWidget->setDefaultDropAction(Qt::MoveAction);
-
-        verticalLayout->addWidget(tableWidget);
-
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        treeWidget = new QTreeWidget(centralWidget);
-        QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem();
-        __qtreewidgetitem->setText(0, QStringLiteral("1"));
-        treeWidget->setHeaderItem(__qtreewidgetitem);
-        treeWidget->setObjectName(QStringLiteral("treeWidget"));
-
-        horizontalLayout_2->addWidget(treeWidget);
-
-        tableWidget_2 = new QTableWidget(centralWidget);
-        tableWidget_2->setObjectName(QStringLiteral("tableWidget_2"));
-
-        horizontalLayout_2->addWidget(tableWidget_2);
-
 
         verticalLayout->addLayout(horizontalLayout_2);
 

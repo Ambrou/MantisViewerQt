@@ -66,24 +66,3 @@ bool MyModel::dropMimeData(const QMimeData *data,Qt::DropAction action, int row,
 //	types << "application/vnd.text.list";
 //	return types;
 //}
-
-//bool MyModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent)
-//{
-//	if (action == Qt::IgnoreAction)
-//		return true;
-//
-//	if (!data->hasFormat("application/vnd.text.list"))
-//		return false;
-//
-//	if (column > 0)
-//		return false;
-//
-//	int beginRow;
-//
-//	if (row != -1)
-//		beginRow = row;
-//	else if (parent.isValid())
-//		beginRow = parent.row();
-//	else
-//		beginRow = rowCount(QModelIndex());
-//}

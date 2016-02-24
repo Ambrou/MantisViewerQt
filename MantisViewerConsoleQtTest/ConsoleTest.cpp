@@ -72,9 +72,9 @@ namespace MantisViewerConsoleQtTest
 			Assert::AreEqual(QString("******").toStdString(), console.motDePasse().toStdString());
 		}
 
-		static void recupererProjets_delegate(QVector<QString>&listeProjets, const QString& user, const QString& password)
+		static void recupererProjets_delegate(QStringList &listeProjets, const QString& user, const QString& password)
 		{
-			listeProjets.append("TeTriS");
+			listeProjets << "TeTriS";
 		}
 
 		TEST_METHOD(listerLesProjets)

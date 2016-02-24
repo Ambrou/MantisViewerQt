@@ -18,7 +18,7 @@ namespace MantisManagerTest
 		{
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			QVector<QString>listeProjets;
+			QStringList listeProjets;
 			MantisConnecteur mantisManager;
 
 			mantisManager.recupererProjets(listeProjets, "apetitgenet", "MAg28vkwde");

@@ -9,24 +9,10 @@ MantisViewerIHMQt::MantisViewerIHMQt(BaseConnecteur &baseConnecteur, QWidget *pa
 	// Initialisation IHM
 	ui.setupUi(this);
 
-	mantisviewerihm_connexion connexionDlg;
-	int iRetour = connexionDlg.exec();
-	if (iRetour == QDialog::Accepted)
-	{
-		m_user = connexionDlg.getUser();
-		m_password = connexionDlg.getPassword();
-	}
+	identifierUtilisateur();
 
-	// récupération de la liste des projets
-	QVector<QString> listeProjets;
-	QString nomProjet;
-	m_BaseConnecteur.recupererProjets(listeProjets, m_user, m_password);
-
+	mettreAJourLaListeDesProjets();
 	
-	foreach(nomProjet, listeProjets)
-	{
-		ui.comboBox_Projet->addItem(nomProjet);
-	}
 	//------------------------------------------------------------
 	// recupération des status
 	QVector<Status> listeStatuts;
@@ -42,22 +28,32 @@ MantisViewerIHMQt::MantisViewerIHMQt(BaseConnecteur &baseConnecteur, QWidget *pa
 
 	//--------------------------------------------------------------
 	// Table View
-	//ui.tableView->setModel(&m_tableModel);
 	m_standardModel.setHorizontalHeaderLabels(headerList);
 	ui.tableView->setModel(&m_standardModel);
-
-	//--------------------------------------------------------------
-	// Table Widget
-	
-	ui.tableWidget->setColumnCount(headerList.size());
-	ui.tableWidget->setHorizontalHeaderLabels(headerList);
-
 
 }
 
 MantisViewerIHMQt::~MantisViewerIHMQt()
 {
 
+}
+
+void MantisViewerIHMQt::identifierUtilisateur()
+{
+	mantisviewerihm_connexion connexionDlg;
+	int iRetour = connexionDlg.exec();
+	if (iRetour == QDialog::Accepted)
+	{
+		m_user = connexionDlg.getUser();
+		m_password = connexionDlg.getPassword();
+	}
+}
+
+void MantisViewerIHMQt::mettreAJourLaListeDesProjets()
+{
+	QStringList listeProjets;
+	m_BaseConnecteur.recupererProjets(listeProjets, m_user, m_password);
+	ui.comboBox_Projet->addItems(listeProjets);
 }
 
 void MantisViewerIHMQt::onModificationProjet(QString newProjet)
@@ -78,11 +74,8 @@ void MantisViewerIHMQt::onModificationProjet(QString newProjet)
 void MantisViewerIHMQt::onModificationVersion(QString newVersion)
 {
 	QVector<Ticket> listeTickets;
-	//m_standardModel.clear();
 	m_standardModel.removeRows(0, m_standardModel.rowCount());
-
 	
-
 	m_BaseConnecteur.recupererTicketDeLaVersionsDuProjet(listeTickets, ui.comboBox_Projet->currentText(), newVersion, m_user, m_password);
 
 	foreach(const Ticket ticket, listeTickets)

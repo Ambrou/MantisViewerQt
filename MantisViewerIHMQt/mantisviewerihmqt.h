@@ -17,6 +17,9 @@ public:
 	~MantisViewerIHMQt();
 
 private:
+	void identifierUtilisateur();
+	void mettreAJourLaListeDesProjets();
+
 	Ui::MantisViewerIHMQtClass ui;
 
 	BaseConnecteur& m_BaseConnecteur;

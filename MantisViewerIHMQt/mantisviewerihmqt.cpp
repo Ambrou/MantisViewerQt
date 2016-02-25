@@ -18,7 +18,6 @@ MantisViewerIHMQt::MantisViewerIHMQt(BaseConnecteur &baseConnecteur, QWidget *pa
 
 	//--------------------------------------------------------------
 	// Table View
-	
 	mantisTableView->setModel(standardModel);
 
 }

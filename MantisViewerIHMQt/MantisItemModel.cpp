@@ -2,7 +2,7 @@
 
 
 MantisItemModel::MantisItemModel(QObject *parent)
-	: QAbstractTableModel(parent)
+	: QStandardItemModel(parent)
 {
 }
 
@@ -13,53 +13,73 @@ MantisItemModel::~MantisItemModel()
 
 void MantisItemModel::mettreAjourLeTitreDesColonnes(const QVector<Status>& listeStatuts)
 {
+	QStringList nomDesColonnes;
 	foreach(const Status status, listeStatuts)
 	{
+		colonneWrapper[status.id()] = nomDesColonnes.size();
+		nbTicketDansLaColonne[status.id()] = 0;
 		nomDesColonnes << status.nom();
 	}
+	setHorizontalHeaderLabels(nomDesColonnes);
 }
 
 void MantisItemModel::ajouterLesTickets(const QVector<Ticket>& listeTickets)
 {
+	QList<qint64> clefs = nbTicketDansLaColonne.keys();
+	foreach(const qint64 clef, clefs)
+	{
+		nbTicketDansLaColonne[clef] = 0;
+	}
 	removeRows(0, rowCount());
-
-	QVector<QVector< Ticket > > ticket;
-
+	
 	foreach(const Ticket ticket, listeTickets)
 	{
-		//setItem(statusPosition[ticket.status()], new QStandardItem(QString::number(ticket.numero())));
+		setItem(nbTicketDansLaColonne[ticket.status()]++, colonneWrapper[ticket.status()], new QStandardItem(QString::number(ticket.numero())));
 	}
 }
-
-int MantisItemModel::rowCount(const QModelIndex & parent) const
-{
-	return 0;
-}
-
-int MantisItemModel::columnCount(const QModelIndex & parent) const
-{
-	return nomDesColonnes.size();
-}
-
-QVariant MantisItemModel::data(const QModelIndex & index, int role) const
-{
-	if (role != Qt::DisplayRole)
-		return QVariant();
-
-	return QVariant();
-}
-
-QVariant MantisItemModel::headerData(int section, Qt::Orientation orientation, int role) const
-{
-	if (role != Qt::DisplayRole)
-		return QVariant();
-
-	if (orientation == Qt::Horizontal) {
-		return nomDesColonnes[section];
-	}
-	return QVariant();
-	
-}
+//
+//int MantisItemModel::rowCount(const QModelIndex & parent) const
+//{
+//	//return 50;
+//	int nbRow = 0;
+//	foreach(QVector< qint64 > listTicket, tickets)
+//	{
+//		nbRow = qMax(nbRow, listTicket.size());
+//	}
+//	return nbRow;
+//}
+//
+//int MantisItemModel::columnCount(const QModelIndex & parent) const
+//{
+//	return nomDesColonnes.size();
+//}
+//
+//QVariant MantisItemModel::data(const QModelIndex & index, int role) const
+//{
+//	return QVariant();
+//	/*if (!index.isValid() || role != Qt::DisplayRole)
+//		return QVariant();
+//
+//	if (columnCount() < index.column())
+//		return QVariant();
+//
+//	if (tickets[index.column()].size() < index.row())
+//		return QVariant();
+//
+//	return QVariant(tickets[index.column()][index.row()]);*/
+//}
+//
+//QVariant MantisItemModel::headerData(int section, Qt::Orientation orientation, int role) const
+//{
+//	if (role != Qt::DisplayRole)
+//		return QVariant();
+//
+//	if (orientation == Qt::Horizontal) {
+//		return nomDesColonnes[section];
+//	}
+//	return QVariant();
+//	
+//}
 
 //Qt::DropActions MyModel::supportedDropActions() const
 //{

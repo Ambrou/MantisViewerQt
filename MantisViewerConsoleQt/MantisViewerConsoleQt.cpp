@@ -58,7 +58,7 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 	}
 	else if (nomCommande == "lister versions")
 	{
-		QVector<QString>listeTickets;
+		QStringList listeTickets;
 		QString nomProjet(m_IoManager.lireCommande());
 		m_BaseConnecteur.recupererVersionsDuProjet(listeTickets, nomProjet, login(), motDePasse());
 		foreach(QString nomTicket, listeTickets)

@@ -61,7 +61,7 @@ void MantisConnecteur::recupererTicketsDuProjet(QVector<Ticket>&listeTicket, con
 //		listeTicket.append(ticket.summary());
 //	}
 //}
-void MantisConnecteur::recupererVersionsDuProjet(QVector<QString>&listeVersion, const QString nomDuProjet, const QString& user, const QString& password) const
+void MantisConnecteur::recupererVersionsDuProjet(QStringList&listeVersion, const QString nomDuProjet, const QString& user, const QString& password) const
 {
 	MantisConnect mantisConnect;
 	qint64 idProjet = mantisConnect.mc_project_get_id_from_name(user, password, nomDuProjet);

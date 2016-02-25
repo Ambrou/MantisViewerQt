@@ -7,6 +7,7 @@
 
 class BaseConnecteur;
 class MantisTableView;
+class MantisItemModel;
 
 class MantisViewerIHMQt : public QMainWindow
 {
@@ -30,8 +31,7 @@ private:
 	QString m_password;
 
 	MantisTableView *mantisTableView;
-	MantisItemModel m_standardModel;
-	QVector<int> maxFromColonne;
+	MantisItemModel *standardModel;
 
 private slots :
 	void onModificationProjet(QString newProjet);

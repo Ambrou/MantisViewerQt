@@ -15,7 +15,7 @@ public:
 	virtual void recupererStatut(QVector<Status> &listeStatuts, const QString& user, const QString& password) const = 0;
 	virtual void recupererProjets(QStringList& listeProjets, const QString& user, const QString& password) const = 0;
 	virtual void recupererTicketsDuProjet(QVector<Ticket>& listeTicket, const QString nomDuProjet, const QString& user, const QString& password) const = 0;
-	virtual void recupererVersionsDuProjet(QVector<QString>& listeVersion, const QString nomDuProjet, const QString& user, const QString& password) const = 0;
+	virtual void recupererVersionsDuProjet(QStringList& listeVersion, const QString nomDuProjet, const QString& user, const QString& password) const = 0;
 	virtual void recupererTicketDeLaVersionsDuProjet(QVector<Ticket>&listeTicket, const QString nomDuProjet, const QString nomVersion, const QString& user, const QString& password) const = 0;
 	virtual void changerEtatTicket(const QString& idTicket, const QString& nouvelEtat, const QString& user, const QString& password) const = 0;
 	virtual void creerUnTicket(const QString& nomDuProjet, const QString& description, const QString& resume, const QString& categorie, const QString& user, const QString& password) const = 0;

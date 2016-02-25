@@ -20,6 +20,15 @@ public:
 	Qt::ItemFlags flags(const QModelIndex &index) const;*/
 protected:
 private:
+	/*struct ColonneInfo
+	{
+		Status status;
+		//qint64 ColonneNumber
+	};
+	
+	QList<ColonneInfo> colonneInformations;*/
+
 	QStringList nomDesColonnes;
+
 };
 

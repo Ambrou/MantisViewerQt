@@ -13,22 +13,17 @@ MantisItemModel::~MantisItemModel()
 
 void MantisItemModel::mettreAjourLeTitreDesColonnes(const QVector<Status>& listeStatuts)
 {
-	
-	//qint64 colonnePosition = 0;
 	foreach(const Status status, listeStatuts)
 	{
 		nomDesColonnes << status.nom();
-		//mapStatus[status.id()].position = colonnePosition++;
-		//mapStatus[status.id()].status = status;
 	}
-	//setHorizontalHeaderLabels(nomDesColonnes);
 }
 
 void MantisItemModel::ajouterLesTickets(const QVector<Ticket>& listeTickets)
 {
 	removeRows(0, rowCount());
 
-	QVector<QVector< qint64 > > idTicket;
+	QVector<QVector< Ticket > > ticket;
 
 	foreach(const Ticket ticket, listeTickets)
 	{
@@ -48,8 +43,12 @@ int MantisItemModel::columnCount(const QModelIndex & parent) const
 
 QVariant MantisItemModel::data(const QModelIndex & index, int role) const
 {
+	if (role != Qt::DisplayRole)
+		return QVariant();
+
 	return QVariant();
 }
+
 QVariant MantisItemModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
 	if (role != Qt::DisplayRole)

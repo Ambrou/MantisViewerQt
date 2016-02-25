@@ -3,7 +3,6 @@
 
 #include <QtWidgets/QMainWindow>
 #include "ui_mantisviewerihmqt.h"
-#include "MantisItemModel.h"
 
 class BaseConnecteur;
 class MantisTableView;

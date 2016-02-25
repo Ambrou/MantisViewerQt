@@ -3,6 +3,7 @@
 #include "mantisviewerihm_connexion.h"
 #include "..\MantisManager\Status.h"
 #include "MantisTableView.h"
+#include "MantisItemModel.h"
 
 MantisViewerIHMQt::MantisViewerIHMQt(BaseConnecteur &baseConnecteur, QWidget *parent)
 	: QMainWindow(parent), m_BaseConnecteur(baseConnecteur)
@@ -51,7 +52,7 @@ void MantisViewerIHMQt::mettreAJourNomDesColonnes()
 {
 	QVector<Status> listeStatuts;
 	m_BaseConnecteur.recupererStatut(listeStatuts, m_user, m_password);
-	//standardModel->setHorizontalHeaderLabels(headerList);
+	standardModel->mettreAjourLeTitreDesColonnes(listeStatuts);
 }
 
 void MantisViewerIHMQt::mettreAJourLaListeDesProjets()
@@ -63,29 +64,18 @@ void MantisViewerIHMQt::mettreAJourLaListeDesProjets()
 
 void MantisViewerIHMQt::onModificationProjet(QString newProjet)
 {
-	ui.comboBox_Version->clear();
-
 	QStringList listeVersions;
-	QString nomVersion;
 
+	ui.comboBox_Version->clear();
 	m_BaseConnecteur.recupererVersionsDuProjet(listeVersions, newProjet, m_user, m_password);
-
-	foreach(nomVersion, listeVersions)
-	{
-		ui.comboBox_Version->addItem(nomVersion);
-	}
+	ui.comboBox_Version->addItems(listeVersions);
 }
 
 void MantisViewerIHMQt::onModificationVersion(QString newVersion)
 {
 	QVector<Ticket> listeTickets;
-	standardModel->removeRows(0, standardModel->rowCount());
 	
 	m_BaseConnecteur.recupererTicketDeLaVersionsDuProjet(listeTickets, ui.comboBox_Projet->currentText(), newVersion, m_user, m_password);
-
-	foreach(const Ticket ticket, listeTickets)
-	{
-		//standardModel->setItem(maxFromColonne[(ticket.status() / 10) - 1], ticket.status() / 10, new QStandardItem(QString::number(ticket.numero())));
-		//maxFromColonne[(ticket.status() / 10) - 1] += 1;
-	}
+	standardModel->ajouterLesTickets(listeTickets);
+	
 }

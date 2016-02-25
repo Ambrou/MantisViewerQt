@@ -33,7 +33,7 @@ void MantisViewerIHMQt::initialiserIHM()
 	ui.setupUi(this);
 	mantisTableView = new MantisTableView(ui.centralWidget);
 	mantisTableView->setObjectName(QStringLiteral("tableView"));
-	ui.verticalLayout->addWidget(mantisTableView);
+	ui.verticalLayout->insertWidget(2, mantisTableView);
 	standardModel = new MantisItemModel(mantisTableView);
 }
 

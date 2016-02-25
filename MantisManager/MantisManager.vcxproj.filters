@@ -23,22 +23,6 @@
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
-    <Filter Include="Generated Files\Debug">
-      <UniqueIdentifier>{fe35fe22-9dee-4f1d-a1cf-09c3d1d76774}</UniqueIdentifier>
-      <Extensions>cpp;moc</Extensions>
-      <SourceControlFiles>False</SourceControlFiles>
-    </Filter>
-    <Filter Include="Generated Files\Release">
-      <UniqueIdentifier>{2bbeccaa-99e8-49d2-8ae5-97a49cf2b4e4}</UniqueIdentifier>
-      <Extensions>cpp;moc</Extensions>
-      <SourceControlFiles>False</SourceControlFiles>
-    </Filter>
-    <Filter Include="Generated Files\Debug_v100">
-      <UniqueIdentifier>{15215eb4-1779-4a9b-aef3-86f6a4b01283}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Generated Files\Release_v100">
-      <UniqueIdentifier>{e085b6a6-ec75-407b-83b9-38cd6bdba568}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -56,15 +40,6 @@
     <ClCompile Include="BaseConnecteur.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug_v100\moc_mantisconnect.cpp">
-      <Filter>Generated Files\Debug_v100</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release_v100\moc_mantisconnect.cpp">
-      <Filter>Generated Files\Release_v100</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_mantisconnect.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
     <ClCompile Include="InvalidArgumentException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -74,14 +49,14 @@
     <ClCompile Include="OperationImpossibleException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_mantisconnect.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="Ticket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Status.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\moc_mantisconnect.cpp">
+      <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

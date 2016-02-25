@@ -2,7 +2,7 @@
 
 
 MantisItemModel::MantisItemModel(QObject *parent)
-	: QStandardItemModel(parent)
+	: QAbstractTableModel(parent)
 {
 }
 
@@ -13,24 +13,53 @@ MantisItemModel::~MantisItemModel()
 
 void MantisItemModel::mettreAjourLeTitreDesColonnes(const QVector<Status>& listeStatuts)
 {
-	QStringList nomDesColonnes;
-	qint64 colonnePosition = 0;
+	
+	//qint64 colonnePosition = 0;
 	foreach(const Status status, listeStatuts)
 	{
 		nomDesColonnes << status.nom();
-		statusPosition[status.id()] = colonnePosition++;
+		//mapStatus[status.id()].position = colonnePosition++;
+		//mapStatus[status.id()].status = status;
 	}
-	setHorizontalHeaderLabels(nomDesColonnes);
+	//setHorizontalHeaderLabels(nomDesColonnes);
 }
 
 void MantisItemModel::ajouterLesTickets(const QVector<Ticket>& listeTickets)
 {
 	removeRows(0, rowCount());
 
+	QVector<QVector< qint64 > > idTicket;
+
 	foreach(const Ticket ticket, listeTickets)
 	{
-
+		//setItem(statusPosition[ticket.status()], new QStandardItem(QString::number(ticket.numero())));
 	}
+}
+
+int MantisItemModel::rowCount(const QModelIndex & parent) const
+{
+	return 0;
+}
+
+int MantisItemModel::columnCount(const QModelIndex & parent) const
+{
+	return nomDesColonnes.size();
+}
+
+QVariant MantisItemModel::data(const QModelIndex & index, int role) const
+{
+	return QVariant();
+}
+QVariant MantisItemModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+	if (role != Qt::DisplayRole)
+		return QVariant();
+
+	if (orientation == Qt::Horizontal) {
+		return nomDesColonnes[section];
+	}
+	return QVariant();
+	
 }
 
 //Qt::DropActions MyModel::supportedDropActions() const

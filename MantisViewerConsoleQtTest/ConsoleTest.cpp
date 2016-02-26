@@ -110,9 +110,9 @@ namespace MantisViewerConsoleQtTest
 
 		static void recupererTicketsDuProjet_delegate(QVector<Ticket>&listeTicket, const QString nomDuProjet, const QString& user, const QString& password)
 		{
-			listeTicket.append(Ticket(1, "bug 1", 10));
-			listeTicket.append(Ticket(5, "bug 3", 10));
-			listeTicket.append(Ticket(8, "evol 7", 10));
+			listeTicket.append(Ticket(1, "bug 1", 10, 10));
+			listeTicket.append(Ticket(5, "bug 3", 10, 10));
+			listeTicket.append(Ticket(8, "evol 7", 10, 10));
 		}
 
 		TEST_METHOD(listerLesTicketsDUnProjet)
@@ -151,9 +151,9 @@ namespace MantisViewerConsoleQtTest
 
 		static void recupererTicketDeLaVersionsDuProjet_delegate(QVector<Ticket>&listeTickets, const QString nomDuProjet, const QString nomVersion, const QString& user, const QString& password)
 		{
-			listeTickets.append(Ticket(1, "bug 1", 10));
-			listeTickets.append(Ticket(5, "bug 3", 10));
-			listeTickets.append(Ticket(8, "evol 7", 10));
+			listeTickets.append(Ticket(1, "bug 1", 10, 10));
+			listeTickets.append(Ticket(5, "bug 3", 10, 10));
+			listeTickets.append(Ticket(8, "evol 7", 10, 10));
 		}
 
 		TEST_METHOD(listerLesTicketsDUneVersionDUnProjet)

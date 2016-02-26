@@ -188,6 +188,9 @@
     <ClInclude Include="IOManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MantisData\MantisData.vcxproj">
+      <Project>{d8924f9a-f78d-493a-9fd6-3ef18c0142b6}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\MantisManager\MantisManager.vcxproj">
       <Project>{b12702ad-abfb-343a-a199-8e24837244a3}</Project>
     </ProjectReference>

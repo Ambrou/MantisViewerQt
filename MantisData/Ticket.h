@@ -1,9 +1,9 @@
 #pragma once
 
-#include "mantismanager_global.h"
+#include "mantisdata_global.h"
 #include <QString>
 
-class MANTISMANAGER_EXPORT Ticket
+class MANTISDATA_EXPORT Ticket
 {
 public:
 	Ticket();

@@ -6,6 +6,7 @@
 #include <QTime>
 #include "Ticket.h"
 #include "Status.h"
+
 class MANTISMANAGER_EXPORT BaseConnecteur
 {
 public:

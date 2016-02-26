@@ -77,10 +77,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="mantisdata.cpp" />
+    <ClCompile Include="Status.cpp" />
+    <ClCompile Include="Ticket.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mantisdata.h" />
     <ClInclude Include="mantisdata_global.h" />
+    <ClInclude Include="Status.h" />
+    <ClInclude Include="Ticket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

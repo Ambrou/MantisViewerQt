@@ -95,7 +95,7 @@ void MantisConnecteur::recupererTicketDeLaVersionsDuProjet(QVector<Ticket>&liste
 			TNS__IssueHeaderData ticket;
 			foreach(ticket, listTicket)
 			{
-				Ticket ticketMantis(ticket.id(), ticket.summary(), ticket.status());
+				Ticket ticketMantis(ticket.id(), ticket.summary(), ticket.status(), ticket.severity());
 				listeTickets.append(ticketMantis);
 			}
 			break;

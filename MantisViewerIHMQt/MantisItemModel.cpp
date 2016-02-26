@@ -34,7 +34,9 @@ void MantisItemModel::ajouterLesTickets(const QVector<Ticket>& listeTickets)
 	
 	foreach(const Ticket ticket, listeTickets)
 	{
-		setItem(nbTicketDansLaColonne[ticket.status()]++, colonneWrapper[ticket.status()], new QStandardItem(QString::number(ticket.numero())));
+		QStandardItem *item = new QStandardItem(QString::number(ticket.numero()));
+		item->setBackground(QBrush(Qt::darkYellow));
+		setItem(nbTicketDansLaColonne[ticket.status()]++, colonneWrapper[ticket.status()], item);
 	}
 }
 //

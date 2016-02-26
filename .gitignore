@@ -26,3 +26,17 @@
 *.exe
 *.out
 *.app
+/MantisManager/Release/MantisManager.tlog
+/MantisManagerTestQt/Debug
+/MantisManagerTestQt/Release/MantisMa.25C0BFAF.tlog
+/MantisViewerConsoleQt/Debug/MantisVi.05DE7572.tlog
+/MantisViewerConsoleQt/Release/MantisVi.05DE7572.tlog
+/MantisViewerConsoleQtTest/Debug/MantisVi.5534913E.tlog
+/MantisViewerConsoleQtTest/Release/MantisVi.5534913E.tlog
+/MantisViewerIHMQt/Debug/MantisVi.C7BE1D66.tlog
+/MantisViewerIHMQt/Release/MantisVi.C7BE1D66.tlog
+/Test_Drag_Drop/Debug/Test_Drag_Drop.tlog
+/Test_Drag_Drop/Release/Test_Drag_Drop.tlog
+*.opensdf
+*.sdf
+*.suo

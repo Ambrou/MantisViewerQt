@@ -1,7 +1,7 @@
 #include "mantisviewerihmqt.h"
 #include "..\MantisManager\BaseConnecteur.h"
 #include "mantisviewerihm_connexion.h"
-#include "..\MantisManager\Status.h"
+#include "..\MantisData\Status.h"
 #include "MantisTableView.h"
 #include "MantisItemModel.h"
 

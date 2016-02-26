@@ -242,6 +242,11 @@
     <ClInclude Include="OperationImpossibleException.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MantisData\MantisData.vcxproj">
+      <Project>{d8924f9a-f78d-493a-9fd6-3ef18c0142b6}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

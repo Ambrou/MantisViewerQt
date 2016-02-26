@@ -4,8 +4,8 @@
 #include <QString>
 #include <QDate>
 #include <QTime>
-#include "Ticket.h"
-#include "Status.h"
+#include "../MantisData/Ticket.h"
+#include "../MantisData/Status.h"
 
 class MANTISMANAGER_EXPORT BaseConnecteur
 {

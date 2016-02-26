@@ -1,8 +1,8 @@
 #pragma once
 
 #include <QStandardItemModel>
-#include "..\MantisManager\Status.h"
-#include "..\MantisManager\Ticket.h"
+#include "..\MantisData\Status.h"
+#include "..\MantisData\Ticket.h"
 
 class MantisItemModel : public QStandardItemModel
 {

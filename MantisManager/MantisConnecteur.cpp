@@ -40,7 +40,7 @@ void MantisConnecteur::recupererTicketsDuProjet(QVector<Ticket>&listeTicket, con
 	TNS__IssueData ticket;
 	foreach(ticket, list)
 	{
-		Ticket ticketMantis(ticket.id(), ticket.summary(), ticket.status().id());
+		Ticket ticketMantis(ticket.id(), ticket.summary(), ticket.status().id(), ticket.severity().id());
 		listeTicket.append(ticketMantis);
 	}
 }

@@ -2,6 +2,7 @@
 
 #include "mantisdata_global.h"
 #include <QString>
+#include <QVariant>
 
 class MANTISDATA_EXPORT Ticket
 {
@@ -25,3 +26,5 @@ private:
 	qint64 m_iSeverite;
 };
 
+
+Q_DECLARE_METATYPE(Ticket)

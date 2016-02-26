@@ -1,5 +1,5 @@
 #include "MantisItemModel.h"
-
+#include "MantisItem.h"
 
 MantisItemModel::MantisItemModel(QObject *parent)
 	: QStandardItemModel(parent)
@@ -25,75 +25,35 @@ void MantisItemModel::mettreAjourLeTitreDesColonnes(const QVector<Status>& liste
 
 void MantisItemModel::ajouterLesTickets(const QVector<Ticket>& listeTickets)
 {
+	remiseAZeroDuModel();
+	
+	foreach(const Ticket ticket, listeTickets)
+	{
+		setItem(nbTicketDansLaColonne[ticket.status()]++, colonneWrapper[ticket.status()], new MantisItem(ticket));
+	}
+}
+
+void MantisItemModel::remiseAZeroDuModel()
+{
 	QList<qint64> clefs = nbTicketDansLaColonne.keys();
 	foreach(const qint64 clef, clefs)
 	{
 		nbTicketDansLaColonne[clef] = 0;
 	}
 	removeRows(0, rowCount());
-	
-	foreach(const Ticket ticket, listeTickets)
-	{
-		QStandardItem *item = new QStandardItem(QString::number(ticket.numero()));
-		item->setBackground(QBrush(Qt::darkYellow));
-		setItem(nbTicketDansLaColonne[ticket.status()]++, colonneWrapper[ticket.status()], item);
-	}
 }
-//
-//int MantisItemModel::rowCount(const QModelIndex & parent) const
-//{
-//	//return 50;
-//	int nbRow = 0;
-//	foreach(QVector< qint64 > listTicket, tickets)
-//	{
-//		nbRow = qMax(nbRow, listTicket.size());
-//	}
-//	return nbRow;
-//}
-//
-//int MantisItemModel::columnCount(const QModelIndex & parent) const
-//{
-//	return nomDesColonnes.size();
-//}
-//
-//QVariant MantisItemModel::data(const QModelIndex & index, int role) const
-//{
-//	return QVariant();
-//	/*if (!index.isValid() || role != Qt::DisplayRole)
-//		return QVariant();
-//
-//	if (columnCount() < index.column())
-//		return QVariant();
-//
-//	if (tickets[index.column()].size() < index.row())
-//		return QVariant();
-//
-//	return QVariant(tickets[index.column()][index.row()]);*/
-//}
-//
-//QVariant MantisItemModel::headerData(int section, Qt::Orientation orientation, int role) const
-//{
-//	if (role != Qt::DisplayRole)
-//		return QVariant();
-//
-//	if (orientation == Qt::Horizontal) {
-//		return nomDesColonnes[section];
-//	}
-//	return QVariant();
-//	
-//}
 
-//Qt::DropActions MyModel::supportedDropActions() const
-//{
-//	return Qt::CopyAction | Qt::MoveAction;
-//}
-//
-//Qt::ItemFlags MyModel::flags(const QModelIndex &index) const
-//{
-//	Qt::ItemFlags defaultFlags = QStandardItemModel::flags(index);
-//
-//	if (index.isValid())
-//		return Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled | defaultFlags;
-//	else
-//		return Qt::ItemIsDropEnabled | defaultFlags;
-//}
+
+Qt::ItemFlags MantisItemModel::flags(const QModelIndex &index) const
+{
+	QStandardItem *pitem = item(index.row(), index.column());
+
+	if (pitem)
+	{
+		return pitem->flags();
+	}
+	return Qt::ItemIsSelectable
+		| Qt::ItemIsEnabled
+		| Qt::ItemIsDragEnabled
+		| Qt::ItemIsDropEnabled;
+}

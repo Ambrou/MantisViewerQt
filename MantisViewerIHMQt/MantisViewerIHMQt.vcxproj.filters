@@ -46,6 +46,9 @@
     <ClCompile Include="GeneratedFiles\moc_mantisviewerihmqt.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="MantisItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="mantisviewerihmqt.h">
@@ -75,6 +78,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MantisTableView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MantisItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

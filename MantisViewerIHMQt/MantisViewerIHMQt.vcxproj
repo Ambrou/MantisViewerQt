@@ -84,6 +84,7 @@
       </PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MantisItem.cpp" />
     <ClCompile Include="MantisTableView.cpp" />
     <ClCompile Include="mantisviewerihmqt.cpp" />
     <ClCompile Include="mantisviewerihm_connexion.cpp" />
@@ -116,6 +117,7 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_mantisviewerihmqt.h" />
     <ClInclude Include="GeneratedFiles\ui_mantisviewerihm_connexion.h" />
+    <ClInclude Include="MantisItem.h" />
     <ClInclude Include="MantisTableView.h" />
     <ClInclude Include="mantisviewerihm_connexion.h" />
     <ClInclude Include="MantisItemModel.h" />

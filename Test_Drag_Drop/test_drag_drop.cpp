@@ -1,6 +1,8 @@
 #include "test_drag_drop.h"
 #include "MyTableView.h"
 #include "MyModel.h"
+#include "WidgetWithQML.h"
+#include <QQuickView>
 
 Test_Drag_Drop::Test_Drag_Drop(QWidget *parent)
 	: QMainWindow(parent)
@@ -56,6 +58,13 @@ Test_Drag_Drop::Test_Drag_Drop(QWidget *parent)
 	myModel->setItem(1, 1, new QStandardItem("4"));
 	myTableView->setModel(myModel);
 
+	QQuickView *view = new QQuickView();
+	QWidget *container = QWidget::createWindowContainer(view, this);
+	container->setMinimumSize(200, 200);
+	container->setMaximumSize(200, 200);
+	container->setFocusPolicy(Qt::TabFocus);
+	view->setSource(QUrl("main.qml"));
+	ui.verticalLayout->addWidget(container);
 }
 
 Test_Drag_Drop::~Test_Drag_Drop()

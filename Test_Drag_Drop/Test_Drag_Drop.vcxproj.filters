@@ -56,6 +56,9 @@
     <ClCompile Include="MyModel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="WidgetWithQML.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="test_drag_drop.h">
@@ -78,5 +81,13 @@
     <ClInclude Include="MyModel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WidgetWithQML.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="main.qml">
+      <Filter>Form Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

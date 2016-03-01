@@ -3,6 +3,8 @@
 #include "MyModel.h"
 #include "WidgetWithQML.h"
 #include <QQuickView>
+#include "TicketExtendedUiQML.h"
+#include <qqmlcontext.h>
 
 Test_Drag_Drop::Test_Drag_Drop(QWidget *parent)
 	: QMainWindow(parent)
@@ -58,13 +60,20 @@ Test_Drag_Drop::Test_Drag_Drop(QWidget *parent)
 	myModel->setItem(1, 1, new QStandardItem("4"));
 	myTableView->setModel(myModel);
 
+
+
+	TicketExtendedUiQML* ticketExtendedUiQML = new TicketExtendedUiQML;
+
 	QQuickView *view = new QQuickView();
 	QWidget *container = QWidget::createWindowContainer(view, this);
 	container->setMinimumSize(200, 200);
 	container->setMaximumSize(200, 200);
 	container->setFocusPolicy(Qt::TabFocus);
+	view->rootContext()->setContextProperty("ticketExtended", ticketExtendedUiQML);
 	view->setSource(QUrl("main.qml"));
 	ui.verticalLayout->addWidget(container);
+
+	ticketExtendedUiQML->setProperty("idTicket", 125478);
 }
 
 Test_Drag_Drop::~Test_Drag_Drop()

@@ -8,7 +8,7 @@ Rectangle {
 
     Text {
         id: text
-        text: "This is QML code.\n(Click to pause)"
+        text: ticketExtended.idTicket
         font.pointSize: 14
         anchors.centerIn: parent
         PropertyAnimation {

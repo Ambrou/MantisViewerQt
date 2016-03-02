@@ -3,9 +3,11 @@
 using namespace MantisData;
 
 Status::Status()
+	: m_id(-1),
+	m_strNom("")
 {
-}
 
+}
 Status::Status(const qint64 id, const QString& strNom)
 	: m_id(id), 
 	m_strNom(strNom)

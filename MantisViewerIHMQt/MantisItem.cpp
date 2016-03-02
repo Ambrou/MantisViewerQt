@@ -1,9 +1,9 @@
 #include "MantisItem.h"
 
-MantisItem::MantisItem(const MantisData::Ticket& ticket)
+MantisItem::MantisItem(const MantisData::Ticket& ticket, const QMap<qint64, Qt::GlobalColor>& couleurWrapper)
 	: m_Ticket(ticket)
 {
-	setBackground(QBrush(Qt::darkYellow));
+	setBackground(couleurWrapper[m_Ticket.severite()]);
 	setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled);
 }
 

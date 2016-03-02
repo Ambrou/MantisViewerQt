@@ -6,6 +6,7 @@
 #include <QTime>
 #include "../MantisData/Ticket.h"
 #include "../MantisData/Status.h"
+#include "../MantisData/Criticite.h"
 
 namespace MantisManager
 {
@@ -20,6 +21,7 @@ namespace MantisManager
 		virtual void recupererTicketsDuProjet(QVector<MantisData::Ticket>& listeTicket, const QString nomDuProjet, const QString& user, const QString& password) const = 0;
 		virtual void recupererVersionsDuProjet(QStringList& listeVersion, const QString nomDuProjet, const QString& user, const QString& password) const = 0;
 		virtual void recupererTicketDeLaVersionsDuProjet(QVector<MantisData::Ticket>&listeTicket, const QString nomDuProjet, const QString nomVersion, const QString& user, const QString& password) const = 0;
+		virtual void recupererCriticite(QVector<MantisData::Criticite>&listeCriticite, const QString& user, const QString& password) const = 0;
 		virtual void changerEtatTicket(const QString& idTicket, const QString& nouvelEtat, const QString& user, const QString& password) const = 0;
 		virtual void creerUnTicket(const QString& nomDuProjet, const QString& description, const QString& resume, const QString& categorie, const QString& user, const QString& password) const = 0;
 		virtual void creerUneVersion(const QString& nomVersion, const QString& projet, const QString& user, const QString& password) const = 0;

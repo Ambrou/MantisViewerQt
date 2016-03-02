@@ -11,6 +11,19 @@ MantisItemModel::~MantisItemModel()
 {
 }
 
+void MantisItemModel::mettreAJourLesCriticites(const QVector<MantisData::Criticite>& listeCriticite)
+{
+
+	foreach(const MantisData::Criticite criticite, listeCriticite)
+	{
+		Qt::GlobalColor couleur = Qt::white;
+		if (criticite.nom() == "bloquant") couleur = Qt::red;
+		if (criticite.nom() == "majeur") couleur = Qt::green;
+		if (criticite.nom() == "mineur") couleur = Qt::blue;
+
+		couleurWrapper[criticite.id()] = couleur;
+	}
+}
 void MantisItemModel::mettreAjourLeTitreDesColonnes(const QVector<MantisData::Status>& listeStatuts)
 {
 	QStringList nomDesColonnes;
@@ -29,7 +42,7 @@ void MantisItemModel::ajouterLesTickets(const QVector<MantisData::Ticket>& liste
 	
 	foreach(const MantisData::Ticket ticket, listeTickets)
 	{
-		setItem(nbTicketDansLaColonne[ticket.status()]++, colonneWrapper[ticket.status()], new MantisItem(ticket));
+		setItem(nbTicketDansLaColonne[ticket.status()]++, colonneWrapper[ticket.status()], new MantisItem(ticket, couleurWrapper));
 	}
 }
 
@@ -46,12 +59,13 @@ void MantisItemModel::remiseAZeroDuModel()
 
 Qt::ItemFlags MantisItemModel::flags(const QModelIndex &index) const
 {
-	QStandardItem *pitem = item(index.row(), index.column());
+	QStandardItem *pItemMantis = item(index.row(), index.column());
 
-	if (pitem)
+	if (pItemMantis != 0)
 	{
-		return pitem->flags();
+		return pItemMantis->flags();
 	}
+
 	return Qt::ItemIsSelectable
 		| Qt::ItemIsEnabled
 		| Qt::ItemIsDragEnabled

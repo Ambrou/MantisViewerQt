@@ -10,6 +10,7 @@ MantisViewerIHMQt::MantisViewerIHMQt(MantisManager::BaseConnecteur &baseConnecte
 {
 	initialiserIHM();
 	identifierUtilisateur();
+	initialiserLesCouleursDesTickets();
 	mettreAJourNomDesColonnes();
 	mettreAJourLaListeDesProjets();
 	
@@ -47,6 +48,13 @@ void MantisViewerIHMQt::identifierUtilisateur()
 	}
 }
 
+void MantisViewerIHMQt::initialiserLesCouleursDesTickets()
+{
+	QVector<MantisData::Criticite> listeCriticite;
+	m_BaseConnecteur.recupererCriticite(listeCriticite, m_user, m_password);
+	standardModel->mettreAJourLesCriticites(listeCriticite);
+}
+
 void MantisViewerIHMQt::mettreAJourNomDesColonnes()
 {
 	QVector<MantisData::Status> listeStatuts;
@@ -76,5 +84,4 @@ void MantisViewerIHMQt::onModificationVersion(QString newVersion)
 	
 	m_BaseConnecteur.recupererTicketDeLaVersionsDuProjet(listeTickets, ui.comboBox_Projet->currentText(), newVersion, m_user, m_password);
 	standardModel->ajouterLesTickets(listeTickets);
-	
 }

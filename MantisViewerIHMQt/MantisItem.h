@@ -8,7 +8,7 @@ class MantisItem :
 	public QStandardItem
 {
 public:
-	MantisItem(const MantisData::Ticket& ticket);
+	MantisItem(const MantisData::Ticket& ticket, const QMap<qint64, Qt::GlobalColor>& couleurWrapper);
 	~MantisItem();
 	QVariant data(int role = Qt::UserRole + 1) const;
 

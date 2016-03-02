@@ -22,6 +22,7 @@ public:
 
 private:
 	void initialiserIHM();
+	void initialiserLesCouleursDesTickets();
 	void identifierUtilisateur();
 	void mettreAJourNomDesColonnes();
 	void mettreAJourLaListeDesProjets();

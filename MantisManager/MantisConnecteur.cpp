@@ -536,10 +536,21 @@ namespace MantisManager
 
 		TNS__ObjectRefArray objectStatus = mantisConnect.mc_enum_status(user, password);
 		QList< TNS__ObjectRef > listStatus = objectStatus.items();
-		TNS__ObjectRef status;
-		foreach(status, listStatus)
+		foreach(const TNS__ObjectRef status, listStatus)
 		{
 			listeStatuts.append(MantisData::Status(status.id(), status.name()));
+		}
+	}
+
+	void MantisConnecteur::recupererCriticite(QVector<MantisData::Criticite>&listeCriticite, const QString& user, const QString& password) const
+	{
+		MantisConnect mantisConnect;
+
+		TNS__ObjectRefArray objectSeverities = mantisConnect.mc_enum_severities(user, password);
+		QList< TNS__ObjectRef > listSeverities = objectSeverities.items();
+		foreach(const TNS__ObjectRef severity, listSeverities)
+		{
+			listeCriticite.append(MantisData::Criticite(severity.id(), severity.name()));
 		}
 	}
 }

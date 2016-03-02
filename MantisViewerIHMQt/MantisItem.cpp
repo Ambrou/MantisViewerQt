@@ -1,6 +1,6 @@
 #include "MantisItem.h"
 
-MantisItem::MantisItem(const Ticket& ticket)
+MantisItem::MantisItem(const MantisData::Ticket& ticket)
 	: m_Ticket(ticket)
 {
 	setBackground(QBrush(Qt::darkYellow));

@@ -8,11 +8,11 @@ class MantisItem :
 	public QStandardItem
 {
 public:
-	MantisItem(const Ticket& ticket);
+	MantisItem(const MantisData::Ticket& ticket);
 	~MantisItem();
 	QVariant data(int role = Qt::UserRole + 1) const;
 
 private:
-	const Ticket m_Ticket;
+	const MantisData::Ticket m_Ticket;
 };
 

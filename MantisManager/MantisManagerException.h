@@ -2,12 +2,14 @@
 
 #include <QException>
 
-class MantisManagerException :
-	public QException
+namespace MantisManager
 {
-public:
-	MantisManagerException() {};
-	virtual ~MantisManagerException() {};
-	virtual const QString What() const = 0;
-};
-
+	class MantisManagerException :
+		public QException
+	{
+	public:
+		MantisManagerException() {};
+		virtual ~MantisManagerException() {};
+		virtual const QString What() const = 0;
+	};
+}

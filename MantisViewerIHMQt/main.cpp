@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
 
-	MantisManager mantisManager;
+	MantisManager::MantisManager mantisManager;
 
 	MantisViewerIHMQt w(mantisManager.connecteur());
 	w.show();

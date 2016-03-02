@@ -4,7 +4,11 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_mantisviewerihmqt.h"
 
-class BaseConnecteur;
+namespace MantisManager
+{
+	class BaseConnecteur;
+}
+
 class MantisTableView;
 class MantisItemModel;
 
@@ -13,7 +17,7 @@ class MantisViewerIHMQt : public QMainWindow
 	Q_OBJECT
 
 public:
-	MantisViewerIHMQt(BaseConnecteur &baseConnecteur, QWidget *parent = 0);
+	MantisViewerIHMQt(MantisManager::BaseConnecteur &baseConnecteur, QWidget *parent = 0);
 	~MantisViewerIHMQt();
 
 private:
@@ -24,7 +28,7 @@ private:
 
 	Ui::MantisViewerIHMQtClass ui;
 
-	BaseConnecteur& m_BaseConnecteur;
+	MantisManager::BaseConnecteur& m_BaseConnecteur;
 
 	QString m_user;
 	QString m_password;

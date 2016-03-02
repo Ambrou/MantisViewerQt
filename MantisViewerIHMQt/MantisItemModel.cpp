@@ -11,10 +11,10 @@ MantisItemModel::~MantisItemModel()
 {
 }
 
-void MantisItemModel::mettreAjourLeTitreDesColonnes(const QVector<Status>& listeStatuts)
+void MantisItemModel::mettreAjourLeTitreDesColonnes(const QVector<MantisData::Status>& listeStatuts)
 {
 	QStringList nomDesColonnes;
-	foreach(const Status status, listeStatuts)
+	foreach(const MantisData::Status status, listeStatuts)
 	{
 		colonneWrapper[status.id()] = nomDesColonnes.size();
 		nbTicketDansLaColonne[status.id()] = 0;
@@ -23,11 +23,11 @@ void MantisItemModel::mettreAjourLeTitreDesColonnes(const QVector<Status>& liste
 	setHorizontalHeaderLabels(nomDesColonnes);
 }
 
-void MantisItemModel::ajouterLesTickets(const QVector<Ticket>& listeTickets)
+void MantisItemModel::ajouterLesTickets(const QVector<MantisData::Ticket>& listeTickets)
 {
 	remiseAZeroDuModel();
 	
-	foreach(const Ticket ticket, listeTickets)
+	foreach(const MantisData::Ticket ticket, listeTickets)
 	{
 		setItem(nbTicketDansLaColonne[ticket.status()]++, colonneWrapper[ticket.status()], new MantisItem(ticket));
 	}

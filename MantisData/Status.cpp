@@ -1,5 +1,6 @@
 #include "Status.h"
 
+using namespace MantisData;
 
 Status::Status()
 {

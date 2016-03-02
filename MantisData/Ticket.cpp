@@ -1,5 +1,6 @@
 #include "Ticket.h"
 
+using namespace MantisData;
 
 Ticket::Ticket()
 {

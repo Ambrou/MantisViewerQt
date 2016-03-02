@@ -76,11 +76,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Criticite.cpp" />
     <ClCompile Include="mantisdata.cpp" />
     <ClCompile Include="Status.cpp" />
     <ClCompile Include="Ticket.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Criticite.h" />
     <ClInclude Include="mantisdata.h" />
     <ClInclude Include="mantisdata_global.h" />
     <ClInclude Include="Status.h" />

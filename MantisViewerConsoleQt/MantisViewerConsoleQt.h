@@ -1,7 +1,11 @@
 #pragma once
 #include <QThread>
 
-class BaseConnecteur;
+namespace MantisManager
+{
+	class BaseConnecteur;
+}
+
 class IOManager;
 
 class MantisViewerConsoleQt : public QThread
@@ -9,7 +13,7 @@ class MantisViewerConsoleQt : public QThread
 	Q_OBJECT;
 
 public:
-	MantisViewerConsoleQt(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande);
+	MantisViewerConsoleQt(QObject *parent, MantisManager::BaseConnecteur &baseConnecteur, IOManager& lecteurCommande);
 
 protected:
 	virtual void run();
@@ -21,7 +25,7 @@ signals:
 	void quitter();
 
 private:
-	BaseConnecteur& m_BaseConnecteur;
+	MantisManager::BaseConnecteur& m_BaseConnecteur;
 	IOManager& m_IoManager;
 
 	QString m_Login;

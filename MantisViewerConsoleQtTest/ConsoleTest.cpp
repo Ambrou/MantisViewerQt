@@ -26,7 +26,7 @@ namespace MantisViewerConsoleQtTest
 			int argc = 0;
 			QCoreApplication app(argc, 0);
 			Mock<IOManager> mockLecteur;
-			Mock<BaseConnecteur> mockBase;
+			Mock<MantisManager::BaseConnecteur> mockBase;
 			
 			// Soit la commande saisi est une demande de sortie d'application
 			When(Method(mockLecteur, lireCommande)).Return("quitter");
@@ -48,7 +48,7 @@ namespace MantisViewerConsoleQtTest
 			class MaConsole : public MantisViewerConsoleQt
 			{
 			public:
-				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				MaConsole(QObject *parent, MantisManager::BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
 				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
 				QString login() const { return MantisViewerConsoleQt::login(); };
 				QString motDePasse() const { return MantisViewerConsoleQt::motDePasse(); };
@@ -57,7 +57,7 @@ namespace MantisViewerConsoleQtTest
 			int argc = 0;
 			QCoreApplication app(argc, 0);
 			Mock<IOManager> mockIOManager;
-			Mock<BaseConnecteur> mockBase;
+			Mock<MantisManager::BaseConnecteur> mockBase;
 
 			When(Method(mockIOManager, lireCommande)).Return("login").Return("******");
 			Fake(Method(mockIOManager, ecrire));
@@ -83,7 +83,7 @@ namespace MantisViewerConsoleQtTest
 			class MaConsole : public MantisViewerConsoleQt
 			{
 			public:
-				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				MaConsole(QObject *parent, MantisManager::BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
 				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
 			};
 
@@ -91,7 +91,7 @@ namespace MantisViewerConsoleQtTest
 			QCoreApplication app(argc, 0);
 			QString texte("");
 			Mock<IOManager> mockIOManager;
-			Mock<BaseConnecteur> mockBase;
+			Mock<MantisManager::BaseConnecteur> mockBase;
 		
 			When(Method(mockBase, recupererProjets)).Do(recupererProjets_delegate);
 			When(Method(mockIOManager, ecrire)).Do([&](const QString& _texte){ texte = _texte; });
@@ -108,11 +108,11 @@ namespace MantisViewerConsoleQtTest
 			Assert::AreEqual("TeTriS", texte.toStdString().c_str());
 		}
 
-		static void recupererTicketsDuProjet_delegate(QVector<Ticket>&listeTicket, const QString nomDuProjet, const QString& user, const QString& password)
+		static void recupererTicketsDuProjet_delegate(QVector<MantisData::Ticket>&listeTicket, const QString nomDuProjet, const QString& user, const QString& password)
 		{
-			listeTicket.append(Ticket(1, "bug 1", 10, 10));
-			listeTicket.append(Ticket(5, "bug 3", 10, 10));
-			listeTicket.append(Ticket(8, "evol 7", 10, 10));
+			listeTicket.append(MantisData::Ticket(1, "bug 1", 10, 10));
+			listeTicket.append(MantisData::Ticket(5, "bug 3", 10, 10));
+			listeTicket.append(MantisData::Ticket(8, "evol 7", 10, 10));
 		}
 
 		TEST_METHOD(listerLesTicketsDUnProjet)
@@ -121,14 +121,14 @@ namespace MantisViewerConsoleQtTest
 			class MaConsole : public MantisViewerConsoleQt
 			{
 			public:
-				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				MaConsole(QObject *parent, MantisManager::BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
 				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
 			};
 
 			int argc = 0;
 			QCoreApplication app(argc, 0);
 			Mock<IOManager> mockIOManager;
-			Mock<BaseConnecteur> mockBase;
+			Mock<MantisManager::BaseConnecteur> mockBase;
 			QVector<QString>listeTicketsTrouves;
 			
 			When(Method(mockBase, recupererTicketsDuProjet)).Do(recupererTicketsDuProjet_delegate);
@@ -149,11 +149,11 @@ namespace MantisViewerConsoleQtTest
 
 		}
 
-		static void recupererTicketDeLaVersionsDuProjet_delegate(QVector<Ticket>&listeTickets, const QString nomDuProjet, const QString nomVersion, const QString& user, const QString& password)
+		static void recupererTicketDeLaVersionsDuProjet_delegate(QVector<MantisData::Ticket>&listeTickets, const QString nomDuProjet, const QString nomVersion, const QString& user, const QString& password)
 		{
-			listeTickets.append(Ticket(1, "bug 1", 10, 10));
-			listeTickets.append(Ticket(5, "bug 3", 10, 10));
-			listeTickets.append(Ticket(8, "evol 7", 10, 10));
+			listeTickets.append(MantisData::Ticket(1, "bug 1", 10, 10));
+			listeTickets.append(MantisData::Ticket(5, "bug 3", 10, 10));
+			listeTickets.append(MantisData::Ticket(8, "evol 7", 10, 10));
 		}
 
 		TEST_METHOD(listerLesTicketsDUneVersionDUnProjet)
@@ -162,14 +162,14 @@ namespace MantisViewerConsoleQtTest
 			class MaConsole : public MantisViewerConsoleQt
 			{
 			public:
-				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				MaConsole(QObject *parent, MantisManager::BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
 				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
 			};
 
 			int argc = 0;
 			QCoreApplication app(argc, 0);
 			Mock<IOManager> mockIOManager;
-			Mock<BaseConnecteur> mockBase;
+			Mock<MantisManager::BaseConnecteur> mockBase;
 			QVector<QString>listeTicketsTrouves;
 
 			When(Method(mockBase, recupererTicketDeLaVersionsDuProjet)).Do(recupererTicketDeLaVersionsDuProjet_delegate);
@@ -198,14 +198,14 @@ namespace MantisViewerConsoleQtTest
 			class MaConsole : public MantisViewerConsoleQt
 			{
 			public:
-				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				MaConsole(QObject *parent, MantisManager::BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
 				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
 			};
 
 			int argc = 0;
 			QCoreApplication app(argc, 0);
 			Mock<IOManager> mockIOManager;
-			Mock<BaseConnecteur> mockBase;
+			Mock<MantisManager::BaseConnecteur> mockBase;
 
 			// Soit une console en attente de commande
 			MaConsole console(&app, mockBase.get(), mockIOManager.get());
@@ -231,15 +231,15 @@ namespace MantisViewerConsoleQtTest
 			class MaConsole : public MantisViewerConsoleQt
 			{
 			public:
-				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				MaConsole(QObject *parent, MantisManager::BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
 				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
 			};
 
 			int argc = 0;
 			QCoreApplication app(argc, 0);
 			Mock<IOManager> mockIOManager;
-			Mock<BaseConnecteur> mockBase;
-			class ME : public MantisManagerException
+			Mock<MantisManager::BaseConnecteur> mockBase;
+			class ME : public MantisManager::MantisManagerException
 			{
 			public:
 				const QString What() const{ return ""; };
@@ -266,7 +266,7 @@ namespace MantisViewerConsoleQtTest
 			class MaConsole : public MantisViewerConsoleQt
 			{
 			public:
-				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				MaConsole(QObject *parent, MantisManager::BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
 				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
 			};
 
@@ -277,7 +277,7 @@ namespace MantisViewerConsoleQtTest
 			QString _categorie;
 			QCoreApplication app(argc, 0);
 			Mock<IOManager> mockIOManager;
-			Mock<BaseConnecteur> mockBase;
+			Mock<MantisManager::BaseConnecteur> mockBase;
 
 			MaConsole console(&app, mockBase.get(), mockIOManager.get());
 			// on s'en fout de ce qu'on écrit
@@ -304,7 +304,7 @@ namespace MantisViewerConsoleQtTest
 			class MaConsole : public MantisViewerConsoleQt
 			{
 			public:
-				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				MaConsole(QObject *parent, MantisManager::BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
 				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
 			};
 
@@ -313,7 +313,7 @@ namespace MantisViewerConsoleQtTest
 			QString nouvelleVersion;
 			QCoreApplication app(argc, 0);
 			Mock<IOManager> mockIOManager;
-			Mock<BaseConnecteur> mockBase;
+			Mock<MantisManager::BaseConnecteur> mockBase;
 
 			MaConsole console(&app, mockBase.get(), mockIOManager.get());
 			// on s'en fout de ce qu'on écrit
@@ -339,7 +339,7 @@ namespace MantisViewerConsoleQtTest
 			class MaConsole : public MantisViewerConsoleQt
 			{
 			public:
-				MaConsole(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
+				MaConsole(QObject *parent, MantisManager::BaseConnecteur &baseConnecteur, IOManager& lecteurCommande) : MantisViewerConsoleQt(parent, baseConnecteur, lecteurCommande){};
 				bool traiterCommandeEtAttendreLaSuivante(const QString& nomCommande){ return MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(nomCommande); };
 			};
 
@@ -350,7 +350,7 @@ namespace MantisViewerConsoleQtTest
 			QTime time;
 			QCoreApplication app(argc, 0);
 			Mock<IOManager> mockIOManager;
-			Mock<BaseConnecteur> mockBase;
+			Mock<MantisManager::BaseConnecteur> mockBase;
 
 			MaConsole console(&app, mockBase.get(), mockIOManager.get());
 			// on s'en fout de ce qu'on écrit

@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "BaseConnecteur.h"
 
-
-BaseConnecteur::BaseConnecteur()
+namespace MantisManager
 {
-}
+	BaseConnecteur::BaseConnecteur()
+	{
+	}
 
 
-BaseConnecteur::~BaseConnecteur()
-{
+	BaseConnecteur::~BaseConnecteur()
+	{
+	}
 }

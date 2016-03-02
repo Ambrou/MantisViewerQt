@@ -5,7 +5,7 @@
 #include "MantisTableView.h"
 #include "MantisItemModel.h"
 
-MantisViewerIHMQt::MantisViewerIHMQt(BaseConnecteur &baseConnecteur, QWidget *parent)
+MantisViewerIHMQt::MantisViewerIHMQt(MantisManager::BaseConnecteur &baseConnecteur, QWidget *parent)
 	: QMainWindow(parent), m_BaseConnecteur(baseConnecteur)
 {
 	initialiserIHM();
@@ -49,7 +49,7 @@ void MantisViewerIHMQt::identifierUtilisateur()
 
 void MantisViewerIHMQt::mettreAJourNomDesColonnes()
 {
-	QVector<Status> listeStatuts;
+	QVector<MantisData::Status> listeStatuts;
 	m_BaseConnecteur.recupererStatut(listeStatuts, m_user, m_password);
 	standardModel->mettreAjourLeTitreDesColonnes(listeStatuts);
 }
@@ -72,7 +72,7 @@ void MantisViewerIHMQt::onModificationProjet(QString newProjet)
 
 void MantisViewerIHMQt::onModificationVersion(QString newVersion)
 {
-	QVector<Ticket> listeTickets;
+	QVector<MantisData::Ticket> listeTickets;
 	
 	m_BaseConnecteur.recupererTicketDeLaVersionsDuProjet(listeTickets, ui.comboBox_Projet->currentText(), newVersion, m_user, m_password);
 	standardModel->ajouterLesTickets(listeTickets);

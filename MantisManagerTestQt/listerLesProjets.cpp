@@ -19,7 +19,7 @@ namespace MantisManagerTest
 			int argc = 0;
 			QCoreApplication app(argc, 0);
 			QStringList listeProjets;
-			MantisConnecteur mantisManager;
+			MantisManager::MantisConnecteur mantisManager;
 
 			mantisManager.recupererProjets(listeProjets, "apetitgenet", "MAg28vkwde");
 
@@ -30,7 +30,7 @@ namespace MantisManagerTest
 		{
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			MantisConnecteur mantisManager;
+			MantisManager::MantisConnecteur mantisManager;
 
 			mantisManager.changerEtatTicket("2234", QString::fromLocal8Bit("à valider"), "apetitgenet", "MAg28vkwde");
 
@@ -41,14 +41,14 @@ namespace MantisManagerTest
 		{
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			MantisConnecteur mantisManager;
+			MantisManager::MantisConnecteur mantisManager;
 
 			try
 			{
 				mantisManager.changerEtatTicket("2234", "à penser", "apetitgenet", "MAg28vkwde");
 				Assert::Fail();
 			}
-			catch (const MantisManagerException &e)
+			catch (const MantisManager::MantisManagerException &e)
 			{
 				Assert::IsTrue(QString("à penser n'est pas un état connu") == e.What());
 			}
@@ -65,13 +65,13 @@ namespace MantisManagerTest
 			{
 				int argc = 0;
 				QCoreApplication app(argc, 0);
-				MantisConnecteur mantisManager;
+				MantisManager::MantisConnecteur mantisManager;
 
 				mantisManager.changerEtatTicket("2234", QString::fromLocal8Bit("validé"), "apetitgenet", "MAg28vkwde");
 				//Assert::Fail();
 				// On peut toujours changer l'état
 			}
-			catch (const OperationImpossibleException& e)
+			catch (const MantisManager::OperationImpossibleException& e)
 			{
 				Assert::AreEqual("coucou", e.what());
 			}
@@ -86,7 +86,7 @@ namespace MantisManagerTest
 		{
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			MantisConnecteur mantisManager;
+			MantisManager::MantisConnecteur mantisManager;
 
 			mantisManager.ajouterUneNoteAuTicket("2234", "Ceci est une nouvelle note", "apetitgenet", "MAg28vkwde");
 		}
@@ -95,14 +95,14 @@ namespace MantisManagerTest
 		{
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			MantisConnecteur mantisManager;
+			MantisManager::MantisConnecteur mantisManager;
 
 			try
 			{
 				mantisManager.ajouterUneNoteAuTicket("2234", "Ceci est une nouvelle note", "apeitgenet", "MAg28vkwde");
 				Assert::Fail();
 			}
-			catch (const MantisManagerException &e)
+			catch (const MantisManager::MantisManagerException &e)
 			{
 				Assert::IsTrue(QString("Impossible de rajouter la note") == e.What());
 			}
@@ -117,7 +117,7 @@ namespace MantisManagerTest
 		{
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			MantisConnecteur mantisManager;
+			MantisManager::MantisConnecteur mantisManager;
 
 			mantisManager.creerUnTicket("TRIXELL-TETRIS", "ceci est la description", QString::fromLatin1("ceci est un résumé"), "IHM","apetitgenet", "MAg28vkwde");
 			
@@ -127,13 +127,13 @@ namespace MantisManagerTest
 		{
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			MantisConnecteur mantisManager;
+			MantisManager::MantisConnecteur mantisManager;
 			try
 			{
 				mantisManager.creerUnTicket("TRIXELL-TETRIS", "ceci est la description", QString::fromLatin1("ceci est un résumé"), "IHM","apetitgenet", "MAg2vkwde");
 				Assert::Fail();
 			}
-			catch (const MantisManagerException &e)
+			catch (const MantisManager::MantisManagerException &e)
 			{
 				Assert::IsTrue(QString("Impossible de créer le ticket") == e.What());
 			}
@@ -147,7 +147,7 @@ namespace MantisManagerTest
 		{
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			MantisConnecteur mantisManager;
+			MantisManager::MantisConnecteur mantisManager;
 
 			mantisManager.creerUneVersion("APT", "TRIXELL-TETRIS", "apetitgenet", "MAg28vkwde");
 		}
@@ -156,7 +156,7 @@ namespace MantisManagerTest
 		{
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			MantisConnecteur mantisManager;
+			MantisManager::MantisConnecteur mantisManager;
 
 			
 			try
@@ -164,7 +164,7 @@ namespace MantisManagerTest
 				mantisManager.creerUneVersion("APT", "TRIXTETRIS", "apetitgenet", "MAg28vkwde");
 				Assert::Fail();
 			}
-			catch (const MantisManagerException &e)
+			catch (const MantisManager::MantisManagerException &e)
 			{
 				Assert::IsTrue(QString("Impossible de créer la version") == e.What());
 			}
@@ -178,7 +178,7 @@ namespace MantisManagerTest
 		{
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			MantisConnecteur mantisManager;
+			MantisManager::MantisConnecteur mantisManager;
 			QDate date;
 			QTime time;
 			date.setDate(2015, 12, 17);
@@ -191,13 +191,13 @@ namespace MantisManagerTest
 		{
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			MantisConnecteur mantisManager;
+			MantisManager::MantisConnecteur mantisManager;
 
 			try
 			{
 				mantisManager.definirDateLivraisonDUneVersion("APT", QDate::currentDate(), QTime::currentTime(), "TRIXELL-TETRIS", "apetitgenet", "MAg28vkwde");
 			}
-			catch (const MantisManagerException &e)
+			catch (const MantisManager::MantisManagerException &e)
 			{
 			}
 			catch (...)
@@ -210,7 +210,7 @@ namespace MantisManagerTest
 		{
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			MantisConnecteur mantisManager;
+			MantisManager::MantisConnecteur mantisManager;
 
 			mantisManager.livrerVersion("CD_Patch1", "TRIXELL-TETRIS", "apetitgenet", "MAg28vkwde");
 		}
@@ -219,13 +219,13 @@ namespace MantisManagerTest
 		{
 			int argc = 0;
 			QCoreApplication app(argc, 0);
-			MantisConnecteur mantisManager;
+			MantisManager::MantisConnecteur mantisManager;
 
 			try
 			{
 				mantisManager.livrerVersion("APT", "TRIXELL-TETRIS", "apetitgenet", "MAg28vkwde");
 			}
-			catch (const MantisManagerException &e)
+			catch (const MantisManager::MantisManagerException &e)
 			{
 			}
 			catch (...)

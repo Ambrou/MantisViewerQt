@@ -3,18 +3,20 @@
 
 #include "mantismanager_global.h"
 
-class BaseConnecteur;
-
-class MANTISMANAGER_EXPORT MantisManager
+namespace MantisManager
 {
-public:
-	MantisManager();
-	~MantisManager();
+	class BaseConnecteur;
 
-	BaseConnecteur& connecteur() const;
+	class MANTISMANAGER_EXPORT MantisManager
+	{
+	public:
+		MantisManager();
+		~MantisManager();
 
-private:
-	BaseConnecteur* mp_Connecteur;
-};
+		BaseConnecteur& connecteur() const;
 
+	private:
+		BaseConnecteur* mp_Connecteur;
+	};
+}
 #endif // MANTISMANAGER_H

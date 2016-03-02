@@ -4,7 +4,7 @@
 #include "IOManager.h"
 #include <QException>
 
-MantisViewerConsoleQt::MantisViewerConsoleQt(QObject *parent, BaseConnecteur &baseConnecteur, IOManager& _IOManager)
+MantisViewerConsoleQt::MantisViewerConsoleQt(QObject *parent, MantisManager::BaseConnecteur &baseConnecteur, IOManager& _IOManager)
 	: QThread(parent), m_BaseConnecteur(baseConnecteur), m_IoManager(_IOManager)
 {
 	m_Login = "";
@@ -48,10 +48,10 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 	}
 	else if (nomCommande == "lister tickets")
 	{
-		QVector<Ticket>listeTickets;
+		QVector<MantisData::Ticket>listeTickets;
 		QString nomProjet(m_IoManager.lireCommande());
 		m_BaseConnecteur.recupererTicketsDuProjet(listeTickets, nomProjet, login(), motDePasse());
-		foreach(Ticket ticket, listeTickets)
+		foreach(const MantisData::Ticket ticket, listeTickets)
 		{
 			m_IoManager.ecrire(QString::number(ticket.numero()) + "\t" + QString::number(ticket.status()) + "\t" + ticket.titre());
 		}
@@ -74,13 +74,13 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 	}
 	else if (nomCommande == "lister tickets pour une version")
 	{
-		QVector<Ticket>listeTickets;
+		QVector<MantisData::Ticket>listeTickets;
 		m_IoManager.ecrire("Projet");
 		QString nomProjet(m_IoManager.lireCommande());
 		m_IoManager.ecrire("Version");
 		QString nomVersion(m_IoManager.lireCommande());
 		m_BaseConnecteur.recupererTicketDeLaVersionsDuProjet(listeTickets, nomProjet, nomVersion, login(), motDePasse());
-		foreach(Ticket ticket, listeTickets)
+		foreach(const MantisData::Ticket ticket, listeTickets)
 		{
 			m_IoManager.ecrire(QString::number(ticket.numero()) + "\t" + QString::number(ticket.status()) + "\t" + ticket.titre());
 		}
@@ -157,9 +157,9 @@ bool MantisViewerConsoleQt::traiterCommandeEtAttendreLaSuivante(const QString& n
 	}
 	else if (nomCommande == "lister statut")
 	{
-		QVector<Status>listeStatuts;
+		QVector<MantisData::Status>listeStatuts;
 		m_BaseConnecteur.recupererStatut(listeStatuts, login(), motDePasse());
-		foreach(Status nomStatut, listeStatuts)
+		foreach(const MantisData::Status nomStatut, listeStatuts)
 		{
 			m_IoManager.ecrire(QString::number(nomStatut.id()) + "\t" + nomStatut.nom());
 		}

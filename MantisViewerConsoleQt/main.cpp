@@ -6,7 +6,7 @@
 int main(int argc, char *argv[])
 {
 	QCoreApplication app(argc, argv);
-	MantisManager mantisManager;
+	MantisManager::MantisManager mantisManager;
 	LecteurClavier lecteurClavier;
 	MantisViewerConsoleQt console(&app, mantisManager.connecteur(), lecteurClavier);
 	console.start();

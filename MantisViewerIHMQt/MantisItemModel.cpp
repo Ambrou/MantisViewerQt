@@ -71,3 +71,21 @@ Qt::ItemFlags MantisItemModel::flags(const QModelIndex &index) const
 		| Qt::ItemIsDragEnabled
 		| Qt::ItemIsDropEnabled;
 }
+
+Qt::DropActions MantisItemModel::supportedDropActions() const
+{
+	return Qt::CopyAction | Qt::MoveAction;
+}
+
+bool MantisItemModel::dropMimeData(const QMimeData *data,Qt::DropAction action, int row, int column, const QModelIndex &parent)
+{
+	bool bResult = true;
+
+	if (action == Qt::IgnoreAction)
+		return true;
+
+	setItem(row, column, new QStandardItem("fskdfhsudf"));
+
+
+	return bResult;
+}

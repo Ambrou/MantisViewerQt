@@ -21,7 +21,7 @@ void MantisItemModel::mettreAJourLesCriticites(const QVector<MantisData::Critici
 		if (criticite.nom() == "majeur") couleur = Qt::green;
 		if (criticite.nom() == "mineur") couleur = Qt::blue;
 
-		couleurWrapper[criticite.id()] = couleur;
+		m_CouleurWrapper[criticite.id()] = couleur;
 	}
 }
 void MantisItemModel::mettreAjourLeTitreDesColonnes(const QVector<MantisData::Status>& listeStatuts)
@@ -29,8 +29,8 @@ void MantisItemModel::mettreAjourLeTitreDesColonnes(const QVector<MantisData::St
 	QStringList nomDesColonnes;
 	foreach(const MantisData::Status status, listeStatuts)
 	{
-		colonneWrapper[status.id()] = nomDesColonnes.size();
-		nbTicketDansLaColonne[status.id()] = 0;
+		m_ColonneWrapper[status.id()] = nomDesColonnes.size();
+		m_NbTicketDansLaColonne[status.id()] = 0;
 		nomDesColonnes << status.nom();
 	}
 	setHorizontalHeaderLabels(nomDesColonnes);
@@ -42,16 +42,35 @@ void MantisItemModel::ajouterLesTickets(const QVector<MantisData::Ticket>& liste
 	
 	foreach(const MantisData::Ticket ticket, listeTickets)
 	{
-		setItem(nbTicketDansLaColonne[ticket.status()]++, colonneWrapper[ticket.status()], new MantisItem(ticket, couleurWrapper));
+		const qint64 iLigne = recupererPremiereLigneLibreDuStatus(ticket.status());
+		const qint64 iColonne = recupererLaColonneDuStatus(ticket.status());
+		MantisItem* pMantisItem = new MantisItem(ticket, m_CouleurWrapper);
+		setItem(iLigne, iColonne, pMantisItem);
+		incrementerNombreDeTicketDansLeStatus(ticket.status());
 	}
+}
+
+qint64 MantisItemModel::recupererPremiereLigneLibreDuStatus(const qint64 iStatus) const
+{
+	return m_NbTicketDansLaColonne[iStatus];
+}
+
+qint64 MantisItemModel::recupererLaColonneDuStatus(const qint64 iStatus) const
+{
+	return m_ColonneWrapper[iStatus];
+}
+
+void MantisItemModel::incrementerNombreDeTicketDansLeStatus(const qint64 iStatus)
+{
+	m_NbTicketDansLaColonne[iStatus]++;
 }
 
 void MantisItemModel::remiseAZeroDuModel()
 {
-	QList<qint64> clefs = nbTicketDansLaColonne.keys();
+	const QList<qint64> clefs = m_NbTicketDansLaColonne.keys();
 	foreach(const qint64 clef, clefs)
 	{
-		nbTicketDansLaColonne[clef] = 0;
+		m_NbTicketDansLaColonne[clef] = 0;
 	}
 	removeRows(0, rowCount());
 }

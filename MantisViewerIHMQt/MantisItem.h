@@ -10,7 +10,7 @@ class MantisItem :
 public:
 	MantisItem(const MantisData::Ticket& ticket, const QMap<qint64, Qt::GlobalColor>& couleurWrapper);
 	~MantisItem();
-	QVariant data(int role = Qt::UserRole + 1) const;
+	//QVariant data(int role = Qt::UserRole + 1) const;
 
 private:
 	const MantisData::Ticket m_Ticket;

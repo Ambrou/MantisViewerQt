@@ -21,7 +21,8 @@ MantisTableView::~MantisTableView()
 
 void MantisTableView::dropEvent(QDropEvent * event)
 {
-	if (dragDropMode() == InternalMove) {
+	if (dragDropMode() == InternalMove) 
+	{
 		if (event->source() != this || !(event->possibleActions() & Qt::MoveAction))
 			return;
 	}

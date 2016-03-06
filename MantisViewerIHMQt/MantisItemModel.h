@@ -21,9 +21,12 @@ public:
 protected:
 private:
 	void remiseAZeroDuModel();
-	QMap<qint64, qint64> colonneWrapper;
-	QMap<qint64, Qt::GlobalColor> couleurWrapper;
-	QMap<qint64, qint64> nbTicketDansLaColonne;
+	qint64 recupererPremiereLigneLibreDuStatus(const qint64 iStatus) const;
+	qint64 recupererLaColonneDuStatus(const qint64 iStatus) const;
+	void incrementerNombreDeTicketDansLeStatus(const qint64 iStatus);
+	QMap<qint64, qint64> m_ColonneWrapper;
+	QMap<qint64, Qt::GlobalColor> m_CouleurWrapper;
+	QMap<qint64, qint64> m_NbTicketDansLaColonne;
 
 };
 

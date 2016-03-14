@@ -1,5 +1,6 @@
 #include "MantisItemModel.h"
 #include "MantisItem.h"
+#include "QMimeData"
 
 MantisItemModel::MantisItemModel(QObject *parent)
 	: QStandardItemModel(parent)
@@ -103,8 +104,49 @@ bool MantisItemModel::dropMimeData(const QMimeData *data,Qt::DropAction action, 
 	if (action == Qt::IgnoreAction)
 		return true;
 
-	setItem(row, column, new QStandardItem("fskdfhsudf"));
+	QByteArray encodedData = data->data("application/vnd.text.list");
+	QDataStream stream(&encodedData, QIODevice::ReadOnly);
 
+	QString text;
+	QString tooltip;
+	while (!stream.atEnd()) {
+		
+		stream >> text >> tooltip;
+	}
+
+	QStandardItem *pnewItem = new QStandardItem(text);
+	if (pnewItem)
+	{
+		pnewItem->setToolTip(tooltip);
+	}
+	setItem(row, column, pnewItem);
 
 	return bResult;
+}
+
+QStringList MantisItemModel::mimeTypes() const
+{
+	QStringList types;
+	types << "application/vnd.text.list";
+	return types;
+}
+
+
+QMimeData *MantisItemModel::mimeData(const QModelIndexList &indexes) const
+{
+	QMimeData *mimeData = new QMimeData();
+	QByteArray encodedData;
+
+	QDataStream stream(&encodedData, QIODevice::WriteOnly);
+
+	foreach(const QModelIndex &index, indexes) {
+		if (index.isValid()) {
+			QString text = data(index, Qt::DisplayRole).toString();
+			QString tooltip = data(index, Qt::ToolTipRole).toString();
+			stream << text << tooltip;
+		}
+	}
+
+	mimeData->setData("application/vnd.text.list", encodedData);
+	return mimeData;
 }

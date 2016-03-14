@@ -53,3 +53,17 @@ void MantisTableView::dropEvent(QDropEvent * event)
 
 	QTableView::dropEvent(event);
 }
+
+/*void MantisTableView::dragEnterEvent(QDragEnterEvent *event)
+{
+	QModelIndex index;
+
+	int colDepart = -1;
+	int rowDepart = -1;
+	index = indexAt(event->pos());
+	if (index.isValid() == true)
+	{
+		colDepart = index.column();
+		rowDepart = index.row();
+	}
+}*/

@@ -8,6 +8,7 @@ public:
 	MantisTableView(QWidget *parent);
 	~MantisTableView();
 
-	void dropEvent(QDropEvent * event);
+	//void dragEnterEvent(QDragEnterEvent *event) Q_DECL_OVERRIDE;
+	void dropEvent(QDropEvent * event) Q_DECL_OVERRIDE;
 };
 

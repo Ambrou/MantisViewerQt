@@ -2,7 +2,6 @@
 
 #include "mantisdata_global.h"
 #include <QString>
-#include <QVariant>
 
 namespace MantisData
 {
@@ -28,5 +27,3 @@ namespace MantisData
 		qint64 m_iSeverite;
 	};
 }
-
-Q_DECLARE_METATYPE(MantisData::Ticket)

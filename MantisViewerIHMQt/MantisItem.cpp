@@ -1,10 +1,10 @@
 #include "MantisItem.h"
+#include "..\MantisData\Ticket.h"
 
 MantisItem::MantisItem(const MantisData::Ticket& ticket, const QMap<qint64, Qt::GlobalColor>& couleurWrapper)
-	: QStandardItem(QString::number(ticket.numero())), m_Ticket(ticket)
 {
 	setText(QString::number(ticket.numero()));
-	setBackground(couleurWrapper[m_Ticket.severite()]);
+	setBackground(couleurWrapper[ticket.severite()]);
 	setTextAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
 	setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsDragEnabled | Qt::ItemIsDropEnabled);
 	setToolTip(ticket.titre());

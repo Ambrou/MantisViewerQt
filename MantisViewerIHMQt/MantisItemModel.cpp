@@ -109,15 +109,18 @@ bool MantisItemModel::dropMimeData(const QMimeData *data,Qt::DropAction action, 
 
 	QString text;
 	QString tooltip;
+	QVariant backGroundColor;
 	while (!stream.atEnd()) {
 		
-		stream >> text >> tooltip;
+		stream >> text >> tooltip >> backGroundColor;
 	}
 
 	QStandardItem *pnewItem = new QStandardItem(text);
 	if (pnewItem)
 	{
 		pnewItem->setToolTip(tooltip);
+		pnewItem->setBackground(backGroundColor.value<QColor>());
+		pnewItem->setTextAlignment(Qt::AlignVCenter | Qt::AlignHCenter);
 	}
 	setItem(row, column, pnewItem);
 
@@ -143,7 +146,7 @@ QMimeData *MantisItemModel::mimeData(const QModelIndexList &indexes) const
 		if (index.isValid()) {
 			QString text = data(index, Qt::DisplayRole).toString();
 			QString tooltip = data(index, Qt::ToolTipRole).toString();
-			stream << text << tooltip;
+			stream << text << tooltip << data(index, Qt::BackgroundRole);
 		}
 	}
 
